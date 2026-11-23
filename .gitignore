@@ -170,7 +170,14 @@ conda-meta/
 .ropeproject
 
 # mkdocs/Zensical documentation
-/site
+# (the template's "/site" rule is removed, as in drywet-explorer: here site/ is the
+#  dashboard's SOURCE. What is generated is ignored instead.)
+# site/data/          what the browser loads, rebuilt by python -m ntl.export
+# site/.observablehq/ Framework's cache
+# node_modules/       npm install
+site/data/
+site/.observablehq/
+node_modules/
 
 # mypy
 .mypy_cache/
@@ -221,3 +228,8 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+# CLAUDE
+.claude/
+/temp
+HANDOFF.md

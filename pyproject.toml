@@ -1,0 +1,27 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "ntl"
+version = "0.1.0"
+description = "Night-time lights pipeline and monitor for Indonesia"
+requires-python = ">=3.11"
+dependencies = ["httpx", "numpy", "h5py"]
+
+[project.optional-dependencies]
+# ntl.zonal.burn_index rasterises polygons with rasterio;
+# ntl.stack.unit_maps_from_file reads the boundary file with geopandas.
+zonal = ["rasterio", "geopandas"]
+# ntl.boundaries simplifies outlines with shapely.coverage_simplify (2.1+).
+outlines = ["geopandas", "shapely>=2.1"]
+test = ["pytest", "rasterio", "geopandas", "shapely>=2.1"]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]
+testpaths = ["tests"]
+# Keep the cache out of the synced repo folder.
+addopts = "-p no:cacheprovider"

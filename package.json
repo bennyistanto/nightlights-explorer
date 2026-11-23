@@ -1,0 +1,21 @@
+{
+  "name": "ntl",
+  "private": true,
+  "type": "module",
+  "description": "Nightlights Explorer: Indonesia after dark, by province, district and sub-district. Static dashboard built with Observable Framework.",
+  "scripts": {
+    "dev": "observable preview",
+    "build": "observable build",
+    "serve": "python -m http.server 3212 --directory dist --bind 127.0.0.1",
+    "clean": "rimraf site/.observablehq/cache dist"
+  },
+  "dependencies": {
+    "@observablehq/framework": "^1.13.4"
+  },
+  "devDependencies": {
+    "rimraf": "^5.0.5"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

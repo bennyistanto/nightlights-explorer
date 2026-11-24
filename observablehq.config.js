@@ -24,5 +24,5 @@ export default {
     gtag('config', 'G-M3ZZ0H7XHJ');
   }
 </script>`,
-  footer: 'Developed by <a href="https://benny.istan.to" target="_blank" rel="noopener">Benny Istanto</a> as a casual weekend project. Night-time lights from NASA Black Marble, Collection 2 (VNP46A3 monthly, VNP46A2 daily, view angles from VNP46A1). Roads on the Mudik map: OpenStreetMap contributors. Admin boundaries: Badan Informasi Geospasial. Built with Observable Framework.'
+  footer: 'Developed by <a href="https://benny.istan.to" target="_blank" rel="noopener">Benny Istanto</a> as a casual weekend project. Night-time lights from NASA Black Marble, Collection 2 (VNP46A3 monthly, VNP46A2 daily, view angles from VNP46A1). Long view: DMSP-OLS stable lights processed by the Earth Observation Group, Payne Institute, Colorado School of Mines; DMSP data collected by the US Air Force Weather Agency. Roads on the Mudik map: OpenStreetMap contributors. Admin boundaries: Badan Informasi Geospasial. Built with Observable Framework.'
 };

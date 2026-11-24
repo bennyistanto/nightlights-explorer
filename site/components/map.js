@@ -37,9 +37,10 @@ const IDLE = "Hover a unit for its status. Click to select it. Scroll or drag to
  * @param describeCell (lon, lat) => text about the lit cell there, or null. Shown after the unit's text.
  * @param sync       a name: maps sharing it mirror each other's zoom and pan
  * @param focus      {key, bounds: [[west, south], [east, north]]} or null: where to move when the key changes
+ * @param idle       the hint shown when the pointer is on no unit (default: about statuses)
  * @param onPick     (id or null) => void
  */
-export function drawMap({width, land, units, context = [], selected = [], lights = null, lines = null, describeCell = null, focus = null, sync = null, label = null, onPick}) {
+export function drawMap({width, land, units, context = [], selected = [], lights = null, lines = null, describeCell = null, focus = null, sync = null, label = null, idle = IDLE, onPick}) {
   const view = viewOf(sync ?? "single");
   const spanX = BOUNDS.east - BOUNDS.west;
   const spanY = BOUNDS.north - BOUNDS.south;
@@ -59,7 +60,7 @@ export function drawMap({width, land, units, context = [], selected = [], lights
   const outlinesOnly = units.some((d) => d.fill === "transparent");
   const hover = document.createElement("div");
   hover.className = "map-hover";
-  hover.textContent = IDLE;
+  hover.textContent = idle;
   let unitText = null; // set by the unit under the pointer; the cell's line is added on the way out
   stage.append("g").selectAll("path").data(units).join("path")
     .attr("d", (d) => path(d.feature))
@@ -148,7 +149,7 @@ export function drawMap({width, land, units, context = [], selected = [], lights
     ? "Map of Indonesia with admin units coloured by their night-lights status for the selected month. The menus above select a unit without a pointer, and the table below lists every unit shown."
     : "Map of lit cells, coloured as the legend beside it says. The text and charts around it give the same figures."));
   wrap.append(svg.node(), canvas);
-  wrap.addEventListener("mouseleave", () => { unitText = null; hover.textContent = IDLE; });
+  wrap.addEventListener("mouseleave", () => { unitText = null; hover.textContent = idle; });
   // Runs after the unit's own handler (the event bubbles up to here): the unit's line, then the cell's.
   wrap.addEventListener("mousemove", (event) => {
     if (event.target.closest(".map-buttons")) return;

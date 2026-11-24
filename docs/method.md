@@ -571,6 +571,163 @@ traffic, lamps at rest areas and toll gates, and the edges of towns all
 qualify. The road overlay does not settle it, because dim cells that flicker
 lie along main roads on ordinary nights too.
 
+## 6a. The long view: DMSP 1992 to 2013 beside VIIRS
+
+Modules `ntl.dmsp`, `ntl.longrecord`, `ntl.sensors`, `ntl.longview`; page `long-view`. The
+older DMSP-OLS satellites give one composite per satellite and year from 1992
+to 2013. The page shows them beside VIIRS on one time axis and does **not**
+join them. This section says what is shown and why the join was given up.
+
+### Data
+
+- **DMSP-OLS Version 4 stable lights** from the Earth Observation Group: 34
+  satellite-years (F10 1992 to F18 2013), 30 arc-seconds, a digital number
+  from 0 to 63 with no on-board calibration. Two forms are used: the archives
+  (stable lights, raw average, count of cloud-free observations) and EOG's
+  own intercalibrated stable lights (Elvidge and others 2009,
+  <https://doi.org/10.3390/en20300595>: a second-order polynomial per
+  satellite-year, reference F12 1999, fitted over Sicily).
+- A DMSP cell covers exactly two by two cells of the 15 arc-second VIIRS
+  grid: cell centres sit on multiples of 1/120 degree.
+- Three of EOG's intercalibrated files (F16 2009, F18 2010, F18 2011) state
+  their corner half a cell away from the others. Measured: in all 34
+  satellite-years the cells above zero are exactly those of the archive when
+  read by position, and fewer agree when moved by one cell. The data are on
+  the usual cells; only the header differs. `ntl.dmsp` reads such a file by
+  position with a warning and refuses any other corner.
+- **Flare outlines** drawn by NOAA for the DMSP years, one shapefile per
+  country, dated 2009 (gone from NOAA's address; the Internet Archive keeps
+  the page).
+
+### What was tried for making the satellites agree
+
+| Tried | Result | Kept |
+|---|---|---|
+| Use the archives as they are | Two satellites of the same year differ by -22% to +34% in national light over Indonesia | No |
+| EOG's intercalibrated files | -18% to +11%; median province disagreement 0.022 to 0.151 | Yes, as the level |
+| A chain through the 12 years with two satellites | Not identified: every overlap is two satellites in the SAME year, so none links one year to the next. A fake drift of 10% a year fits the overlaps exactly | No |
+| An invariant set of Indonesian cells | Circular: cells of stable rank are blind to growth everywhere at once | No |
+| A floor on the digital number for lit area | Removes 92% of newly lit cells; Sumatra's lit area turns from growth (1.30 times) to decline (0.87) | No |
+| A dark-background reading of sensor gain (raw average over sea never lit) | Tracks the pair differences (r = 0.97, slope 0.60) and shows which satellite moved (F15 in 2003), but it misses in at least two satellite-years (F10 1994, F18 2013) and no publication using it was found | As a diagnostic only |
+
+### The yearly record
+
+For unit $u$ and satellite-year $s$, with corrected digital numbers $d_i$:
+light $T_{u,s} = \sum_{i \in u} d_i$, lit cells
+$A_{u,s} = \#\{i \in u : d_i > 0\}$ (no floor), and light outside the flare
+outlines.
+
+**Two satellites in a year.** The value is their mean, unless one plainly
+misses the unit's dim light (recall, below).
+
+**Recall of steady dim cells.** For satellite-year $s$, the steady dim cells
+$S_s$ are those lit in at least 60% of the other satellite-years within three
+years, with a median value below 8. For a unit with at least 50 of them,
+
+$$R_{u,s} = \frac{\#\{i \in u \cap S_s : d_i > 0\}}{\#\{u \cap S_s\}} .$$
+
+Where one satellite has $R < 0.7$ and the other is at least 0.15 higher, the
+better one stands alone (65 province-years, 17 of them in 1999 and 19 in
+2003). The median over provinces is 0.85 to 0.94 in 16 of the 22 years, 0.22
+in 1992, 0.71 in 1993 and 0.78 in 2013.
+
+**The band is disagreement between satellites, not a confidence interval.**
+Per unit, over the years $P$ with two satellites $a$, $b$:
+
+$$\sigma_u = \sqrt{\frac{1}{|P|} \sum_{y \in P} \left( \tfrac{1}{2} \ln \frac{T_{u,a}}{T_{u,b}} \right)^2 }$$
+
+(a year in which one of them sees nothing counts as 1.0; a unit with fewer
+than four such years takes the median of the others). The half width in log is
+
+$$w_{u,y} = \sqrt{ (k\,\sigma_u)^2 + \tau^2 }, \qquad k = 1 \text{ for a mean of two},\; k = 2 \text{ for one satellite},$$
+
+with $\tau$ = 0.05 for light and 0.08 for lit cells, the part common to all
+provinces in a year (an upper estimate: it also takes in real change). The
+band is $T e^{\pm w}$. Measured for light, leaving a year out: with $k = 1$ a
+single-satellite band held the other satellite's reading 35% of the time, with
+$k = 2$ about 68%. A year's own two readings reach beyond the band in about
+one province-year in five (22% of the years that have two readings; 16% of
+those where the point is their mean): the band is a typical width, not the
+range of that year. The page gives "satellites typically differ by" as
+$e^{2\sigma_u} - 1$, the whole typical difference, where the band's half width
+uses $\sigma_u$. Typical half width for a province: 16% with one satellite,
+8% with two (light); 30% and 15% (lit cells). A value of zero has no band: it
+is "not detected".
+
+**Flags** (none changes a value): lit area that drops below 75% of both the
+three years before and after, and so returns; recall under 0.7; a median of
+fewer than 15 cloud-free observations in the unit; no light detected; more
+than half the light at the top of the scale. F12 1994 is left out for thin
+observation (median 10 per cell; F10 covers the year). F18, 2010 to 2013, is a
+segment of its own: for those years EOG's Version 4 series has a yearly
+composite of F18 alone (other satellites flew, but none has a composite), so
+nothing ties them to the years before. The step from F16 2009 to F18 2010 in
+national light is +9% in the corrected files, +18% after the dark-background
+reading and +45% uncorrected; how much of it is the ground is not known.
+
+**Gas flares.** Up to 81% of a province's DMSP light lies inside NOAA's
+outlines (South Sumatra in 1992, a thin year; 78% in 1996). The outlines are broad and include towns, and flare glow reaches
+beyond them, so the choice of mask decides the result where flares are large
+(one province reads 0.69, 1.17 or 0.71 of its 1996 light in 2007 with no
+mask, these outlines, or a tight mask). "Light outside the outlines" is
+marked usable only where the outlines never hold more than 10% of the unit's
+light: 32 of 38 provinces.
+
+### Why DMSP and VIIRS are not joined
+
+Yearly Black Marble (median of each cell's good months, every cell, averaged
+two by two onto the DMSP grid) was compared with F18 for 2012 and 2013
+(`ntl.sensors`; the page shows its two outputs: what F18 sees in each class
+of VIIRS radiance, and per place the share of F18's light in cells where
+VIIRS reads under 0.25 nW, which has a median of 31% to 35% over provinces
+and reaches 59% in East Nusa Tenggara).
+
+- F18 calls lit 57% of cells where VIIRS reads 0.25 to 0.5 nW, 86% at 0.5 to
+  1 and 98% at 1 to 2; it reaches the top of its scale above about 16 nW.
+- Blurring VIIRS by 1.5 DMSP cells raises its correlation with F18 from 0.89
+  to 0.94; a blur of 2 cells does nearly as well and was used for the fit
+  below.
+- A conversion in the form of Li and others (2020,
+  <https://doi.org/10.1038/s41597-020-0510-y>), on blurred radiance $L$,
+
+$$\widehat{DN} = d + \frac{D - d}{1 + e^{-k(\ln(1+L) - x_0)}}, \qquad \widehat{DN} = 0 \text{ below a floor},$$
+
+  fitted on 2013 gives $d$ = 4.8, $k$ = 2.15, $x_0$ = 1.87, $D$ = 58.6 and a
+  floor of 0.17 nW. Applied to 2012 it gives a national sum of 1.02 times F18
+  and a lit area of 1.02.
+- By province it fails: in the year not fitted on, the typical miss is 22% to
+  25% (0.20 to 0.23 in log), and 9 or 10 of 38 provinces are within 10%.
+- The national figure is a balance of opposite regional errors (0.92, 1.09
+  and 1.16 for the three regions it was fitted on), moves from 1.14 to 0.92 with a floor between
+  0.10 and 0.25 nW, and compresses growth: a doubling of radiance becomes 1.6
+  times.
+- A third of F18's lit cells (87 thousand of 267 thousand, 18% of its light)
+  have less than 0.25 nW of VIIRS light under them. 86% of that light is
+  within 3 cells of a VIIRS cell of 0.5 nW: mostly DMSP's wider footprint
+  around lights VIIRS does see, with a little light below the VIIRS product's
+  own floor (those cells read 0.04 to 0.06 nW above their dark neighbours).
+- A second VIIRS product (EOG's annual VNL v2) disagrees with Black Marble by
+  region, so any ratio between DMSP and VIIRS depends on the product chosen.
+
+So the page shows three segments with gaps: DMSP 1992 to 2009, F18 2010 to
+2013, and VIIRS from 2012 in its own measure (the yearly median of the
+monthly index of section 3, as a share of the unit's usual light). No ratio
+between the sensors is published.
+
+### What the long view cannot support
+
+A growth figure from two single years; any change across 2009 to 2010 or from
+DMSP to VIIRS; a trend for a saturated unit; the words "electrification" or
+"settlement light". The level across all DMSP years rests on the assumption
+that the lighting of Sicily was largely stable (Elvidge and others 2009, for
+1994 to 2008; EOG's later coefficient table extends it), and no band shows an
+error in it. A joined series does exist (Li and others 2020): what is said
+here is that the join does not hold below the country for Indonesia. The record has
+not been compared with electricity sales or any other record on the ground.
+Several causes named in the notes are inferences, not checked: fire and haze
+for 1997 in central and south Kalimantan, and gas flaring for bright spots
+that faded on the coasts of Aceh, North Sumatra and Riau.
+
 ## 7. What was tried and changed
 
 | Tried | What the test showed | Now |
@@ -654,9 +811,10 @@ beyond counting what is on the map.
 - **Sensitivity.** The median unit catches a one-month drop of about a
   third. Events of days are invisible in a month.
 - **Early years.** No alarm threshold before 2018, and no province status before 2020.
-- **One sensor.** The record is VIIRS only, from 2012. The older DMSP-OLS
-  yearly composites (1992 onward) were downloaded but are not used:
-  joining the two sensors needs an intercalibration that was not done.
+- **Two sensors, not joined.** The statuses are VIIRS only, from 2012. The
+  older DMSP-OLS yearly composites (1992 to 2013) are shown beside it on the
+  long view page and are not joined to it (section 6a): a conversion between
+  them comes within 3% for the country and misses provinces by a fifth to a quarter.
 - **Thresholds drift.** The yearly alarm rate ranges from a tenth to three
   times its target.
 - **One satellite pass.** About 01:30. Light lost and restored between
@@ -734,6 +892,10 @@ the figures "against nights seen alike" are left out.
 ```
 python -m ntl.events --event lombok2018 --root E:\temp\ntl --cache E:\temp\ntl\cache --out site\data
 python -m ntl.lightup --study mudik2019 --root E:\temp\ntl --out site\data --roads E:\temp\ntl\osm\java_roads_overpass.json
+python -m ntl.dmsp --archives <folder of FssYYYY.v4.tar> --out E:\temp\ntl\dmsp --scratch E:\temp\ntl\scratch\dmsp
+python -m ntl.longrecord --crops E:\temp\ntl\dmsp --eog E:\temp\ntl\eog --boundaries <adm3 file> --flares <Flares_Indonesia_1.shp> --out E:\temp\ntl\longrecord
+python -m ntl.sensors --root E:\temp\ntl --crops E:\temp\ntl\dmsp --eog E:\temp\ntl\eog --units <unit maps .npz> --cache E:\temp\ntl\dmsp_work --out E:\temp\ntl\longrecord\sensors.json
+python -m ntl.longview --records E:\temp\ntl\longrecord --run E:\temp\ntl\cache\run_monthly.npz --sensors E:\temp\ntl\longrecord\sensors.json --out site\data\long
 ```
 
 The first is run once per event (`lombok2018`, `palu2018`, `nyepi2026`,

@@ -47,6 +47,11 @@ chosen layer shows that month, and a click opens any place over time.
 | Nyepi 2026 | On the Balinese day of silence the island gave under a tenth of its light. |
 | Mudik 2019 | The exodus before Eid does not show in the cities. On the roads one night stands out: the Sunday of the return. |
 
+**The long view.** The older DMSP satellites (1992 to 2013) beside VIIRS on one
+time axis, per province and district, as a review of what the older record
+can carry. The two are not joined: a conversion between them comes within 3%
+for the country and misses provinces by a fifth to a quarter.
+
 ![A case study page](docs/img/case-study.png)
 
 <!-- Figure: a screenshot of one case study (for example the Mudik map of Java on the return nights), saved as docs/img/case-study.png -->

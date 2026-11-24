@@ -97,6 +97,9 @@ h2 {margin-top: 2rem;}
 .keys {display: flex; flex-wrap: wrap; gap: 0.3rem 1rem; font-size: 0.8rem; color: #52514e; margin: 0 0 0.6rem;}
 .keys span {display: inline-flex; align-items: center; gap: 0.35rem;}
 .key-line {display: inline-block; width: 22px; height: 0; border-top: 2px solid #0b0b0b;}
+.time-brush .handle {cursor: ew-resize;}
+.time-brush .selection {cursor: grab;}
+.time-card {padding-bottom: 0.7rem;}
 .card table {width: 100%; max-width: none;}
 details {margin: 0.4rem 0;}
 details p, details li {max-width: 80ch; font-size: 0.9rem;}
@@ -128,7 +131,7 @@ details p, details li {max-width: 80ch; font-size: 0.9rem;}
   <p class="lede">Indonesia after dark, by province, district and sub-district. Month by month, the night-time radiance a satellite records over each area's lit cells, set against what the area's own past would lead one to expect.</p>
 </header>
 
-<p class="fine" style="max-width:none; margin: -0.6rem 0 1rem;">Case studies, night by night: <a href="./lombok-2018">Lombok 2018, two dark nights, one of them unexplained</a>; <a href="./palu-2018">Palu 2018, the light that took weeks to return</a>; <a href="./nyepi-2026">Nyepi 2026, an island at under a tenth of its light</a>; <a href="./mudik-2019">Mudik 2019, looking for an exodus in the dark</a>.</p>
+<p class="fine" style="max-width:none; margin: -0.6rem 0 1rem;">Before 2012: <a href="./long-view">the long view, 1992 to 2026: a review of the older DMSP record, shown beside VIIRS and not joined</a>. Case studies, night by night: <a href="./lombok-2018">Lombok 2018, two dark nights, one of them unexplained</a>; <a href="./palu-2018">Palu 2018, the light that took weeks to return</a>; <a href="./nyepi-2026">Nyepi 2026, an island at under a tenth of its light</a>; <a href="./mudik-2019">Mudik 2019, looking for an exodus in the dark</a>.</p>
 
 <div class="notice">
   <p><strong>How to read a status.</strong> A status says how a unit's light compares with its own past. It does not say why: this page makes no claim about electricity, outages or the economy, and none of it has been checked against records on the ground.</p>
@@ -139,6 +142,7 @@ import {files} from "./data/files.js";
 import {loadTyped, loadJSON, loadBundle, seriesOf, monthLabel, monthDate} from "./components/load.js";
 import {STATUS, STRIP, LOW, LEVEL_NAME, LEVEL_PLURAL, PARENT_NAME, swatchStyle, RAMPS, NO_VALUE, CELL_LAYERS, colourOf, classOf} from "./components/palette.js";
 import {drawMap, legend, boundsOf} from "./components/map.js";
+import {timeSlider, rangeStore} from "./components/timezoom.js";
 ```
 
 ```js
@@ -151,6 +155,12 @@ const LAST = meta.latest.window;
 const START = Math.max(0, LAST - 1);
 const HIDDEN = meta.months.slice(LAST + 1); // months in the files that are not shown
 const dates = meta.months.map(monthDate);
+// The span of months the unit's charts show, kept when the unit or the month changes. It opens on the whole
+// record; the overview above the charts narrows or moves it. `rangeStore` holds the same span for that overview
+// (see timezoom.js), so that it is not rebuilt, and a drag not cut off, when the span changes.
+rangeStore.value = [0, LAST];
+const timeRange = Mutable(rangeStore.value);
+const setTimeRange = (a, b) => { timeRange.value = [a, b]; };
 const LEVELS = meta.levels; // province, district, subdistrict
 const DIVISOR = {province: 1, district: 100, subdistrict: 10000}; // code / divisor = province code
 const MIN_CELLS = meta.thresholds.min_unit_cells;
@@ -923,24 +933,39 @@ display(unit && rows ? (() => {
 ```
 
 ```js
+// ---- the months the charts below show: an overview of the whole record with a draggable window.
+// This block must not read `timeRange`: it would be rebuilt during a drag (see timezoom.js).
+display(unit && rows ? html`<div class="card time-card">
+  <h3>Months shown in the charts below</h3>
+  <p class="fine">The unit's light over the whole record. Drag the shaded window to move it, drag an edge to show more or fewer months (a year at least), double-click to show everything. The thin line is the month on the map.</p>
+  ${resize((width) => timeSlider({width, dates: dates.slice(0, LAST + 1), values: rows.map((r) => (Number.isFinite(r.observed) ? r.observed : null)), marker: month,
+    colours: {line: "#0b0b0b", fill: "#e1e0d9", axis: "#c3c2b7", ink: "#52514e", window: "#a2431a"}, onChange: setTimeRange}))}
+</div>` : html`<span></span>`);
+```
+
+```js
 // ---- the charts for the selected unit
 display(unit && rows ? (() => {
-  const seen = rows.filter((r) => Number.isFinite(r.observed));
+  const [T0, T1] = timeRange;
+  const inWindow = rows.filter((r) => r.t >= T0 && r.t <= T1); // the months inside the window of the overview above
+  const span = [dates[T0], new Date(Date.UTC(dates[T1].getUTCFullYear(), dates[T1].getUTCMonth() + 1, 1))];
+  const here = month >= T0 && month <= T1 ? [dates[month]] : []; // the month on the map, if it is in the window
+  const seen = inWindow.filter((r) => Number.isFinite(r.observed));
   const flagged = seen.filter((r) => LOW.has(r.state));
   const lightPlot = (width) => clickToMonth(Plot.plot({
     width, height: 300, marginLeft: 48,
-    x: {label: null},
+    x: {label: null, domain: span},
     y: {label: "% of usual light", grid: true, nice: true},
     marks: [
-      ...(hasTiers ? [Plot.lineY(rows, {x: "date", y: "alarmLine", stroke: "#c53030", strokeWidth: 1.2, strokeDasharray: "1.5,3"}),
-                      Plot.lineY(rows, {x: "date", y: "watchLine", stroke: "#8a5a00", strokeWidth: 1.2, strokeDasharray: "7,3"})]
-                   : [Plot.lineY(rows, {x: "date", y: "watchLine", stroke: "#6b46c1", strokeWidth: 1.2, strokeDasharray: "7,3"})]),
-      Plot.lineY(rows, {x: "date", y: "expected", stroke: "#898781", strokeWidth: 1.5}),
-      Plot.lineY(rows, {x: "date", y: "observed", stroke: "#0b0b0b", strokeWidth: 1.2}),
+      ...(hasTiers ? [Plot.lineY(inWindow, {x: "date", y: "alarmLine", stroke: "#c53030", strokeWidth: 1.2, strokeDasharray: "1.5,3"}),
+                      Plot.lineY(inWindow, {x: "date", y: "watchLine", stroke: "#8a5a00", strokeWidth: 1.2, strokeDasharray: "7,3"})]
+                   : [Plot.lineY(inWindow, {x: "date", y: "watchLine", stroke: "#6b46c1", strokeWidth: 1.2, strokeDasharray: "7,3"})]),
+      Plot.lineY(inWindow, {x: "date", y: "expected", stroke: "#898781", strokeWidth: 1.5}),
+      Plot.lineY(inWindow, {x: "date", y: "observed", stroke: "#0b0b0b", strokeWidth: 1.2}),
       Plot.dot(seen, {x: "date", y: "observed", r: 1.6, fill: "#0b0b0b"}), // so that a single observed month between gaps is visible
       Plot.dot(flagged, {x: "date", y: "observed", r: 4.5, fill: (d) => STATUS[d.state].colour, stroke: "#0b0b0b", strokeWidth: 0.75,
                          symbol: (d) => (d.state === 5 ? "diamond" : d.state === 4 ? "circle" : "square")}),
-      Plot.ruleX([dates[month]], {stroke: "#0b0b0b", strokeOpacity: 0.35}),
+      Plot.ruleX(here, {stroke: "#0b0b0b", strokeOpacity: 0.35}),
       Plot.dot(seen, Plot.pointerX({x: "date", y: "observed", r: 6, stroke: "#0b0b0b", fill: "none"})),
       Plot.tip(seen, Plot.pointerX({x: "date", y: "observed", channels: {t: "t"},
         title: (d) => `${monthLabel(meta.months[d.t])}\n${d.status}${LOW.has(d.state) && d.judged !== "yes" ? " (low confidence)" : ""}\nObserved ${d.observed.toFixed(0)}% of usual light${Number.isFinite(d.expected) ? `\nExpected ${d.expected.toFixed(0)}%` : ""}\n${seenText(d.coverage, d.state)} of its light seen`}))
@@ -949,27 +974,27 @@ display(unit && rows ? (() => {
   const key = (style, label) => html`<span><span class="key-line" style=${style}></span>${label}</span>`;
   const dot = (code, shape) => html`<span><span class="swatch" style=${swatchStyle(code) + shape}></span>${STATUS[code].label}</span>`;
 
-  const band = rows.map((r) => ({...r, next: new Date(Date.UTC(r.date.getUTCFullYear(), r.date.getUTCMonth() + 1, 1))}));
+  const band = inWindow.map((r) => ({...r, next: new Date(Date.UTC(r.date.getUTCFullYear(), r.date.getUTCMonth() + 1, 1))}));
   const stripPlot = (width) => clickToMonth(Plot.plot({
     width, height: 70, marginLeft: 12, marginRight: 12, marginTop: 6,
-    x: {label: null}, y: {axis: null},
+    x: {label: null, domain: span}, y: {axis: null},
     marks: [
       Plot.frame({stroke: "#e1e0d9"}),
       ...Object.keys(STRIP).filter((code) => STRIP[code]).map((code) => Plot.rect(band.filter((r) => r.state === +code), {x1: "date", x2: "next", y1: 0, y2: 1, fill: STRIP[code], inset: 0.3})),
-      Plot.ruleX([dates[month]], {stroke: "#0b0b0b"}),
+      Plot.ruleX(here, {stroke: "#0b0b0b"}),
       Plot.tip(band, Plot.pointerX({x: "date", y: 0.5, channels: {t: "t"}, title: (d) => `${monthLabel(meta.months[d.t])}: ${d.status}`}))
     ]
   }));
   const seenPlot = (width) => clickToMonth(Plot.plot({
     width, height: 170, marginLeft: 44,
-    x: {label: null}, y: {label: "% of usual light seen", domain: [0, 100], grid: true},
+    x: {label: null, domain: span}, y: {label: "% of usual light seen", domain: [0, 100], grid: true},
     marks: [
-      Plot.areaY(rows, {x: "date", y: (d) => 100 * d.coverage, fill: "#6f8598", fillOpacity: 0.35, curve: "step"}),
-      Plot.lineY(rows, {x: "date", y: (d) => 100 * d.coverage, stroke: "#4f6475", strokeWidth: 1.2, curve: "step"}),
+      Plot.areaY(inWindow, {x: "date", y: (d) => 100 * d.coverage, fill: "#6f8598", fillOpacity: 0.35, curve: "step"}),
+      Plot.lineY(inWindow, {x: "date", y: (d) => 100 * d.coverage, stroke: "#4f6475", strokeWidth: 1.2, curve: "step"}),
       Plot.ruleY([100 * meta.thresholds.min_coverage], {stroke: "#0b0b0b", strokeDasharray: "3,3"}),
-      Plot.text([[dates[0], 100 * meta.thresholds.min_coverage]], {text: ["minimum for a reading"], dy: -6, textAnchor: "start", fontSize: 11, fill: "#52514e"}),
-      Plot.ruleX([dates[month]], {stroke: "#0b0b0b", strokeOpacity: 0.35}),
-      Plot.tip(rows, Plot.pointerX({x: "date", y: (d) => 100 * d.coverage, channels: {t: "t"},
+      Plot.text([[dates[T0], 100 * meta.thresholds.min_coverage]], {text: ["minimum for a reading"], dy: -6, textAnchor: "start", fontSize: 11, fill: "#52514e"}),
+      Plot.ruleX(here, {stroke: "#0b0b0b", strokeOpacity: 0.35}),
+      Plot.tip(inWindow, Plot.pointerX({x: "date", y: (d) => 100 * d.coverage, channels: {t: "t"},
         title: (d) => `${monthLabel(meta.months[d.t])}\n${seenText(d.coverage, d.state)} of its usual light seen${Number.isFinite(d.nights) ? `\nmean ${d.nights.toFixed(1)} observations per cell` : ""}`}))
     ]
   }));

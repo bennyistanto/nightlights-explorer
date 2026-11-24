@@ -4,6 +4,8 @@ Indonesia after dark, by province, district and sub-district: an interactive
 dashboard of night-time lights seen from space, month by month from January
 2012 to October 2026, with four case studies read night by night.
 
+See live dashboard at <https://bennyistanto.github.io/nightlights-explorer>
+
 ## What the dashboard can tell you
 
 For any province, district or sub-district:

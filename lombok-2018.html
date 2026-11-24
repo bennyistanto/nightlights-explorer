@@ -1,0 +1,882 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="generator" content="Observable Framework v1.13.4">
+<title>Lombok 2018: two dark nights, one of them unexplained | Nightlights Explorer</title>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,200..900;1,8..60,200..900&amp;display=swap" crossorigin>
+<link rel="preload" as="style" href="./_observablehq/theme-air,alt,wide.8a524e59.css">
+<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,200..900;1,8..60,200..900&amp;display=swap" crossorigin>
+<link rel="stylesheet" type="text/css" href="./_observablehq/theme-air,alt,wide.8a524e59.css">
+<link rel="modulepreload" href="./_observablehq/client.b09e1b20.js">
+<link rel="modulepreload" href="./_observablehq/runtime.13bc3751.js">
+<link rel="modulepreload" href="./_observablehq/stdlib.3a5bae2b.js">
+<link rel="modulepreload" href="./_import/data/events/lombok2018/files.2ccd8c32.js">
+<link rel="modulepreload" href="./_import/data/files.a4c9cf92.js">
+<link rel="modulepreload" href="./_import/components/load.054d4540.js">
+<link rel="modulepreload" href="./_import/components/map.ef9eee7a.js">
+<link rel="modulepreload" href="./_import/components/explorer.dbc2604f.js">
+<link rel="modulepreload" href="./_import/components/palette.2cf889e5.js">
+<link rel="modulepreload" href="./_npm/d3@7.9.2/172963d6.js">
+<link rel="modulepreload" href="./_npm/htl@1.0.0/11521f02.js">
+<link rel="modulepreload" href="./_npm/@observablehq/plot@0.6.19/2e9f152c.js">
+<link rel="modulepreload" href="./_npm/d3-array@3.2.5/52d144d7.js">
+<link rel="modulepreload" href="./_npm/d3-axis@3.0.1/c0e5fbdf.js">
+<link rel="modulepreload" href="./_npm/d3-brush@3.0.1/321ca391.js">
+<link rel="modulepreload" href="./_npm/d3-chord@3.0.2/468a53d3.js">
+<link rel="modulepreload" href="./_npm/d3-color@3.1.1/91613843.js">
+<link rel="modulepreload" href="./_npm/d3-contour@4.0.3/8e79d948.js">
+<link rel="modulepreload" href="./_npm/d3-delaunay@6.0.6/d6c84ddb.js">
+<link rel="modulepreload" href="./_npm/d3-dispatch@3.0.2/a70bd0ef.js">
+<link rel="modulepreload" href="./_npm/d3-drag@3.0.1/47229f37.js">
+<link rel="modulepreload" href="./_npm/d3-dsv@3.0.2/4a4147a2.js">
+<link rel="modulepreload" href="./_npm/d3-ease@3.0.2/ca4f77fd.js">
+<link rel="modulepreload" href="./_npm/d3-fetch@3.0.2/eef84249.js">
+<link rel="modulepreload" href="./_npm/d3-force@3.0.1/c1b23a7b.js">
+<link rel="modulepreload" href="./_npm/d3-format@3.1.3/b1442952.js">
+<link rel="modulepreload" href="./_npm/d3-geo@3.1.2/e07dc79e.js">
+<link rel="modulepreload" href="./_npm/d3-hierarchy@3.1.3/d3b0a1aa.js">
+<link rel="modulepreload" href="./_npm/d3-interpolate@3.0.2/6de199be.js">
+<link rel="modulepreload" href="./_npm/d3-path@3.1.1/9eb769d3.js">
+<link rel="modulepreload" href="./_npm/d3-polygon@3.0.2/93595b54.js">
+<link rel="modulepreload" href="./_npm/d3-quadtree@3.0.2/80bafd54.js">
+<link rel="modulepreload" href="./_npm/d3-random@3.0.2/8bf3f736.js">
+<link rel="modulepreload" href="./_npm/d3-scale@4.0.3/d15d690b.js">
+<link rel="modulepreload" href="./_npm/d3-scale-chromatic@3.1.1/287966da.js">
+<link rel="modulepreload" href="./_npm/d3-selection@3.0.1/c4158eb5.js">
+<link rel="modulepreload" href="./_npm/d3-shape@3.2.1/a41eab18.js">
+<link rel="modulepreload" href="./_npm/d3-time@3.1.1/acaa76bc.js">
+<link rel="modulepreload" href="./_npm/d3-time-format@4.1.1/d561e9cd.js">
+<link rel="modulepreload" href="./_npm/d3-timer@3.0.2/ea7e7cf7.js">
+<link rel="modulepreload" href="./_npm/d3-transition@3.0.2/f861168f.js">
+<link rel="modulepreload" href="./_npm/d3-zoom@3.0.1/c1f09323.js">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns=%22http://www.w3.org/2000/svg%22%20viewBox=%220%200%2024%2024%22%3E%3Ccircle%20cx=%2212%22%20cy=%2212%22%20r=%2210.5%22%20fill=%22%252310151c%22/%3E%3Cpath%20d=%22M12%201.5a10.500%2010.500%200%200%201%200%2021%2013.500%2013.500%200%200%200%200-21Z%22%20fill=%22%25232a3644%22/%3E%3Ccircle%20cx=%228.300%22%20cy=%229.400%22%20r=%223%22%20fill=%22%2523ffd76a%22%20opacity=%22.22%22/%3E%3Ccircle%20cx=%228.300%22%20cy=%229.400%22%20r=%221.500%22%20fill=%22%2523ffd76a%22/%3E%3Ccircle%20cx=%2212.700%22%20cy=%2213.700%22%20r=%221.100%22%20fill=%22%2523ffd76a%22/%3E%3Ccircle%20cx=%227.300%22%20cy=%2214.900%22%20r=%22.800%22%20fill=%22%2523f2b24a%22/%3E%3Ccircle%20cx=%2211.300%22%20cy=%226.700%22%20r=%22.600%22%20fill=%22%2523f2b24a%22/%3E%3Ccircle%20cx=%2210.200%22%20cy=%2217.600%22%20r=%22.600%22%20fill=%22%2523f2b24a%22/%3E%3C/svg%3E">
+<script>
+  if (!["localhost", "127.0.0.1"].includes(location.hostname)) {
+    const s = document.createElement("script");
+    s.async = true;
+    s.src = "https://www.googletagmanager.com/gtag/js?id=G-M3ZZ0H7XHJ";
+    document.head.appendChild(s);
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-M3ZZ0H7XHJ');
+  }
+</script>
+<script type="module">
+
+import {define} from "./_observablehq/client.b09e1b20.js";
+import {registerFile} from "./_observablehq/stdlib.3a5bae2b.js";
+
+registerFile("./data/cell_district.u16.gz", {"name":"./data/cell_district.u16.gz","mimeType":"application/gzip","path":"./_file/data/cell_district.u16.fb194027.gz","lastModified":1795450136290,"size":31640});
+registerFile("./data/cell_province.u16.gz", {"name":"./data/cell_province.u16.gz","mimeType":"application/gzip","path":"./_file/data/cell_province.u16.8b99fb5f.gz","lastModified":1795450134959,"size":12257});
+registerFile("./data/cell_subdistrict.u16.gz", {"name":"./data/cell_subdistrict.u16.gz","mimeType":"application/gzip","path":"./_file/data/cell_subdistrict.u16.b3bcb6b2.gz","lastModified":1795450138108,"size":74022});
+registerFile("./data/cell_then_now.u8.gz", {"name":"./data/cell_then_now.u8.gz","mimeType":"application/gzip","path":"./_file/data/cell_then_now.u8.54595fc7.gz","lastModified":1795450134002,"size":34149});
+registerFile("./data/cell_usual.u16.gz", {"name":"./data/cell_usual.u16.gz","mimeType":"application/gzip","path":"./_file/data/cell_usual.u16.5f99d360.gz","lastModified":1795450091620,"size":277622});
+registerFile("./data/cells.u32.gz", {"name":"./data/cells.u32.gz","mimeType":"application/gzip","path":"./_file/data/cells.u32.5f928170.gz","lastModified":1795450091456,"size":406090});
+registerFile("./data/cells/2012.u8.gz", {"name":"./data/cells/2012.u8.gz","mimeType":"application/gzip","path":"./_file/data/cells/2012.u8.69bd146a.gz","lastModified":1795450102782,"size":577872});
+registerFile("./data/cells/2013.u8.gz", {"name":"./data/cells/2013.u8.gz","mimeType":"application/gzip","path":"./_file/data/cells/2013.u8.d7cb9979.gz","lastModified":1795450104950,"size":1144319});
+registerFile("./data/cells/2014.u8.gz", {"name":"./data/cells/2014.u8.gz","mimeType":"application/gzip","path":"./_file/data/cells/2014.u8.56b2123d.gz","lastModified":1795450106737,"size":1295731});
+registerFile("./data/cells/2015.u8.gz", {"name":"./data/cells/2015.u8.gz","mimeType":"application/gzip","path":"./_file/data/cells/2015.u8.e8d77dbe.gz","lastModified":1795450108617,"size":1286439});
+registerFile("./data/cells/2016.u8.gz", {"name":"./data/cells/2016.u8.gz","mimeType":"application/gzip","path":"./_file/data/cells/2016.u8.3a183013.gz","lastModified":1795450110603,"size":1146917});
+registerFile("./data/cells/2017.u8.gz", {"name":"./data/cells/2017.u8.gz","mimeType":"application/gzip","path":"./_file/data/cells/2017.u8.5a9c7aa4.gz","lastModified":1795450112661,"size":1098632});
+registerFile("./data/cells/2018.u8.gz", {"name":"./data/cells/2018.u8.gz","mimeType":"application/gzip","path":"./_file/data/cells/2018.u8.6a311ae0.gz","lastModified":1795450114659,"size":1159240});
+registerFile("./data/cells/2019.u8.gz", {"name":"./data/cells/2019.u8.gz","mimeType":"application/gzip","path":"./_file/data/cells/2019.u8.9badc131.gz","lastModified":1795450116521,"size":1265555});
+registerFile("./data/cells/2020.u8.gz", {"name":"./data/cells/2020.u8.gz","mimeType":"application/gzip","path":"./_file/data/cells/2020.u8.8f6b80d0.gz","lastModified":1795450118312,"size":1213753});
+registerFile("./data/cells/2021.u8.gz", {"name":"./data/cells/2021.u8.gz","mimeType":"application/gzip","path":"./_file/data/cells/2021.u8.3624246a.gz","lastModified":1795450120046,"size":1113979});
+registerFile("./data/cells/2022.u8.gz", {"name":"./data/cells/2022.u8.gz","mimeType":"application/gzip","path":"./_file/data/cells/2022.u8.6908853d.gz","lastModified":1795450122062,"size":948213});
+registerFile("./data/cells/2023.u8.gz", {"name":"./data/cells/2023.u8.gz","mimeType":"application/gzip","path":"./_file/data/cells/2023.u8.7ab37c44.gz","lastModified":1795450124324,"size":1058244});
+registerFile("./data/cells/2024.u8.gz", {"name":"./data/cells/2024.u8.gz","mimeType":"application/gzip","path":"./_file/data/cells/2024.u8.7493a4f8.gz","lastModified":1795450126283,"size":1071393});
+registerFile("./data/cells/2025.u8.gz", {"name":"./data/cells/2025.u8.gz","mimeType":"application/gzip","path":"./_file/data/cells/2025.u8.97fa8123.gz","lastModified":1795450128164,"size":1007048});
+registerFile("./data/cells/2026.u8.gz", {"name":"./data/cells/2026.u8.gz","mimeType":"application/gzip","path":"./_file/data/cells/2026.u8.304198fe.gz","lastModified":1795450129485,"size":987854});
+registerFile("./data/district/11.bin.gz", {"name":"./data/district/11.bin.gz","mimeType":"application/gzip","path":"./_file/data/district/11.bin.764ea1a5.gz","lastModified":1795450137631,"size":15427});
+registerFile("./data/district/12.bin.gz", {"name":"./data/district/12.bin.gz","mimeType":"application/gzip","path":"./_file/data/district/12.bin.5e547ba9.gz","lastModified":1795450137675,"size":20525});
+registerFile("./data/district/13.bin.gz", {"name":"./data/district/13.bin.gz","mimeType":"application/gzip","path":"./_file/data/district/13.bin.4256a68e.gz","lastModified":1795450137692,"size":14030});
+registerFile("./data/district/14.bin.gz", {"name":"./data/district/14.bin.gz","mimeType":"application/gzip","path":"./_file/data/district/14.bin.884ca7cb.gz","lastModified":1795450137702,"size":13561});
+registerFile("./data/district/15.bin.gz", {"name":"./data/district/15.bin.gz","mimeType":"application/gzip","path":"./_file/data/district/15.bin.737ee089.gz","lastModified":1795450137712,"size":10794});
+registerFile("./data/district/16.bin.gz", {"name":"./data/district/16.bin.gz","mimeType":"application/gzip","path":"./_file/data/district/16.bin.c1f55ce6.gz","lastModified":1795450137727,"size":14610});
+registerFile("./data/district/17.bin.gz", {"name":"./data/district/17.bin.gz","mimeType":"application/gzip","path":"./_file/data/district/17.bin.e573cdf1.gz","lastModified":1795450137734,"size":7712});
+registerFile("./data/district/18.bin.gz", {"name":"./data/district/18.bin.gz","mimeType":"application/gzip","path":"./_file/data/district/18.bin.213e4281.gz","lastModified":1795450137742,"size":14703});
+registerFile("./data/district/19.bin.gz", {"name":"./data/district/19.bin.gz","mimeType":"application/gzip","path":"./_file/data/district/19.bin.ce8af8dd.gz","lastModified":1795450137742,"size":8474});
+registerFile("./data/district/21.bin.gz", {"name":"./data/district/21.bin.gz","mimeType":"application/gzip","path":"./_file/data/district/21.bin.2a55f5eb.gz","lastModified":1795450137761,"size":9552});
+registerFile("./data/district/31.bin.gz", {"name":"./data/district/31.bin.gz","mimeType":"application/gzip","path":"./_file/data/district/31.bin.017d9bd8.gz","lastModified":1795450137761,"size":4954});
+registerFile("./data/district/32.bin.gz", {"name":"./data/district/32.bin.gz","mimeType":"application/gzip","path":"./_file/data/district/32.bin.015ab25e.gz","lastModified":1795450137780,"size":26613});
+registerFile("./data/district/33.bin.gz", {"name":"./data/district/33.bin.gz","mimeType":"application/gzip","path":"./_file/data/district/33.bin.f531e9e1.gz","lastModified":1795450137792,"size":32842});
+registerFile("./data/district/34.bin.gz", {"name":"./data/district/34.bin.gz","mimeType":"application/gzip","path":"./_file/data/district/34.bin.8ce62c59.gz","lastModified":1795450137810,"size":5511});
+registerFile("./data/district/35.bin.gz", {"name":"./data/district/35.bin.gz","mimeType":"application/gzip","path":"./_file/data/district/35.bin.65d774f4.gz","lastModified":1795450137828,"size":41766});
+registerFile("./data/district/36.bin.gz", {"name":"./data/district/36.bin.gz","mimeType":"application/gzip","path":"./_file/data/district/36.bin.fe1a463f.gz","lastModified":1795450137828,"size":8441});
+registerFile("./data/district/51.bin.gz", {"name":"./data/district/51.bin.gz","mimeType":"application/gzip","path":"./_file/data/district/51.bin.657936c3.gz","lastModified":1795450137842,"size":11568});
+registerFile("./data/district/52.bin.gz", {"name":"./data/district/52.bin.gz","mimeType":"application/gzip","path":"./_file/data/district/52.bin.982b552f.gz","lastModified":1795450137842,"size":13492});
+registerFile("./data/district/53.bin.gz", {"name":"./data/district/53.bin.gz","mimeType":"application/gzip","path":"./_file/data/district/53.bin.c094a170.gz","lastModified":1795450137863,"size":28990});
+registerFile("./data/district/61.bin.gz", {"name":"./data/district/61.bin.gz","mimeType":"application/gzip","path":"./_file/data/district/61.bin.41339874.gz","lastModified":1795450137877,"size":8879});
+registerFile("./data/district/62.bin.gz", {"name":"./data/district/62.bin.gz","mimeType":"application/gzip","path":"./_file/data/district/62.bin.506ea750.gz","lastModified":1795450137882,"size":13686});
+registerFile("./data/district/63.bin.gz", {"name":"./data/district/63.bin.gz","mimeType":"application/gzip","path":"./_file/data/district/63.bin.95e10acb.gz","lastModified":1795450137898,"size":14680});
+registerFile("./data/district/64.bin.gz", {"name":"./data/district/64.bin.gz","mimeType":"application/gzip","path":"./_file/data/district/64.bin.61afcf58.gz","lastModified":1795450137898,"size":12251});
+registerFile("./data/district/65.bin.gz", {"name":"./data/district/65.bin.gz","mimeType":"application/gzip","path":"./_file/data/district/65.bin.f84e1ad2.gz","lastModified":1795450137916,"size":7427});
+registerFile("./data/district/71.bin.gz", {"name":"./data/district/71.bin.gz","mimeType":"application/gzip","path":"./_file/data/district/71.bin.d49245f0.gz","lastModified":1795450137932,"size":21741});
+registerFile("./data/district/72.bin.gz", {"name":"./data/district/72.bin.gz","mimeType":"application/gzip","path":"./_file/data/district/72.bin.13c0f9cd.gz","lastModified":1795450137942,"size":15633});
+registerFile("./data/district/73.bin.gz", {"name":"./data/district/73.bin.gz","mimeType":"application/gzip","path":"./_file/data/district/73.bin.9236ba56.gz","lastModified":1795450137959,"size":24163});
+registerFile("./data/district/74.bin.gz", {"name":"./data/district/74.bin.gz","mimeType":"application/gzip","path":"./_file/data/district/74.bin.c3a03edd.gz","lastModified":1795450137978,"size":19302});
+registerFile("./data/district/75.bin.gz", {"name":"./data/district/75.bin.gz","mimeType":"application/gzip","path":"./_file/data/district/75.bin.0a80a36c.gz","lastModified":1795450137986,"size":9049});
+registerFile("./data/district/76.bin.gz", {"name":"./data/district/76.bin.gz","mimeType":"application/gzip","path":"./_file/data/district/76.bin.84fa36af.gz","lastModified":1795450137994,"size":5332});
+registerFile("./data/district/81.bin.gz", {"name":"./data/district/81.bin.gz","mimeType":"application/gzip","path":"./_file/data/district/81.bin.d829bcd6.gz","lastModified":1795450138008,"size":14764});
+registerFile("./data/district/82.bin.gz", {"name":"./data/district/82.bin.gz","mimeType":"application/gzip","path":"./_file/data/district/82.bin.bab56994.gz","lastModified":1795450138025,"size":15169});
+registerFile("./data/district/91.bin.gz", {"name":"./data/district/91.bin.gz","mimeType":"application/gzip","path":"./_file/data/district/91.bin.fe9c2bd7.gz","lastModified":1795450138025,"size":7499});
+registerFile("./data/district/92.bin.gz", {"name":"./data/district/92.bin.gz","mimeType":"application/gzip","path":"./_file/data/district/92.bin.fa8c9cfe.gz","lastModified":1795450138049,"size":4301});
+registerFile("./data/district/93.bin.gz", {"name":"./data/district/93.bin.gz","mimeType":"application/gzip","path":"./_file/data/district/93.bin.7b17438d.gz","lastModified":1795450138058,"size":3035});
+registerFile("./data/district/94.bin.gz", {"name":"./data/district/94.bin.gz","mimeType":"application/gzip","path":"./_file/data/district/94.bin.ca79259d.gz","lastModified":1795450138063,"size":1706});
+registerFile("./data/district/95.bin.gz", {"name":"./data/district/95.bin.gz","mimeType":"application/gzip","path":"./_file/data/district/95.bin.1372e740.gz","lastModified":1795450138063,"size":785});
+registerFile("./data/district/96.bin.gz", {"name":"./data/district/96.bin.gz","mimeType":"application/gzip","path":"./_file/data/district/96.bin.11a3a920.gz","lastModified":1795450138075,"size":3318});
+registerFile("./data/events/lombok2018/adjusted.u8.gz", {"name":"./data/events/lombok2018/adjusted.u8.gz","mimeType":"application/gzip","path":"./_file/data/events/lombok2018/adjusted.u8.bf4f46d7.gz","lastModified":1795450150206,"size":41570});
+registerFile("./data/events/lombok2018/cell_info.u8.gz", {"name":"./data/events/lombok2018/cell_info.u8.gz","mimeType":"application/gzip","path":"./_file/data/events/lombok2018/cell_info.u8.b74a4f3e.gz","lastModified":1795450150211,"size":3072});
+registerFile("./data/events/lombok2018/cells.u32.gz", {"name":"./data/events/lombok2018/cells.u32.gz","mimeType":"application/gzip","path":"./_file/data/events/lombok2018/cells.u32.4919b96a.gz","lastModified":1795450149885,"size":11114});
+registerFile("./data/events/lombok2018/meta.json", {"name":"./data/events/lombok2018/meta.json","mimeType":"application/json","path":"./_file/data/events/lombok2018/meta.999436c0.json","lastModified":1795450151030,"size":15816});
+registerFile("./data/events/lombok2018/nights.u8.gz", {"name":"./data/events/lombok2018/nights.u8.gz","mimeType":"application/gzip","path":"./_file/data/events/lombok2018/nights.u8.dc14dd70.gz","lastModified":1795450150080,"size":65327});
+registerFile("./data/events/lombok2018/recovery.u8.gz", {"name":"./data/events/lombok2018/recovery.u8.gz","mimeType":"application/gzip","path":"./_file/data/events/lombok2018/recovery.u8.8f4f8d73.gz","lastModified":1795450150625,"size":1172});
+registerFile("./data/events/lombok2018/units.json", {"name":"./data/events/lombok2018/units.json","mimeType":"application/json","path":"./_file/data/events/lombok2018/units.f7960557.json","lastModified":1795450151021,"size":104499});
+registerFile("./data/faint_cells.u32.gz", {"name":"./data/faint_cells.u32.gz","mimeType":"application/gzip","path":"./_file/data/faint_cells.u32.55a4d0bf.gz","lastModified":1795450144890,"size":71351});
+registerFile("./data/faint_province.u16.gz", {"name":"./data/faint_province.u16.gz","mimeType":"application/gzip","path":"./_file/data/faint_province.u16.35a0bd35.gz","lastModified":1795450144951,"size":7742});
+registerFile("./data/faint_usual.u16.gz", {"name":"./data/faint_usual.u16.gz","mimeType":"application/gzip","path":"./_file/data/faint_usual.u16.8cbc4830.gz","lastModified":1795450144933,"size":18635});
+registerFile("./data/files.js", {"name":"./data/files.js","mimeType":"text/javascript","path":"./_file/data/files.796d6738.js","lastModified":1795450144951,"size":10615});
+registerFile("./data/meta.json", {"name":"./data/meta.json","mimeType":"application/json","path":"./_file/data/meta.ea0cc5f4.json","lastModified":1795450144951,"size":27562});
+registerFile("./data/outlines/district.geojson", {"name":"./data/outlines/district.geojson","mimeType":"application/geo+json","path":"./_file/data/outlines/district.6db295d4.geojson","lastModified":1795450143864,"size":4728146});
+registerFile("./data/outlines/province.geojson", {"name":"./data/outlines/province.geojson","mimeType":"application/geo+json","path":"./_file/data/outlines/province.ff9fbc90.geojson","lastModified":1795450143604,"size":3075557});
+registerFile("./data/outlines/subdistrict/11.geojson", {"name":"./data/outlines/subdistrict/11.geojson","mimeType":"application/geo+json","path":"./_file/data/outlines/subdistrict/11.24af1612.geojson","lastModified":1795450143913,"size":379509});
+registerFile("./data/outlines/subdistrict/12.geojson", {"name":"./data/outlines/subdistrict/12.geojson","mimeType":"application/geo+json","path":"./_file/data/outlines/subdistrict/12.e980c8bd.geojson","lastModified":1795450143950,"size":516049});
+registerFile("./data/outlines/subdistrict/13.geojson", {"name":"./data/outlines/subdistrict/13.geojson","mimeType":"application/geo+json","path":"./_file/data/outlines/subdistrict/13.347b611f.geojson","lastModified":1795450143964,"size":270601});
+registerFile("./data/outlines/subdistrict/14.geojson", {"name":"./data/outlines/subdistrict/14.geojson","mimeType":"application/geo+json","path":"./_file/data/outlines/subdistrict/14.f93de132.geojson","lastModified":1795450143993,"size":250480});
+registerFile("./data/outlines/subdistrict/15.geojson", {"name":"./data/outlines/subdistrict/15.geojson","mimeType":"application/geo+json","path":"./_file/data/outlines/subdistrict/15.4818569a.geojson","lastModified":1795450144005,"size":193953});
+registerFile("./data/outlines/subdistrict/16.geojson", {"name":"./data/outlines/subdistrict/16.geojson","mimeType":"application/geo+json","path":"./_file/data/outlines/subdistrict/16.a43e2646.geojson","lastModified":1795450144026,"size":338311});
+registerFile("./data/outlines/subdistrict/17.geojson", {"name":"./data/outlines/subdistrict/17.geojson","mimeType":"application/geo+json","path":"./_file/data/outlines/subdistrict/17.118d5fe3.geojson","lastModified":1795450144047,"size":148229});
+registerFile("./data/outlines/subdistrict/18.geojson", {"name":"./data/outlines/subdistrict/18.geojson","mimeType":"application/geo+json","path":"./_file/data/outlines/subdistrict/18.5907c6a1.geojson","lastModified":1795450144067,"size":316337});
+registerFile("./data/outlines/subdistrict/19.geojson", {"name":"./data/outlines/subdistrict/19.geojson","mimeType":"application/geo+json","path":"./_file/data/outlines/subdistrict/19.fc2f6393.geojson","lastModified":1795450144070,"size":127380});
+registerFile("./data/outlines/subdistrict/21.geojson", {"name":"./data/outlines/subdistrict/21.geojson","mimeType":"application/geo+json","path":"./_file/data/outlines/subdistrict/21.b1ef0671.geojson","lastModified":1795450144102,"size":298054});
+registerFile("./data/outlines/subdistrict/31.geojson", {"name":"./data/outlines/subdistrict/31.geojson","mimeType":"application/geo+json","path":"./_file/data/outlines/subdistrict/31.2c59f4e0.geojson","lastModified":1795450144105,"size":29588});
+registerFile("./data/outlines/subdistrict/32.geojson", {"name":"./data/outlines/subdistrict/32.geojson","mimeType":"application/geo+json","path":"./_file/data/outlines/subdistrict/32.ad615a13.geojson","lastModified":1795450144137,"size":566430});
+registerFile("./data/outlines/subdistrict/33.geojson", {"name":"./data/outlines/subdistrict/33.geojson","mimeType":"application/geo+json","path":"./_file/data/outlines/subdistrict/33.1efd333b.geojson","lastModified":1795450144170,"size":558692});
+registerFile("./data/outlines/subdistrict/34.geojson", {"name":"./data/outlines/subdistrict/34.geojson","mimeType":"application/geo+json","path":"./_file/data/outlines/subdistrict/34.e053b3cd.geojson","lastModified":1795450144182,"size":62998});
+registerFile("./data/outlines/subdistrict/35.geojson", {"name":"./data/outlines/subdistrict/35.geojson","mimeType":"application/geo+json","path":"./_file/data/outlines/subdistrict/35.7a80201b.geojson","lastModified":1795450144222,"size":699621});
+registerFile("./data/outlines/subdistrict/36.geojson", {"name":"./data/outlines/subdistrict/36.geojson","mimeType":"application/geo+json","path":"./_file/data/outlines/subdistrict/36.74264b40.geojson","lastModified":1795450144234,"size":153863});
+registerFile("./data/outlines/subdistrict/51.geojson", {"name":"./data/outlines/subdistrict/51.geojson","mimeType":"application/geo+json","path":"./_file/data/outlines/subdistrict/51.2cd77814.geojson","lastModified":1795450144237,"size":66657});
+registerFile("./data/outlines/subdistrict/52.geojson", {"name":"./data/outlines/subdistrict/52.geojson","mimeType":"application/geo+json","path":"./_file/data/outlines/subdistrict/52.8c26016f.geojson","lastModified":1795450144254,"size":193467});
+registerFile("./data/outlines/subdistrict/53.geojson", {"name":"./data/outlines/subdistrict/53.geojson","mimeType":"application/geo+json","path":"./_file/data/outlines/subdistrict/53.23187606.geojson","lastModified":1795450144282,"size":449062});
+registerFile("./data/outlines/subdistrict/61.geojson", {"name":"./data/outlines/subdistrict/61.geojson","mimeType":"application/geo+json","path":"./_file/data/outlines/subdistrict/61.9ca92f62.geojson","lastModified":1795450144330,"size":412108});
+registerFile("./data/outlines/subdistrict/62.geojson", {"name":"./data/outlines/subdistrict/62.geojson","mimeType":"application/geo+json","path":"./_file/data/outlines/subdistrict/62.f94ae3ae.geojson","lastModified":1795450144350,"size":231818});
+registerFile("./data/outlines/subdistrict/63.geojson", {"name":"./data/outlines/subdistrict/63.geojson","mimeType":"application/geo+json","path":"./_file/data/outlines/subdistrict/63.cf123f52.geojson","lastModified":1795450144366,"size":190595});
+registerFile("./data/outlines/subdistrict/64.geojson", {"name":"./data/outlines/subdistrict/64.geojson","mimeType":"application/geo+json","path":"./_file/data/outlines/subdistrict/64.06eec58a.geojson","lastModified":1795450144387,"size":300710});
+registerFile("./data/outlines/subdistrict/65.geojson", {"name":"./data/outlines/subdistrict/65.geojson","mimeType":"application/geo+json","path":"./_file/data/outlines/subdistrict/65.ab471a54.geojson","lastModified":1795450144403,"size":172413});
+registerFile("./data/outlines/subdistrict/71.geojson", {"name":"./data/outlines/subdistrict/71.geojson","mimeType":"application/geo+json","path":"./_file/data/outlines/subdistrict/71.84a841d8.geojson","lastModified":1795450144421,"size":176880});
+registerFile("./data/outlines/subdistrict/72.geojson", {"name":"./data/outlines/subdistrict/72.geojson","mimeType":"application/geo+json","path":"./_file/data/outlines/subdistrict/72.73e701cb.geojson","lastModified":1795450144454,"size":455568});
+registerFile("./data/outlines/subdistrict/73.geojson", {"name":"./data/outlines/subdistrict/73.geojson","mimeType":"application/geo+json","path":"./_file/data/outlines/subdistrict/73.6d626caf.geojson","lastModified":1795450144482,"size":391046});
+registerFile("./data/outlines/subdistrict/74.geojson", {"name":"./data/outlines/subdistrict/74.geojson","mimeType":"application/geo+json","path":"./_file/data/outlines/subdistrict/74.141d7114.geojson","lastModified":1795450144518,"size":289381});
+registerFile("./data/outlines/subdistrict/75.geojson", {"name":"./data/outlines/subdistrict/75.geojson","mimeType":"application/geo+json","path":"./_file/data/outlines/subdistrict/75.6aeb6826.geojson","lastModified":1795450144528,"size":99736});
+registerFile("./data/outlines/subdistrict/76.geojson", {"name":"./data/outlines/subdistrict/76.geojson","mimeType":"application/geo+json","path":"./_file/data/outlines/subdistrict/76.679dbdb6.geojson","lastModified":1795450144538,"size":111169});
+registerFile("./data/outlines/subdistrict/81.geojson", {"name":"./data/outlines/subdistrict/81.geojson","mimeType":"application/geo+json","path":"./_file/data/outlines/subdistrict/81.8c247348.geojson","lastModified":1795450144564,"size":411218});
+registerFile("./data/outlines/subdistrict/82.geojson", {"name":"./data/outlines/subdistrict/82.geojson","mimeType":"application/geo+json","path":"./_file/data/outlines/subdistrict/82.dba401a9.geojson","lastModified":1795450144582,"size":258560});
+registerFile("./data/outlines/subdistrict/91.geojson", {"name":"./data/outlines/subdistrict/91.geojson","mimeType":"application/geo+json","path":"./_file/data/outlines/subdistrict/91.d7971ce9.geojson","lastModified":1795450144616,"size":298053});
+registerFile("./data/outlines/subdistrict/92.geojson", {"name":"./data/outlines/subdistrict/92.geojson","mimeType":"application/geo+json","path":"./_file/data/outlines/subdistrict/92.f01995df.geojson","lastModified":1795450144640,"size":358739});
+registerFile("./data/outlines/subdistrict/93.geojson", {"name":"./data/outlines/subdistrict/93.geojson","mimeType":"application/geo+json","path":"./_file/data/outlines/subdistrict/93.57efed5d.geojson","lastModified":1795450144653,"size":241998});
+registerFile("./data/outlines/subdistrict/94.geojson", {"name":"./data/outlines/subdistrict/94.geojson","mimeType":"application/geo+json","path":"./_file/data/outlines/subdistrict/94.a69185e4.geojson","lastModified":1795450144673,"size":235711});
+registerFile("./data/outlines/subdistrict/95.geojson", {"name":"./data/outlines/subdistrict/95.geojson","mimeType":"application/geo+json","path":"./_file/data/outlines/subdistrict/95.9337891f.geojson","lastModified":1795450144693,"size":264130});
+registerFile("./data/outlines/subdistrict/96.geojson", {"name":"./data/outlines/subdistrict/96.geojson","mimeType":"application/geo+json","path":"./_file/data/outlines/subdistrict/96.3e536143.geojson","lastModified":1795450144724,"size":499450});
+registerFile("./data/province/all.bin.gz", {"name":"./data/province/all.bin.gz","mimeType":"application/gzip","path":"./_file/data/province/all.bin.875daefd.gz","lastModified":1795450136224,"size":33112});
+registerFile("./data/subdistrict/11.bin.gz", {"name":"./data/subdistrict/11.bin.gz","mimeType":"application/gzip","path":"./_file/data/subdistrict/11.bin.695dc13f.gz","lastModified":1795450140544,"size":114843});
+registerFile("./data/subdistrict/12.bin.gz", {"name":"./data/subdistrict/12.bin.gz","mimeType":"application/gzip","path":"./_file/data/subdistrict/12.bin.c68c4e2b.gz","lastModified":1795450140768,"size":160744});
+registerFile("./data/subdistrict/13.bin.gz", {"name":"./data/subdistrict/13.bin.gz","mimeType":"application/gzip","path":"./_file/data/subdistrict/13.bin.5e7712f2.gz","lastModified":1795450140861,"size":76802});
+registerFile("./data/subdistrict/14.bin.gz", {"name":"./data/subdistrict/14.bin.gz","mimeType":"application/gzip","path":"./_file/data/subdistrict/14.bin.255992ad.gz","lastModified":1795450140982,"size":132460});
+registerFile("./data/subdistrict/15.bin.gz", {"name":"./data/subdistrict/15.bin.gz","mimeType":"application/gzip","path":"./_file/data/subdistrict/15.bin.385ea535.gz","lastModified":1795450141064,"size":71200});
+registerFile("./data/subdistrict/16.bin.gz", {"name":"./data/subdistrict/16.bin.gz","mimeType":"application/gzip","path":"./_file/data/subdistrict/16.bin.c78813a6.gz","lastModified":1795450141161,"size":126494});
+registerFile("./data/subdistrict/17.bin.gz", {"name":"./data/subdistrict/17.bin.gz","mimeType":"application/gzip","path":"./_file/data/subdistrict/17.bin.20ac3185.gz","lastModified":1795450141205,"size":29411});
+registerFile("./data/subdistrict/18.bin.gz", {"name":"./data/subdistrict/18.bin.gz","mimeType":"application/gzip","path":"./_file/data/subdistrict/18.bin.5383b372.gz","lastModified":1795450141295,"size":162711});
+registerFile("./data/subdistrict/19.bin.gz", {"name":"./data/subdistrict/19.bin.gz","mimeType":"application/gzip","path":"./_file/data/subdistrict/19.bin.e4004d88.gz","lastModified":1795450141317,"size":39781});
+registerFile("./data/subdistrict/21.bin.gz", {"name":"./data/subdistrict/21.bin.gz","mimeType":"application/gzip","path":"./_file/data/subdistrict/21.bin.b049dea8.gz","lastModified":1795450141337,"size":44391});
+registerFile("./data/subdistrict/31.bin.gz", {"name":"./data/subdistrict/31.bin.gz","mimeType":"application/gzip","path":"./_file/data/subdistrict/31.bin.a0601e04.gz","lastModified":1795450141355,"size":35126});
+registerFile("./data/subdistrict/32.bin.gz", {"name":"./data/subdistrict/32.bin.gz","mimeType":"application/gzip","path":"./_file/data/subdistrict/32.bin.181b289d.gz","lastModified":1795450141679,"size":511398});
+registerFile("./data/subdistrict/33.bin.gz", {"name":"./data/subdistrict/33.bin.gz","mimeType":"application/gzip","path":"./_file/data/subdistrict/33.bin.1fa83ec3.gz","lastModified":1795450141972,"size":463602});
+registerFile("./data/subdistrict/34.bin.gz", {"name":"./data/subdistrict/34.bin.gz","mimeType":"application/gzip","path":"./_file/data/subdistrict/34.bin.6d587cc5.gz","lastModified":1795450142013,"size":66369});
+registerFile("./data/subdistrict/35.bin.gz", {"name":"./data/subdistrict/35.bin.gz","mimeType":"application/gzip","path":"./_file/data/subdistrict/35.bin.24a3592b.gz","lastModified":1795450142362,"size":649367});
+registerFile("./data/subdistrict/36.bin.gz", {"name":"./data/subdistrict/36.bin.gz","mimeType":"application/gzip","path":"./_file/data/subdistrict/36.bin.29bda287.gz","lastModified":1795450142445,"size":128080});
+registerFile("./data/subdistrict/51.bin.gz", {"name":"./data/subdistrict/51.bin.gz","mimeType":"application/gzip","path":"./_file/data/subdistrict/51.bin.b74d6250.gz","lastModified":1795450142496,"size":67663});
+registerFile("./data/subdistrict/52.bin.gz", {"name":"./data/subdistrict/52.bin.gz","mimeType":"application/gzip","path":"./_file/data/subdistrict/52.bin.0f942e2b.gz","lastModified":1795450142562,"size":118535});
+registerFile("./data/subdistrict/53.bin.gz", {"name":"./data/subdistrict/53.bin.gz","mimeType":"application/gzip","path":"./_file/data/subdistrict/53.bin.0065c08d.gz","lastModified":1795450142605,"size":73156});
+registerFile("./data/subdistrict/61.bin.gz", {"name":"./data/subdistrict/61.bin.gz","mimeType":"application/gzip","path":"./_file/data/subdistrict/61.bin.565156f6.gz","lastModified":1795450142667,"size":48906});
+registerFile("./data/subdistrict/62.bin.gz", {"name":"./data/subdistrict/62.bin.gz","mimeType":"application/gzip","path":"./_file/data/subdistrict/62.bin.6f055674.gz","lastModified":1795450142712,"size":61949});
+registerFile("./data/subdistrict/63.bin.gz", {"name":"./data/subdistrict/63.bin.gz","mimeType":"application/gzip","path":"./_file/data/subdistrict/63.bin.fc5776ff.gz","lastModified":1795450142796,"size":107317});
+registerFile("./data/subdistrict/64.bin.gz", {"name":"./data/subdistrict/64.bin.gz","mimeType":"application/gzip","path":"./_file/data/subdistrict/64.bin.55d15870.gz","lastModified":1795450142863,"size":107966});
+registerFile("./data/subdistrict/65.bin.gz", {"name":"./data/subdistrict/65.bin.gz","mimeType":"application/gzip","path":"./_file/data/subdistrict/65.bin.e444e48b.gz","lastModified":1795450142883,"size":32560});
+registerFile("./data/subdistrict/71.bin.gz", {"name":"./data/subdistrict/71.bin.gz","mimeType":"application/gzip","path":"./_file/data/subdistrict/71.bin.7d05a778.gz","lastModified":1795450142946,"size":132548});
+registerFile("./data/subdistrict/72.bin.gz", {"name":"./data/subdistrict/72.bin.gz","mimeType":"application/gzip","path":"./_file/data/subdistrict/72.bin.7b1db1de.gz","lastModified":1795450143024,"size":65540});
+registerFile("./data/subdistrict/73.bin.gz", {"name":"./data/subdistrict/73.bin.gz","mimeType":"application/gzip","path":"./_file/data/subdistrict/73.bin.4f4271fc.gz","lastModified":1795450143146,"size":150011});
+registerFile("./data/subdistrict/74.bin.gz", {"name":"./data/subdistrict/74.bin.gz","mimeType":"application/gzip","path":"./_file/data/subdistrict/74.bin.5ba3ef61.gz","lastModified":1795450143196,"size":78990});
+registerFile("./data/subdistrict/75.bin.gz", {"name":"./data/subdistrict/75.bin.gz","mimeType":"application/gzip","path":"./_file/data/subdistrict/75.bin.de4dc9cc.gz","lastModified":1795450143226,"size":65170});
+registerFile("./data/subdistrict/76.bin.gz", {"name":"./data/subdistrict/76.bin.gz","mimeType":"application/gzip","path":"./_file/data/subdistrict/76.bin.f641cfd0.gz","lastModified":1795450143262,"size":14077});
+registerFile("./data/subdistrict/81.bin.gz", {"name":"./data/subdistrict/81.bin.gz","mimeType":"application/gzip","path":"./_file/data/subdistrict/81.bin.f7620b5f.gz","lastModified":1795450143282,"size":28337});
+registerFile("./data/subdistrict/82.bin.gz", {"name":"./data/subdistrict/82.bin.gz","mimeType":"application/gzip","path":"./_file/data/subdistrict/82.bin.1184fefd.gz","lastModified":1795450143299,"size":40975});
+registerFile("./data/subdistrict/91.bin.gz", {"name":"./data/subdistrict/91.bin.gz","mimeType":"application/gzip","path":"./_file/data/subdistrict/91.bin.9118d915.gz","lastModified":1795450143332,"size":23022});
+registerFile("./data/subdistrict/92.bin.gz", {"name":"./data/subdistrict/92.bin.gz","mimeType":"application/gzip","path":"./_file/data/subdistrict/92.bin.86595907.gz","lastModified":1795450143357,"size":11393});
+registerFile("./data/subdistrict/93.bin.gz", {"name":"./data/subdistrict/93.bin.gz","mimeType":"application/gzip","path":"./_file/data/subdistrict/93.bin.2faeecf0.gz","lastModified":1795450143386,"size":7770});
+registerFile("./data/subdistrict/94.bin.gz", {"name":"./data/subdistrict/94.bin.gz","mimeType":"application/gzip","path":"./_file/data/subdistrict/94.bin.6be24b3f.gz","lastModified":1795450143398,"size":4618});
+registerFile("./data/subdistrict/95.bin.gz", {"name":"./data/subdistrict/95.bin.gz","mimeType":"application/gzip","path":"./_file/data/subdistrict/95.bin.7efa945b.gz","lastModified":1795450143398,"size":2529});
+registerFile("./data/subdistrict/96.bin.gz", {"name":"./data/subdistrict/96.bin.gz","mimeType":"application/gzip","path":"./_file/data/subdistrict/96.bin.47739ddc.gz","lastModified":1795450143413,"size":14377});
+registerFile("./data/units_district.json", {"name":"./data/units_district.json","mimeType":"application/json","path":"./_file/data/units_district.ffb4209d.json","lastModified":1795450137586,"size":51271});
+registerFile("./data/units_province.json", {"name":"./data/units_province.json","mimeType":"application/json","path":"./_file/data/units_province.60d26997.json","lastModified":1795450136190,"size":4597});
+registerFile("./data/units_subdistrict.json", {"name":"./data/units_subdistrict.json","mimeType":"application/json","path":"./_file/data/units_subdistrict.dde4d022.json","lastModified":1795450140317,"size":456752});
+
+define({id: "27292fc7", outputs: ["files","national","loadTyped","drawMap","nightExplorer","NO_VALUE","d3"], body: async () => {
+const [{files}, {files: national}, {loadTyped}, {drawMap}, {nightExplorer}, {NO_VALUE}, d3] = await Promise.all([import("./_import/data/events/lombok2018/files.2ccd8c32.js"), import("./_import/data/files.a4c9cf92.js"), import("./_import/components/load.054d4540.js"), import("./_import/components/map.ef9eee7a.js"), import("./_import/components/explorer.dbc2604f.js"), import("./_import/components/palette.2cf889e5.js"), import("./_npm/d3@7.9.2/172963d6.js")]);
+
+return {files,national,loadTyped,drawMap,nightExplorer,NO_VALUE,d3};
+}});
+
+define({id: "97e45255", inputs: ["files","loadTyped","national","d3","NO_VALUE","drawMap","html"], outputs: ["meta","S","cells","adjusted","raw","info","D","N","dates","night","provinces","districtOutlines","island","COLS","DEG","lon","lat","day","marks","pct","brbg","CLASS_COLOURS","rgb","colours","FOCUS","outlines","nightMap","classLegend","C","F","B","G","lit","against","controlNights","beforeK","duringK","afterK","litBefore","wentDark","show","M","like","baliLike","refK","spread"], body: async (files,loadTyped,national,d3,NO_VALUE,drawMap,html) => {
+const meta = await files["meta.json"].json();
+const S = meta.story;
+const cells = await loadTyped("lombok-cells", files["cells.u32.gz"], Uint32Array);
+const adjusted = await loadTyped("lombok-adjusted", files["adjusted.u8.gz"], Uint8Array);
+const raw = await loadTyped("lombok-nights", files["nights.u8.gz"], Uint8Array);
+const info = await loadTyped("lombok-info", files["cell_info.u8.gz"], Uint8Array);
+const D = meta.dates.length, N = cells.length;
+const dates = meta.dates.map((s) => new Date(`${s}T00:00:00Z`));
+const night = (iso) => meta.dates.indexOf(iso);
+const provinces = await national["outlines/province.geojson"].json();
+const districtOutlines = await national["outlines/district.geojson"].json();
+const island = districtOutlines.features.filter((f) => S.focus.districts.includes(f.properties.code));
+const COLS = 86400, DEG = 1 / 240;
+const lon = Float32Array.from(cells, (i) => -180 + ((i % COLS) + 0.5) * DEG);
+const lat = Float32Array.from(cells, (i) => 90 - (Math.floor(i / COLS) + 0.5) * DEG);
+const day = (k, long = true) => dates[k].toLocaleDateString("en-GB", {day: "numeric", month: long ? "long" : "short", timeZone: "UTC"});
+const marks = meta.marks.map((m) => ({k: night(m.date), date: dates[night(m.date)], label: m.label}));
+const pct = (v) => `${(100 * v).toFixed(0)}%`;
+// ColorBrewer BrBG: brown is dimmer than the reference, teal brighter. Class 0 (no reference) is not drawn.
+const brbg = d3.schemeBrBG[7];
+const CLASS_COLOURS = [null, NO_VALUE, NO_VALUE, brbg[0], brbg[1], brbg[3], brbg[5], NO_VALUE];
+const rgb = (hex) => [1, 3, 5].map((k) => parseInt(hex.slice(k, k + 2), 16)).join(", ");
+const colours = CLASS_COLOURS.map((c) => (c ? rgb(c) : null));
+const FOCUS = {key: "lombok", bounds: [[115.95, -8.95], [116.75, -8.15]]};
+const outlines = island.map((feature) => ({feature, id: null, state: null, weak: false, fill: "transparent", text: ""}));
+// a map of the island for one night; `source` is the adjusted or the raw class array
+const nightMap = (k, source, sync = null) => (width) => {
+  const mask = 7;
+  const level = new Uint8Array(N);
+  for (let i = 0; i < N; i++) level[i] = source[k * N + i] & mask;
+  return drawMap({width, land: provinces.features, units: outlines, context: [], selected: [], lights: {lon, lat, level, colours}, focus: FOCUS, sync, onPick: () => {}});
+};
+const classLegend = html`<div class="legend">${[[3, "under 50% of its reference"], [4, "50 to 80%"], [5, "80 to 125%: about the same"], [6, "125% or more"]].map(([k, label]) =>
+  html`<span class="legend-item"><span class="swatch" style=${`background:${CLASS_COLOURS[k]};`}></span>Cell at ${label}</span>`)}
+  <span class="legend-item"><span class="swatch" style=${`background:${NO_VALUE};`}></span>Cell not seen that night (cloud or a poor-quality retrieval), which is not the same as dark</span></div>`;
+// figures used in the text: every unit figure is the summed light of the cells seen over their summed reference
+const C = S.control, F = S.focus, B = S.bands, G = S.same_geometry;
+const lit = (iso) => F.light[night(iso)], against = (iso) => F.light_adjusted[night(iso)];
+const controlNights = C.light.filter((v) => v !== null).length;
+const [beforeK, duringK, afterK] = meta.story_nights.map(night);
+const litBefore = d3.sum(S.went_dark.rings, (r) => r.lit_before), wentDark = d3.sum(S.went_dark.rings, (r) => r.went_dark);
+const show = (v) => (v === null || v === undefined ? "no figure" : pct(v));
+// against references from nights seen from a similar angle (within M.tolerance degrees): the figure the text leans on
+const M = S.matched;
+const like = (iso) => M.focus.light[night(iso)], baliLike = (iso) => M.control.light[night(iso)];
+const refK = d3.range(night(meta.reference.last) + 1);
+const spread = (values) => d3.deviation(refK.filter((k) => values[k] !== null && M.focus.light[k] !== null && F.light[k] !== null), (k) => Math.log(values[k]));
+return {meta,S,cells,adjusted,raw,info,D,N,dates,night,provinces,districtOutlines,island,COLS,DEG,lon,lat,day,marks,pct,brbg,CLASS_COLOURS,rgb,colours,FOCUS,outlines,nightMap,classLegend,C,F,B,G,lit,against,controlNights,beforeK,duringK,afterK,litBefore,wentDark,show,M,like,baliLike,refK,spread};
+}});
+
+define({id: "9077d95f", mode: "inline", inputs: ["day","night","display"], body: async (day,night,display) => {
+display(await(
+day(night("2018-08-08"))
+))
+}});
+
+define({id: "f67c3507", mode: "inline", inputs: ["show","lit","display"], body: async (show,lit,display) => {
+display(await(
+show(lit("2018-08-08"))
+))
+}});
+
+define({id: "feed508d", mode: "inline", inputs: ["show","C","night","display"], body: async (show,C,night,display) => {
+display(await(
+show(C.light[night("2018-08-08")])
+))
+}});
+
+define({id: "df5a5c48", mode: "inline", inputs: ["M","night","display"], body: async (M,night,display) => {
+display(await(
+M.zenith[night("2018-08-08")].toFixed(0)
+))
+}});
+
+define({id: "8b081847", mode: "inline", inputs: ["M","display"], body: async (M,display) => {
+display(await(
+M.tolerance
+))
+}});
+
+define({id: "e590a463", mode: "inline", inputs: ["show","like","display"], body: async (show,like,display) => {
+display(await(
+show(like("2018-08-08"))
+))
+}});
+
+define({id: "90df28bc", mode: "inline", inputs: ["show","baliLike","display"], body: async (show,baliLike,display) => {
+display(await(
+show(baliLike("2018-08-08"))
+))
+}});
+
+define({id: "4de0fde5", mode: "inline", inputs: ["show","like","display"], body: async (show,like,display) => {
+display(await(
+show(like("2018-08-05"))
+))
+}});
+
+define({id: "6d613b7b", mode: "inline", inputs: ["show","like","display"], body: async (show,like,display) => {
+display(await(
+show(like("2018-08-06"))
+))
+}});
+
+define({id: "65fa4a6f", mode: "inline", inputs: ["show","like","display"], body: async (show,like,display) => {
+display(await(
+show(like("2018-08-07"))
+))
+}});
+
+define({id: "9d579a63", inputs: ["meta","dates","C","F","M","Plot","marks","day"], outputs: ["series","skyChart"], body: (meta,dates,C,F,M,Plot,marks,day) => {
+const series = meta.dates.map((_, k) => ({k, date: dates[k], bali: C.light[k] === null ? null : 100 * C.light[k],
+  raw: F.light[k] === null ? null : 100 * F.light[k], adjusted: M.focus.light[k] === null || M.focus.cells[k] < 400 ? null : 100 * M.focus.light[k], seen: F.raw.seen[k],
+  baliLike: M.control.light[k] === null || M.control.cells[k] < 400 ? null : 100 * M.control.light[k], cells: M.focus.cells[k], zenith: M.zenith[k]}));
+const skyChart = (width) => Plot.plot({
+  width, height: 300, marginLeft: 48, marginRight: 20,
+  x: {label: null}, y: {label: "% of the reference nights", domain: [0, 170], grid: true},
+  marks: [
+    Plot.ruleY([100], {stroke: "#898781"}),
+    Plot.ruleX(marks, {x: "date", stroke: "#c53030", strokeDasharray: "2,3"}),
+    Plot.text(marks, {x: "date", y: 170, text: (m) => m.label.split(",")[0], dy: 8, dx: 4, textAnchor: "start", fontSize: 10, fill: "#c53030"}),
+    Plot.lineY(series.filter((r) => r.raw !== null), {x: "date", y: "raw", stroke: "#b5b3aa", strokeWidth: 1.2}),
+    Plot.dot(series.filter((r) => r.raw !== null), {x: "date", y: "raw", r: 2.5, fill: "#b5b3aa"}),
+    Plot.dot(series.filter((r) => r.baliLike !== null), {x: "date", y: "baliLike", r: 3.5, fill: "#5ab4ac", stroke: "#0b0b0b", strokeWidth: 0.5, symbol: "square"}),
+    Plot.dot(series.filter((r) => r.adjusted !== null), {x: "date", y: "adjusted", r: 5, fill: "#0b0b0b"}),
+    Plot.tip(series.filter((r) => r.raw !== null), Plot.pointerX({x: "date", y: "raw",
+      title: (r) => `${day(r.k)}, seen from ${r.zenith === null ? "an unknown angle" : r.zenith.toFixed(0) + " degrees"}\nLombok against all reference nights: ${r.raw.toFixed(0)}% (${r.seen.toLocaleString("en")} of ${F.raw.cells.toLocaleString("en")} cells seen)\nLombok against nights seen alike: ${r.adjusted === null ? "no figure" : r.adjusted.toFixed(0) + "% (" + r.cells.toLocaleString("en") + " cells)"}\nBali against nights seen alike: ${r.baliLike === null ? "too few cells" : r.baliLike.toFixed(0) + "%"}`}))
+  ]
+});
+return {series,skyChart};
+}});
+
+define({id: "9c2a84a9", mode: "inline", inputs: ["resize","skyChart","display"], body: async (resize,skyChart,display) => {
+display(await(
+resize(skyChart)
+))
+}});
+
+define({id: "06905c77", mode: "inline", inputs: ["day","night","meta","display"], body: async (day,night,meta,display) => {
+display(await(
+day(night(meta.reference.last))
+))
+}});
+
+define({id: "8b081847-1", mode: "inline", inputs: ["M","display"], body: async (M,display) => {
+display(await(
+M.tolerance
+))
+}});
+
+define({id: "dd41eb88", mode: "inline", inputs: ["pct","spread","F","display"], body: async (pct,spread,F,display) => {
+display(await(
+pct(Math.exp(spread(F.light)) - 1)
+))
+}});
+
+define({id: "48ab624d", mode: "inline", inputs: ["pct","spread","M","display"], body: async (pct,spread,M,display) => {
+display(await(
+pct(Math.exp(spread(M.focus.light)) - 1)
+))
+}});
+
+define({id: "cbf22626", mode: "inline", inputs: ["M","night","display"], body: async (M,night,display) => {
+display(await(
+M.focus.cells[night("2018-08-19")].toLocaleString("en")
+))
+}});
+
+define({id: "fb269a7e", mode: "inline", inputs: ["show","like","display"], body: async (show,like,display) => {
+display(await(
+show(like("2018-08-19"))
+))
+}});
+
+define({id: "398e2bda", mode: "inline", inputs: ["show","baliLike","display"], body: async (show,baliLike,display) => {
+display(await(
+show(baliLike("2018-08-19"))
+))
+}});
+
+define({id: "e2453754", mode: "inline", inputs: ["G","night","display"], body: async (G,night,display) => {
+display(await(
+G.focus.cells[night("2018-08-19")].toLocaleString("en")
+))
+}});
+
+define({id: "cb6777d6", mode: "inline", inputs: ["show","G","night","display"], body: async (show,G,night,display) => {
+display(await(
+show(G.focus.ratio[night("2018-08-19")])
+))
+}});
+
+define({id: "7f594748", mode: "inline", inputs: ["show","like","display"], body: async (show,like,display) => {
+display(await(
+show(like("2018-08-20"))
+))
+}});
+
+define({id: "b1303588", mode: "inline", inputs: ["pct","F","duringK","display"], body: async (pct,F,duringK,display) => {
+display(await(
+pct(F.raw.seen[duringK] / F.raw.cells)
+))
+}});
+
+define({id: "4c04444b", mode: "inline", inputs: ["day","night","display"], body: async (day,night,display) => {
+display(await(
+day(night("2018-08-12"))
+))
+}});
+
+define({id: "659b3b5c", mode: "inline", inputs: ["show","like","display"], body: async (show,like,display) => {
+display(await(
+show(like("2018-08-12"))
+))
+}});
+
+define({id: "a7e35005", mode: "inline", inputs: ["F","night","display"], body: async (F,night,display) => {
+display(await(
+F.raw.seen[night("2018-08-12")].toLocaleString("en")
+))
+}});
+
+define({id: "ba3ee2ab", mode: "inline", inputs: ["F","display"], body: async (F,display) => {
+display(await(
+F.raw.cells.toLocaleString("en")
+))
+}});
+
+define({id: "4cee1197", mode: "inline", inputs: ["M","night","display"], body: async (M,night,display) => {
+display(await(
+M.control.cells[night("2018-08-12")]
+))
+}});
+
+define({id: "c2c2861e", mode: "inline", inputs: ["show","baliLike","display"], body: async (show,baliLike,display) => {
+display(await(
+show(baliLike("2018-08-12"))
+))
+}});
+
+define({id: "0b8ff532", mode: "inline", inputs: ["beforeK","duringK","afterK","html","day","resize","nightMap","adjusted","show","M","F","display"], body: async (beforeK,duringK,afterK,html,day,resize,nightMap,adjusted,show,M,F,display) => {
+display(await(
+[[beforeK, "Before"], [duringK, "The night of the third earthquake"], [afterK, "The night after"]].map(([k, label]) => html`<div>
+      <h4>${day(k)}</h4><p class="sub">${label}</p>
+      ${resize(nightMap(k, adjusted, "triptych"))}
+      <p>Lombok against nights seen alike: <strong>${show(M.focus.light[k])}</strong>. ${F.raw.seen[k].toLocaleString("en")} of ${F.raw.cells.toLocaleString("en")} cells seen.</p>
+    </div>`)
+))
+}});
+
+define({id: "9fe34e31", mode: "inline", inputs: ["classLegend","display"], body: async (classLegend,display) => {
+display(await(
+classLegend
+))
+}});
+
+define({id: "b1303588-1", mode: "inline", inputs: ["pct","F","duringK","display"], body: async (pct,F,duringK,display) => {
+display(await(
+pct(F.raw.seen[duringK] / F.raw.cells)
+))
+}});
+
+define({id: "ba3ee2ab-1", mode: "inline", inputs: ["F","display"], body: async (F,display) => {
+display(await(
+F.raw.cells.toLocaleString("en")
+))
+}});
+
+define({id: "4d5d2818", mode: "inline", inputs: ["B","display"], body: async (B,display) => {
+display(await(
+B[0].raw.cells + B[1].raw.cells
+))
+}});
+
+define({id: "6b47bf7b", mode: "inline", inputs: ["show","B","night","display"], body: async (show,B,night,display) => {
+display(await(
+show(B[1].light_adjusted[night("2018-08-08")])
+))
+}});
+
+define({id: "78525d5b", mode: "inline", inputs: ["B","display"], body: async (B,display) => {
+display(await(
+B[1].raw.cells
+))
+}});
+
+define({id: "90458ffc", mode: "inline", inputs: ["show","d3","B","night","meta","display"], body: async (show,d3,B,night,meta,display) => {
+display(await(
+show(d3.min(B[1].light_adjusted.slice(0, night(meta.reference.last) + 1).filter((v) => v !== null)))
+))
+}});
+
+define({id: "4ae115eb", mode: "inline", inputs: ["show","d3","B","night","meta","display"], body: async (show,d3,B,night,meta,display) => {
+display(await(
+show(d3.max(B[1].light_adjusted.slice(0, night(meta.reference.last) + 1).filter((v) => v !== null)))
+))
+}});
+
+define({id: "d257612c", inputs: ["C","night","B","day","Plot","F"], outputs: ["bandLabel","bandNights","bandRows","bandChart","countChart"], body: (C,night,B,day,Plot,F) => {
+const bandLabel = (b) => `${b.km[0]} to ${b.km[1]} km`;
+const bandNights = ["2018-08-03", "2018-08-08", "2018-08-13", "2018-08-19", "2018-08-20"].filter((iso) => C.light[night(iso)] !== null);
+const bandRows = B.flatMap((b) => bandNights.map((iso) => ({band: bandLabel(b), night: day(night(iso), false), order: night(iso),
+  value: b.light_adjusted[night(iso)] === null ? null : 100 * b.light_adjusted[night(iso)], seen: b.raw.seen[night(iso)], cells: b.raw.cells}))).filter((r) => r.value !== null);
+const bandChart = (width) => Plot.plot({
+  width, height: 280, marginLeft: 48, marginBottom: 46,
+  x: {label: "Distance from the epicentre of 5 August, km (each bar is a 15 or 25 km band starting here)", domain: B.map(bandLabel), tickFormat: (d) => d.split(" ")[0]},
+  y: {label: "% of the reference nights, against Bali", domain: [0, 150], grid: true},
+  fx: {domain: bandNights.map((iso) => day(night(iso), false)), label: null},
+  marks: [
+    Plot.ruleY([100], {stroke: "#898781"}),
+    Plot.barY(bandRows, {fx: "night", x: "band", y: "value", fill: (r) => (r.cells < 100 ? "#d9d7cf" : "#9aa3ad"), insetLeft: 1, insetRight: 1}),
+    Plot.text(bandRows, {fx: "night", x: "band", y: "value", text: (r) => r.value.toFixed(0), dy: -6, fontSize: 10}),
+    Plot.tip(bandRows, Plot.pointer({fx: "night", x: "band", y: "value", title: (r) => `${r.night}, ${r.band}\n${r.value.toFixed(0)}% against Bali\n${r.seen} of ${r.cells} cells seen`}))
+  ]
+});
+const countChart = (width) => Plot.plot({
+  width, height: 150, marginLeft: 90, marginRight: 50,
+  x: {label: "Lit cells with a reference", grid: true}, y: {label: null, domain: B.map(bandLabel)},
+  marks: [Plot.barX(B, {y: bandLabel, x: (b) => b.raw.cells, fill: "#9aa3ad"}), Plot.text(B, {y: bandLabel, x: (b) => b.raw.cells, text: (b) => b.raw.cells.toLocaleString("en"), dx: 6, textAnchor: "start", fontSize: 11}),
+          Plot.tip(B, Plot.pointerY({y: bandLabel, x: (b) => b.raw.cells, title: (b) => `${bandLabel(b)} from the epicentre\n${b.raw.cells.toLocaleString("en")} lit cells with a reference\n${((100 * b.raw.cells) / F.raw.cells).toFixed(1)}% of Lombok's lit cells`}))]
+});
+return {bandLabel,bandNights,bandRows,bandChart,countChart};
+}});
+
+define({id: "da4d2b96", mode: "inline", inputs: ["B","display"], body: async (B,display) => {
+display(await(
+B[0].raw.cells
+))
+}});
+
+define({id: "78525d5b-1", mode: "inline", inputs: ["B","display"], body: async (B,display) => {
+display(await(
+B[1].raw.cells
+))
+}});
+
+define({id: "62e2c6e2", mode: "inline", inputs: ["resize","bandChart","display"], body: async (resize,bandChart,display) => {
+display(await(
+resize(bandChart)
+))
+}});
+
+define({id: "4d5d2818-1", mode: "inline", inputs: ["B","display"], body: async (B,display) => {
+display(await(
+B[0].raw.cells + B[1].raw.cells
+))
+}});
+
+define({id: "02c1abeb", mode: "inline", inputs: ["resize","countChart","display"], body: async (resize,countChart,display) => {
+display(await(
+resize(countChart)
+))
+}});
+
+define({id: "1a6266d6", mode: "inline", inputs: ["wentDark","display"], body: async (wentDark,display) => {
+display(await(
+wentDark
+))
+}});
+
+define({id: "d086b7a1", mode: "inline", inputs: ["litBefore","display"], body: async (litBefore,display) => {
+display(await(
+litBefore.toLocaleString("en")
+))
+}});
+
+define({id: "d086b7a1-1", mode: "inline", inputs: ["litBefore","display"], body: async (litBefore,display) => {
+display(await(
+litBefore.toLocaleString("en")
+))
+}});
+
+define({id: "ba3ee2ab-2", mode: "inline", inputs: ["F","display"], body: async (F,display) => {
+display(await(
+F.raw.cells.toLocaleString("en")
+))
+}});
+
+define({id: "5860409c", mode: "inline", inputs: ["day","night","S","display"], body: async (day,night,S,display) => {
+display(await(
+day(night(S.went_dark.after[0]))
+))
+}});
+
+define({id: "98d70d65", mode: "inline", inputs: ["day","night","S","display"], body: async (day,night,S,display) => {
+display(await(
+day(night(S.went_dark.after[1]))
+))
+}});
+
+define({id: "1acd53fc", mode: "inline", inputs: ["S","display"], body: async (S,display) => {
+display(await(
+S.went_dark.control.went_dark
+))
+}});
+
+define({id: "945d1397", mode: "inline", inputs: ["S","display"], body: async (S,display) => {
+display(await(
+S.went_dark.control.lit_before.toLocaleString("en")
+))
+}});
+
+define({id: "47b33bc9", mode: "inline", inputs: ["S","display"], body: async (S,display) => {
+display(await(
+S.new_light.near.lit_after
+))
+}});
+
+define({id: "7f3bd2aa", mode: "inline", inputs: ["S","display"], body: async (S,display) => {
+display(await(
+S.new_light.near.dark_before.toLocaleString("en")
+))
+}});
+
+define({id: "9d6ff19e", mode: "inline", inputs: ["S","display"], body: async (S,display) => {
+display(await(
+S.new_light.control_side.lit_after
+))
+}});
+
+define({id: "51bcbc44", mode: "inline", inputs: ["S","display"], body: async (S,display) => {
+display(await(
+S.new_light.control_side.dark_before.toLocaleString("en")
+))
+}});
+
+define({id: "e83c3ee5", mode: "inline", inputs: ["controlNights","display"], body: async (controlNights,display) => {
+display(await(
+controlNights
+))
+}});
+
+define({id: "3f39d5c3", mode: "inline", inputs: ["D","display"], body: async (D,display) => {
+display(await(
+D
+))
+}});
+
+define({id: "fc3beb4c", mode: "inline", inputs: ["day","night","display"], body: async (day,night,display) => {
+display(await(
+day(night("2018-08-04"), false)
+))
+}});
+
+define({id: "90d41305", mode: "inline", inputs: ["day","night","display"], body: async (day,night,display) => {
+display(await(
+day(night("2018-08-07"), false)
+))
+}});
+
+define({id: "9714fc1c", mode: "inline", inputs: ["day","night","display"], body: async (day,night,display) => {
+display(await(
+day(night("2018-08-09"), false)
+))
+}});
+
+define({id: "56462926", mode: "inline", inputs: ["day","night","display"], body: async (day,night,display) => {
+display(await(
+day(night("2018-08-12"), false)
+))
+}});
+
+define({id: "b37f4f30", inputs: ["files","display","nightExplorer","meta","lon","lat","colours","provinces","districtOutlines","FOCUS","duringK","classLegend","national","C","adjusted","raw","N","marks","day","pct","F"], outputs: ["lombokUnits"], body: async (files,display,nightExplorer,meta,lon,lat,colours,provinces,districtOutlines,FOCUS,duringK,classLegend,national,C,adjusted,raw,N,marks,day,pct,F) => {
+const lombokUnits = await files["units.json"].json();
+display(nightExplorer({
+  meta, units: lombokUnits, lon, lat, colours, provinces: provinces.features, districts: districtOutlines.features, focus: FOCUS, start: duringK,
+  scope: "Bali, Lombok and west Sumbawa", legend: classLegend.cloneNode(true),
+  subOutlines: (p) => { const f = national[`outlines/subdistrict/${p}.geojson`]; return f ? f.json() : Promise.resolve(null); },
+  // against Bali on the nights it was seen well enough, uncorrected on the others
+  levelAt: (k) => { const source = C.light[k] !== null ? adjusted : raw, level = new Uint8Array(N); for (let i = 0; i < N; i++) level[i] = source[k * N + i] & 7; return level; },
+  noteAt: (k) => {
+    const mark = marks.find((m) => m.k === k);
+    return `The night that began on the evening of ${day(k)}. ` + (mark ? `First night after the earthquake of ${mark.label}. ` : "")
+      + (C.light[k] !== null ? `Cells are shown against Bali, which stood at ${pct(C.light[k])} of its own reference. ` : "Bali was not seen well enough this night, so cells are shown uncorrected: a shared dip cannot be told from a local one. ")
+      + `${pct(meta.seen_share_by_night[k])} of the cells of Bali, Lombok and west Sumbawa were seen; on Lombok, ${F.raw.seen[k].toLocaleString("en")} of ${F.raw.cells.toLocaleString("en")}.`;
+  }
+}));
+return {lombokUnits};
+}});
+
+define({id: "839b7e62", mode: "inline", inputs: ["N","display"], body: async (N,display) => {
+display(await(
+N.toLocaleString("en")
+))
+}});
+
+define({id: "8d554a2e", mode: "inline", inputs: ["meta","display"], body: async (meta,display) => {
+display(await(
+meta.cells.with_reference.toLocaleString("en")
+))
+}});
+
+define({id: "efed0bae", mode: "inline", inputs: ["day","display"], body: async (day,display) => {
+display(await(
+day(0)
+))
+}});
+
+define({id: "06905c77-1", mode: "inline", inputs: ["day","night","meta","display"], body: async (day,night,meta,display) => {
+display(await(
+day(night(meta.reference.last))
+))
+}});
+
+define({id: "b67a07b5", mode: "inline", inputs: ["meta","display"], body: async (meta,display) => {
+display(await(
+meta.reference.min_nights
+))
+}});
+
+</script>
+</head>
+<body>
+<div id="observablehq-center">
+<main id="observablehq-main" class="observablehq">
+<style>
+.page-head {margin: 0.5rem 0 1.25rem;}
+.page-head h1 {margin: 0 0 0.4rem; font-size: 2rem; line-height: 1.15; max-width: none; display: flex; align-items: center; gap: 0.6rem;}
+.page-head h1 .logo {width: 32px; height: 32px; flex: none;}
+.brand {margin: 0 0 0.35rem; max-width: none; font: 600 0.78rem var(--sans-serif); letter-spacing: 0.06em; text-transform: uppercase; color: #a2431a;}
+.brand a {color: inherit; text-decoration: none;}
+.brand a:hover {text-decoration: underline;}
+.lede {margin: 0; max-width: none; color: #52514e; font-size: 1rem; line-height: 1.5;}
+.notice {border-left: 4px solid #eda100; padding: 0.6rem 0.9rem; background: #fdf6e3; font-size: 0.9rem; border-radius: 0 8px 8px 0; margin: 0 0 1.5rem;}
+.notice p {margin: 0; max-width: none;}
+section.part {margin: 0 0 2.25rem;}
+section.part:last-of-type {margin-bottom: 1rem;}
+.kicker {font: 600 0.72rem/1 var(--sans-serif); letter-spacing: 0.08em; text-transform: uppercase; color: #8a5a00; margin: 0 0 0.4rem;}
+section.part h2 {margin: 0 0 0.5rem; font-size: 1.45rem; line-height: 1.2; max-width: none;}
+/* the story text fills the page in two balanced columns on a wide screen, one on a narrow one (as drywet-explorer) */
+section.part > p:not(.kicker) {max-width: none; margin: 0 0 1rem; line-height: 1.55; columns: 2 26rem; column-gap: 2.5rem; text-align: justify; hyphens: auto;}
+.card {padding: 1.1rem 1.25rem;}
+.card h3 {max-width: none; margin: 0 0 0.45rem; font-family: var(--sans-serif); font-size: 1.02rem; font-weight: 600; color: #0b0b0b;}
+.card > .fine {margin: 0 0 0.8rem; max-width: none; line-height: 1.45;}
+.fine {font-size: 0.8rem; color: #52514e;}
+/* values that come from the data */
+.dyn {font-weight: 600; font-family: var(--sans-serif); font-size: 0.95em; color: #a2431a; white-space: nowrap;}
+.keys {display: flex; flex-wrap: wrap; gap: 0.3rem 1rem; font-size: 0.8rem; color: #52514e; margin: 0 0 0.6rem;}
+.keys span {display: inline-flex; align-items: center; gap: 0.35rem;}
+.key-line {display: inline-block; width: 22px; height: 0; border-top: 2px solid #0b0b0b;}
+.triptych {display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0.8rem;}
+.triptych h4 {margin: 0; font: 600 0.95rem/1.2 var(--sans-serif);}
+.triptych p.sub {margin: 0.1rem 0 0.4rem; min-height: 1.2em; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;}
+#observablehq-main {min-height: 0;}        /* Framework keeps the main column a screen tall: no gap above the footer */
+#observablehq-footer {margin-top: 1.5rem;}
+.triptych p {margin: 0.3rem 0 0; font-size: 0.8rem; color: #52514e; max-width: none;}
+.triptych .map-buttons {display: none;}   /* three small maps side by side: drag and scroll still zoom */
+@media (max-width: 800px) {.triptych {grid-template-columns: 1fr;}}
+.map-hover {display: none;}
+.map-buttons {position: absolute; top: 8px; right: 8px; display: flex; gap: 4px;}
+.map-buttons button {font: inherit; font-size: 0.8rem; min-width: 1.8rem; padding: 0.15rem 0.45rem; border: 1px solid #c3c2b7; border-radius: 6px; background: #fcfcfb; color: #0b0b0b; cursor: pointer;}
+.map-buttons button:disabled {color: #898781; cursor: default;}
+.legend {display: flex; flex-wrap: wrap; gap: 0.35rem 1rem; font-size: 0.8rem; color: #52514e; margin: 0.7rem 0 0;}
+.legend-item {display: inline-flex; align-items: center; gap: 0.35rem;}
+.swatch {width: 14px; height: 14px; display: inline-block; border-radius: 50%; border: 1px solid #c3c2b7; flex: none;}
+.tiles {display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 1rem;}
+.tile-value {font-size: 1.7rem; font-weight: 600; line-height: 1.15; margin-bottom: 0.3rem;}
+.tile-label {font-size: 0.82rem; color: #52514e; line-height: 1.4;}
+.when {display: grid; grid-template-columns: auto auto minmax(160px, 1fr); gap: 1rem 1.5rem; align-items: center; margin: 0 0 0.6rem;}
+.night-label {font-size: 1.15rem; font-weight: 600; width: 10.5rem; white-space: nowrap;}
+.when input[type=range] {width: 100%;}
+@media (max-width: 560px) {.when {grid-template-columns: 1fr auto;} .when input[type=range] {grid-column: 1 / -1;}}
+.steps {display: inline-flex;}
+.steps .step {font: inherit; line-height: 1; min-width: 2rem; padding: 0.3rem 0.5rem; border: 1px solid #c3c2b7; border-left-width: 0; background: #fcfcfb; cursor: pointer;}
+.steps .step:first-child {border-left-width: 1px; border-radius: 8px 0 0 8px;}
+.steps .step:last-child {border-radius: 0 8px 8px 0;}
+</style>
+<header class="page-head">
+  <p class="brand"><a href="./" title="Back to the main dashboard">← Nightlights Explorer</a> · Case study</p>
+  <h1><svg class="logo" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10.5" fill="#10151c"></circle><path d="M12 1.5a10.500 10.500 0 0 1 0 21 13.500 13.500 0 0 0 0-21Z" fill="#2a3644"></path><circle cx="8.300" cy="9.400" r="3" fill="#ffd76a" opacity=".22"></circle><circle cx="8.300" cy="9.400" r="1.500" fill="#ffd76a"></circle><circle cx="12.700" cy="13.700" r="1.100" fill="#ffd76a"></circle><circle cx="7.300" cy="14.900" r=".800" fill="#f2b24a"></circle><circle cx="11.300" cy="6.700" r=".600" fill="#f2b24a"></circle><circle cx="10.200" cy="17.600" r=".600" fill="#f2b24a"></circle></svg>Lombok 2018: two dark nights, one of them unexplained</h1>
+  <p class="lede">Three large earthquakes, among many smaller ones, struck Lombok between 29 July and 19 August 2018. A satellite passed over every night at about 01:30. This page asks what it saw that nobody on the island could have seen, and what it could not see at all.</p>
+</header>
+<div class="notice">
+  <p><strong>What this page can and cannot say.</strong> None of it has been checked against records of power or damage. The page compares light with the eleven nights before the main earthquake, with the same cells on reference nights seen from a similar angle, and with Bali. It does not say why a place was dim, and nothing here is a statement about electricity.</p>
+</div>
+<div class="observablehq observablehq--block"><!--:27292fc7:--></div>
+<div class="observablehq observablehq--block"><!--:97e45255:--></div>
+<section class="part">
+<p class="kicker">1 · What the island could not see</p>
+<h2 id="most-of-the-dimming-was-the-angle-of-view" tabindex="-1"><a class="observablehq-header-anchor" href="#most-of-the-dimming-was-the-angle-of-view">Most of the dimming was the angle of view</a></h2>
+<p>On the ground, a darker night after an earthquake looks like damage. On <span class="dyn"><observablehq-loading></observablehq-loading><!--:9077d95f:--></span>, three nights after the magnitude 6.9, Lombok's lit cells gave <span class="dyn"><observablehq-loading></observablehq-loading><!--:f67c3507:--></span> of their light on the reference nights. But Bali, farther from every one of these epicentres, gave <span class="dyn"><observablehq-loading></observablehq-loading><!--:feed508d:--></span> of its own. Neither drop survives a fair comparison. That night the satellite looked almost straight down, <span class="dyn"><observablehq-loading></observablehq-loading><!--:df5a5c48:--> degrees</span> from overhead, and over these two islands in these weeks cells read dimmer from nearly overhead than from the side. (The product's guide reports the opposite over dense city centres, so this is a finding about these places, not a law.) So compare each cell only with reference nights seen from within <observablehq-loading></observablehq-loading><!--:8b081847:--> degrees of the same angle: Lombok then stood at <span class="dyn"><observablehq-loading></observablehq-loading><!--:e590a463:--></span> and Bali at <span class="dyn"><observablehq-loading></observablehq-loading><!--:90df28bc:--></span>. Done for every night, this halves the scatter of the reference nights. What is left after the main earthquake is small: <span class="dyn"><observablehq-loading></observablehq-loading><!--:4de0fde5:--></span> on the night itself, <span class="dyn"><observablehq-loading></observablehq-loading><!--:6d613b7b:--></span> and <span class="dyn"><observablehq-loading></observablehq-loading><!--:65fa4a6f:--></span> on the two that followed, about a fifth down and close to the edge of the noise.</p>
+<div class="observablehq observablehq--block"><!--:9d579a63:--></div>
+<div class="card">
+  <h3>Lombok's light, before and after the angle is taken out</h3>
+  <div class="keys"><span><span class="key-line" style="border-color:#b5b3aa"></span>Lombok against all reference nights</span>
+    <span><span class="swatch" style="background:#0b0b0b;"></span>Lombok against nights seen alike</span>
+    <span><span class="swatch" style="background:#5ab4ac;border-radius:2px;"></span>Bali against nights seen alike</span>
+    <span><span class="key-line" style="border-top:2px dashed #c53030"></span>First night after an earthquake</span></div>
+  <observablehq-loading></observablehq-loading><!--:9c2a84a9:-->
+  <p class="fine" style="margin-top:0.6rem;">Each point is the summed light of the cells seen that night over the summed reference of the same cells. Grey: a cell's reference is its median on the eleven nights to <observablehq-loading></observablehq-loading><!--:06905c77:-->. Black and teal: its median on those of the eleven nights seen from within <observablehq-loading></observablehq-loading><!--:8b081847-1:--> degrees of the night in question, never the night itself, so fewer cells have a figure (the tip gives the count; both islands are drawn with at least 400 cells). Many of these references are a single night, which makes each point noisier than it looks. Seven of the eleven reference nights follow the first earthquake of 29 July, so "reference" is not "before any shaking". Over the reference nights the grey figure scatters by <observablehq-loading></observablehq-loading><!--:dd41eb88:--> and the black by <observablehq-loading></observablehq-loading><!--:48ab624d:-->.</p>
+</div>
+</section>
+<section class="part">
+<p class="kicker">2 · What only a satellite could catch</p>
+<h2 id="two-dark-nights-and-only-one-has-an-earthquake" tabindex="-1"><a class="observablehq-header-anchor" href="#two-dark-nights-and-only-one-has-an-earthquake">Two dark nights, and only one has an earthquake</a></h2>
+<p>The third earthquake struck at 22:56 on 19 August. The satellite passed about two and a half hours later. Against nights seen from a similar angle, the <span class="dyn"><observablehq-loading></observablehq-loading><!--:cbf22626:--></span> cells of Lombok seen that night gave <span class="dyn"><observablehq-loading></observablehq-loading><!--:fb269a7e:--></span> of their light; Bali gave <span class="dyn"><observablehq-loading></observablehq-loading><!--:398e2bda:--></span>. A second test agrees: sixteen nights earlier the satellite saw the island from nearly the same angle, and over the <observablehq-loading></observablehq-loading><!--:e2453754:--> cells seen on both nights Lombok gave <span class="dyn"><observablehq-loading></observablehq-loading><!--:cb6777d6:--></span> of what it gave then. The night after, it was back at <span class="dyn"><observablehq-loading></observablehq-loading><!--:7f594748:--></span>. So about half the light of the cells seen was missing for one night. Only <span class="dyn"><observablehq-loading></observablehq-loading><!--:b1303588:--></span> of the island's cells were seen, so this is not a statement about the whole island.</p>
+<p>The darkest night of the month is a different one. On <span class="dyn"><observablehq-loading></observablehq-loading><!--:4c04444b:--></span> Lombok gave <span class="dyn"><observablehq-loading></observablehq-loading><!--:659b3b5c:--></span> of its light at that angle, with <span class="dyn"><observablehq-loading></observablehq-loading><!--:a7e35005:--></span> of its <observablehq-loading></observablehq-loading><!--:ba3ee2ab:--> cells seen, and it was back the next night. Bali was mostly under cloud, but the <span class="dyn"><observablehq-loading></observablehq-loading><!--:4cee1197:--></span> of its cells that were seen read <span class="dyn"><observablehq-loading></observablehq-loading><!--:c2c2861e:--></span>: nothing unusual there. None of the three large earthquakes fell on that night. This page cannot say whether it was a power failure, something in the sky that the quality flag missed, or a fault of the product, and it has not been checked against any record. It is the most unusual thing the satellite saw this month, and nothing here explains it.</p>
+<div class="card">
+  <div class="triptych">
+    <observablehq-loading></observablehq-loading><!--:0b8ff532:-->
+  </div>
+  <observablehq-loading></observablehq-loading><!--:9fe34e31:-->
+  <p class="fine" style="margin-top:0.6rem;">The three maps move together: zoom or drag one and the others follow. Each lit cell is coloured by its light that night, divided by its reference and by what Bali did the same night. On the middle night about <observablehq-loading></observablehq-loading><!--:b1303588-1:--> of the cells were seen: the rest of the island is grey, not dark. Even on an ordinary night many single cells read under half their reference, so read the pattern, not single cells. A cell is about 460 m across and the sensor's view is wider.</p>
+</div>
+</section>
+<section class="part">
+<p class="kicker">3 · Where the shaking was, and how little light is there</p>
+<h2 id="near-the-epicentre-there-is-almost-nothing-to-watch" tabindex="-1"><a class="observablehq-header-anchor" href="#near-the-epicentre-there-is-almost-nothing-to-watch">Near the epicentre there is almost nothing to watch</a></h2>
+<p>The obvious question is whether places nearer the epicentre dimmed more. Night lights cannot answer it here. Of Lombok's <observablehq-loading></observablehq-loading><!--:ba3ee2ab-1:--> lit cells, only <span class="dyn"><observablehq-loading></observablehq-loading><!--:4d5d2818:--></span> lie within 30 km of the epicentre of the main earthquake. Three nights after it the band 15 to 30 km out read <span class="dyn"><observablehq-loading></observablehq-loading><!--:6b47bf7b:--></span> against Bali, and the same <observablehq-loading></observablehq-loading><!--:78525d5b:--> cells, followed through the nights before the main earthquake, ranged from <span class="dyn"><observablehq-loading></observablehq-loading><!--:90458ffc:--></span> to <span class="dyn"><observablehq-loading></observablehq-loading><!--:4ae115eb:--></span>. A handful of cells swings that much on its own. After the main earthquake the bands beyond 30 km, which hold nearly all the light, show no drop larger than the scatter. On 19 August every band is down by about half: that is the dark night of the section above, not something that depends on distance. Night lights watch the towns of the south and west, not the north of the island.</p>
+<div class="observablehq observablehq--block"><!--:d257612c:--></div>
+<div class="grid grid-cols-2" style="gap:1.1rem; grid-auto-rows:auto;">
+  <div class="card">
+    <h3>Light against Bali, by distance from the epicentre</h3>
+    <p class="fine">Nights on which Bali was seen well enough: before the main earthquake, three and eight nights after it, the night of the third earthquake, and the night after that. A bar is the band's summed light over its summed reference, divided by Bali's; pale bars are the two nearest bands, of <observablehq-loading></observablehq-loading><!--:da4d2b96:--> and <observablehq-loading></observablehq-loading><!--:78525d5b-1:--> cells, shown so their scatter can be seen, not to be read. Distances are from the epicentre of 5 August; the earthquake of 19 August was elsewhere.</p>
+    <observablehq-loading></observablehq-loading><!--:62e2c6e2:-->
+  </div>
+  <div class="card">
+    <h3>Where Lombok's light is</h3>
+    <p class="fine">Lit cells by distance from the epicentre. The two nearest bands hold <observablehq-loading></observablehq-loading><!--:4d5d2818-1:--> cells between them.</p>
+    <observablehq-loading></observablehq-loading><!--:02c1abeb:-->
+  </div>
+</div>
+</section>
+<section class="part">
+<p class="kicker">4 · What stayed invisible</p>
+<h2 id="nothing-was-seen-to-go-out-for-good-and-nothing-new-lit-up" tabindex="-1"><a class="observablehq-header-anchor" href="#nothing-was-seen-to-go-out-for-good-and-nothing-new-lit-up">Nothing was seen to go out for good, and nothing new lit up</a></h2>
+<p>Two things that a survey on the ground might report were not found in these nights. Of the lit cells on Lombok that could be judged, none went dark and stayed dark. And no dark cell within 40 km of the epicentre became lit: lighting too faint for this sensor, if there was any, leaves no trace. On the night of the main earthquake too few of Bali's cells were seen for the plain comparison; against nights seen alike Lombok reads about a fifth down, which is inside the spread of its quiet nights.</p>
+<div class="tiles">
+  <div class="card"><div class="tile-value"><observablehq-loading></observablehq-loading><!--:1a6266d6:--> of <observablehq-loading></observablehq-loading><!--:d086b7a1:--></div><div class="tile-label">Lit cells on Lombok, of the <observablehq-loading></observablehq-loading><!--:d086b7a1-1:--> of <observablehq-loading></observablehq-loading><!--:ba3ee2ab-2:--> seen often enough to judge, that went dark and stayed dark through <observablehq-loading></observablehq-loading><!--:5860409c:--> to <observablehq-loading></observablehq-loading><!--:98d70d65:-->. Bali: <observablehq-loading></observablehq-loading><!--:1acd53fc:--> of <observablehq-loading></observablehq-loading><!--:945d1397:-->.</div></div>
+  <div class="card"><div class="tile-value"><observablehq-loading></observablehq-loading><!--:47b33bc9:--> of <observablehq-loading></observablehq-loading><!--:7f3bd2aa:--></div><div class="tile-label">Dark cells within 40 km of the epicentre, land and sea, that became lit in the same nights. West of Lombok over the same nights: <observablehq-loading></observablehq-loading><!--:9d6ff19e:--> of <observablehq-loading></observablehq-loading><!--:51bcbc44:-->.</div></div>
+  <div class="card"><div class="tile-value"><observablehq-loading></observablehq-loading><!--:e83c3ee5:--> of <observablehq-loading></observablehq-loading><!--:3f39d5c3:--></div><div class="tile-label">Nights on which Bali was seen well enough to compare with. It was not on <observablehq-loading></observablehq-loading><!--:fc3beb4c:--> to <observablehq-loading></observablehq-loading><!--:90d41305:-->, which includes the night of the main earthquake, nor on <observablehq-loading></observablehq-loading><!--:9714fc1c:--> to <observablehq-loading></observablehq-loading><!--:56462926:-->.</div></div>
+  <div class="card"><div class="tile-value">16 nights</div><div class="tile-label">Until the satellite sees a place from the same angle again. Between two such nights a town's light can read tens of percent apart with nothing changed on the ground. It passes at about 01:30: power lost and restored between passes leaves no trace.</div></div>
+</div>
+</section>
+<section class="part">
+<p class="kicker">Every night, place by place</p>
+<h2 id="step-through-the-nights-district-by-district" tabindex="-1"><a class="observablehq-header-anchor" href="#step-through-the-nights-district-by-district">Step through the nights, district by district</a></h2>
+<p>The sections above tell one story. This map is for looking yourself. Move the slider to a night, click a district to open it and move the map to it, then click one of its sub-districts. The text under the map follows what is open: its light that night against its reference, how much of it was seen, where it stands among its neighbours, and its own nights.</p>
+<div class="observablehq observablehq--block"><!--:b37f4f30:--></div>
+</section>
+<p class="fine" style="max-width:none;">Source: NASA Black Marble daily, VNP46A2, Collection 2, the moonlight-corrected radiance, high-quality retrievals only, over the <observablehq-loading></observablehq-loading><!--:839b7e62:--> lit cells of Bali, Lombok and west Sumbawa (<observablehq-loading></observablehq-loading><!--:8d554a2e:--> with a reference). A cell's reference is its median over the nights of <observablehq-loading></observablehq-loading><!--:efed0bae:--> to <observablehq-loading></observablehq-loading><!--:06905c77-1:-->, with at least <observablehq-loading></observablehq-loading><!--:b67a07b5:--> of them seen. Earthquake times, magnitudes and the epicentre: USGS catalogue. A file dated D is the night that begins on the evening of local date D.</p>
+<p class="fine" style="max-width:none; margin-top:1.2rem;"><a href="./">\← Back to the main dashboard</a> · <a href="https://github.com/bennyistanto/nightlights-explorer" target="_blank" rel="noopener">Code and method on GitHub</a></p>
+</main>
+<footer id="observablehq-footer">
+<div>Developed by <a href="https://benny.istan.to" target="_blank" rel="noopener">Benny Istanto</a> as a casual weekend project. Night-time lights from NASA Black Marble, Collection 2 (VNP46A3 monthly, VNP46A2 daily, view angles from VNP46A1). Long view: DMSP-OLS stable lights processed by the Earth Observation Group, Payne Institute, Colorado School of Mines; DMSP data collected by the US Air Force Weather Agency. Roads on the Mudik map: OpenStreetMap contributors. Admin boundaries: Badan Informasi Geospasial. Built with Observable Framework.</div>
+</footer>
+</div>
+</body>
+</html>

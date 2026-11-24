@@ -1,0 +1,734 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="generator" content="Observable Framework v1.13.4">
+<title>Nyepi 2026: an island at under a tenth of its light | Nightlights Explorer</title>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,200..900;1,8..60,200..900&amp;display=swap" crossorigin>
+<link rel="preload" as="style" href="./_observablehq/theme-air,alt,wide.8a524e59.css">
+<link rel="preload" as="style" href="./_observablehq/stdlib/inputs.f7bf0e12.css">
+<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,200..900;1,8..60,200..900&amp;display=swap" crossorigin>
+<link rel="stylesheet" type="text/css" href="./_observablehq/theme-air,alt,wide.8a524e59.css">
+<link rel="stylesheet" type="text/css" href="./_observablehq/stdlib/inputs.f7bf0e12.css">
+<link rel="modulepreload" href="./_observablehq/client.b09e1b20.js">
+<link rel="modulepreload" href="./_observablehq/runtime.13bc3751.js">
+<link rel="modulepreload" href="./_observablehq/stdlib.3a5bae2b.js">
+<link rel="modulepreload" href="./_import/data/events/nyepi2026/files.64bec751.js">
+<link rel="modulepreload" href="./_import/data/files.a4c9cf92.js">
+<link rel="modulepreload" href="./_import/components/load.054d4540.js">
+<link rel="modulepreload" href="./_import/components/map.ef9eee7a.js">
+<link rel="modulepreload" href="./_import/components/explorer.dbc2604f.js">
+<link rel="modulepreload" href="./_import/components/palette.2cf889e5.js">
+<link rel="modulepreload" href="./_npm/d3@7.9.2/172963d6.js">
+<link rel="modulepreload" href="./_npm/htl@1.0.0/11521f02.js">
+<link rel="modulepreload" href="./_observablehq/stdlib/inputs.a43d632f.js">
+<link rel="modulepreload" href="./_npm/@observablehq/plot@0.6.19/2e9f152c.js">
+<link rel="modulepreload" href="./_npm/isoformat@0.2.1/604cb63b.js">
+<link rel="modulepreload" href="./_npm/d3-array@3.2.5/52d144d7.js">
+<link rel="modulepreload" href="./_npm/d3-axis@3.0.1/c0e5fbdf.js">
+<link rel="modulepreload" href="./_npm/d3-brush@3.0.1/321ca391.js">
+<link rel="modulepreload" href="./_npm/d3-chord@3.0.2/468a53d3.js">
+<link rel="modulepreload" href="./_npm/d3-color@3.1.1/91613843.js">
+<link rel="modulepreload" href="./_npm/d3-contour@4.0.3/8e79d948.js">
+<link rel="modulepreload" href="./_npm/d3-delaunay@6.0.6/d6c84ddb.js">
+<link rel="modulepreload" href="./_npm/d3-dispatch@3.0.2/a70bd0ef.js">
+<link rel="modulepreload" href="./_npm/d3-drag@3.0.1/47229f37.js">
+<link rel="modulepreload" href="./_npm/d3-dsv@3.0.2/4a4147a2.js">
+<link rel="modulepreload" href="./_npm/d3-ease@3.0.2/ca4f77fd.js">
+<link rel="modulepreload" href="./_npm/d3-fetch@3.0.2/eef84249.js">
+<link rel="modulepreload" href="./_npm/d3-force@3.0.1/c1b23a7b.js">
+<link rel="modulepreload" href="./_npm/d3-format@3.1.3/b1442952.js">
+<link rel="modulepreload" href="./_npm/d3-geo@3.1.2/e07dc79e.js">
+<link rel="modulepreload" href="./_npm/d3-hierarchy@3.1.3/d3b0a1aa.js">
+<link rel="modulepreload" href="./_npm/d3-interpolate@3.0.2/6de199be.js">
+<link rel="modulepreload" href="./_npm/d3-path@3.1.1/9eb769d3.js">
+<link rel="modulepreload" href="./_npm/d3-polygon@3.0.2/93595b54.js">
+<link rel="modulepreload" href="./_npm/d3-quadtree@3.0.2/80bafd54.js">
+<link rel="modulepreload" href="./_npm/d3-random@3.0.2/8bf3f736.js">
+<link rel="modulepreload" href="./_npm/d3-scale@4.0.3/d15d690b.js">
+<link rel="modulepreload" href="./_npm/d3-scale-chromatic@3.1.1/287966da.js">
+<link rel="modulepreload" href="./_npm/d3-selection@3.0.1/c4158eb5.js">
+<link rel="modulepreload" href="./_npm/d3-shape@3.2.1/a41eab18.js">
+<link rel="modulepreload" href="./_npm/d3-time@3.1.1/acaa76bc.js">
+<link rel="modulepreload" href="./_npm/d3-time-format@4.1.1/d561e9cd.js">
+<link rel="modulepreload" href="./_npm/d3-timer@3.0.2/ea7e7cf7.js">
+<link rel="modulepreload" href="./_npm/d3-transition@3.0.2/f861168f.js">
+<link rel="modulepreload" href="./_npm/d3-zoom@3.0.1/c1f09323.js">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns=%22http://www.w3.org/2000/svg%22%20viewBox=%220%200%2024%2024%22%3E%3Ccircle%20cx=%2212%22%20cy=%2212%22%20r=%2210.5%22%20fill=%22%252310151c%22/%3E%3Cpath%20d=%22M12%201.5a10.500%2010.500%200%200%201%200%2021%2013.500%2013.500%200%200%200%200-21Z%22%20fill=%22%25232a3644%22/%3E%3Ccircle%20cx=%228.300%22%20cy=%229.400%22%20r=%223%22%20fill=%22%2523ffd76a%22%20opacity=%22.22%22/%3E%3Ccircle%20cx=%228.300%22%20cy=%229.400%22%20r=%221.500%22%20fill=%22%2523ffd76a%22/%3E%3Ccircle%20cx=%2212.700%22%20cy=%2213.700%22%20r=%221.100%22%20fill=%22%2523ffd76a%22/%3E%3Ccircle%20cx=%227.300%22%20cy=%2214.900%22%20r=%22.800%22%20fill=%22%2523f2b24a%22/%3E%3Ccircle%20cx=%2211.300%22%20cy=%226.700%22%20r=%22.600%22%20fill=%22%2523f2b24a%22/%3E%3Ccircle%20cx=%2210.200%22%20cy=%2217.600%22%20r=%22.600%22%20fill=%22%2523f2b24a%22/%3E%3C/svg%3E">
+<script>
+  if (!["localhost", "127.0.0.1"].includes(location.hostname)) {
+    const s = document.createElement("script");
+    s.async = true;
+    s.src = "https://www.googletagmanager.com/gtag/js?id=G-M3ZZ0H7XHJ";
+    document.head.appendChild(s);
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-M3ZZ0H7XHJ');
+  }
+</script>
+<script type="module">
+
+import {define} from "./_observablehq/client.b09e1b20.js";
+import {registerFile} from "./_observablehq/stdlib.3a5bae2b.js";
+
+registerFile("./data/cell_district.u16.gz", {"name":"./data/cell_district.u16.gz","mimeType":"application/gzip","path":"./_file/data/cell_district.u16.fb194027.gz","lastModified":1795450136290,"size":31640});
+registerFile("./data/cell_province.u16.gz", {"name":"./data/cell_province.u16.gz","mimeType":"application/gzip","path":"./_file/data/cell_province.u16.8b99fb5f.gz","lastModified":1795450134959,"size":12257});
+registerFile("./data/cell_subdistrict.u16.gz", {"name":"./data/cell_subdistrict.u16.gz","mimeType":"application/gzip","path":"./_file/data/cell_subdistrict.u16.b3bcb6b2.gz","lastModified":1795450138108,"size":74022});
+registerFile("./data/cell_then_now.u8.gz", {"name":"./data/cell_then_now.u8.gz","mimeType":"application/gzip","path":"./_file/data/cell_then_now.u8.54595fc7.gz","lastModified":1795450134002,"size":34149});
+registerFile("./data/cell_usual.u16.gz", {"name":"./data/cell_usual.u16.gz","mimeType":"application/gzip","path":"./_file/data/cell_usual.u16.5f99d360.gz","lastModified":1795450091620,"size":277622});
+registerFile("./data/cells.u32.gz", {"name":"./data/cells.u32.gz","mimeType":"application/gzip","path":"./_file/data/cells.u32.5f928170.gz","lastModified":1795450091456,"size":406090});
+registerFile("./data/cells/2012.u8.gz", {"name":"./data/cells/2012.u8.gz","mimeType":"application/gzip","path":"./_file/data/cells/2012.u8.69bd146a.gz","lastModified":1795450102782,"size":577872});
+registerFile("./data/cells/2013.u8.gz", {"name":"./data/cells/2013.u8.gz","mimeType":"application/gzip","path":"./_file/data/cells/2013.u8.d7cb9979.gz","lastModified":1795450104950,"size":1144319});
+registerFile("./data/cells/2014.u8.gz", {"name":"./data/cells/2014.u8.gz","mimeType":"application/gzip","path":"./_file/data/cells/2014.u8.56b2123d.gz","lastModified":1795450106737,"size":1295731});
+registerFile("./data/cells/2015.u8.gz", {"name":"./data/cells/2015.u8.gz","mimeType":"application/gzip","path":"./_file/data/cells/2015.u8.e8d77dbe.gz","lastModified":1795450108617,"size":1286439});
+registerFile("./data/cells/2016.u8.gz", {"name":"./data/cells/2016.u8.gz","mimeType":"application/gzip","path":"./_file/data/cells/2016.u8.3a183013.gz","lastModified":1795450110603,"size":1146917});
+registerFile("./data/cells/2017.u8.gz", {"name":"./data/cells/2017.u8.gz","mimeType":"application/gzip","path":"./_file/data/cells/2017.u8.5a9c7aa4.gz","lastModified":1795450112661,"size":1098632});
+registerFile("./data/cells/2018.u8.gz", {"name":"./data/cells/2018.u8.gz","mimeType":"application/gzip","path":"./_file/data/cells/2018.u8.6a311ae0.gz","lastModified":1795450114659,"size":1159240});
+registerFile("./data/cells/2019.u8.gz", {"name":"./data/cells/2019.u8.gz","mimeType":"application/gzip","path":"./_file/data/cells/2019.u8.9badc131.gz","lastModified":1795450116521,"size":1265555});
+registerFile("./data/cells/2020.u8.gz", {"name":"./data/cells/2020.u8.gz","mimeType":"application/gzip","path":"./_file/data/cells/2020.u8.8f6b80d0.gz","lastModified":1795450118312,"size":1213753});
+registerFile("./data/cells/2021.u8.gz", {"name":"./data/cells/2021.u8.gz","mimeType":"application/gzip","path":"./_file/data/cells/2021.u8.3624246a.gz","lastModified":1795450120046,"size":1113979});
+registerFile("./data/cells/2022.u8.gz", {"name":"./data/cells/2022.u8.gz","mimeType":"application/gzip","path":"./_file/data/cells/2022.u8.6908853d.gz","lastModified":1795450122062,"size":948213});
+registerFile("./data/cells/2023.u8.gz", {"name":"./data/cells/2023.u8.gz","mimeType":"application/gzip","path":"./_file/data/cells/2023.u8.7ab37c44.gz","lastModified":1795450124324,"size":1058244});
+registerFile("./data/cells/2024.u8.gz", {"name":"./data/cells/2024.u8.gz","mimeType":"application/gzip","path":"./_file/data/cells/2024.u8.7493a4f8.gz","lastModified":1795450126283,"size":1071393});
+registerFile("./data/cells/2025.u8.gz", {"name":"./data/cells/2025.u8.gz","mimeType":"application/gzip","path":"./_file/data/cells/2025.u8.97fa8123.gz","lastModified":1795450128164,"size":1007048});
+registerFile("./data/cells/2026.u8.gz", {"name":"./data/cells/2026.u8.gz","mimeType":"application/gzip","path":"./_file/data/cells/2026.u8.304198fe.gz","lastModified":1795450129485,"size":987854});
+registerFile("./data/district/11.bin.gz", {"name":"./data/district/11.bin.gz","mimeType":"application/gzip","path":"./_file/data/district/11.bin.764ea1a5.gz","lastModified":1795450137631,"size":15427});
+registerFile("./data/district/12.bin.gz", {"name":"./data/district/12.bin.gz","mimeType":"application/gzip","path":"./_file/data/district/12.bin.5e547ba9.gz","lastModified":1795450137675,"size":20525});
+registerFile("./data/district/13.bin.gz", {"name":"./data/district/13.bin.gz","mimeType":"application/gzip","path":"./_file/data/district/13.bin.4256a68e.gz","lastModified":1795450137692,"size":14030});
+registerFile("./data/district/14.bin.gz", {"name":"./data/district/14.bin.gz","mimeType":"application/gzip","path":"./_file/data/district/14.bin.884ca7cb.gz","lastModified":1795450137702,"size":13561});
+registerFile("./data/district/15.bin.gz", {"name":"./data/district/15.bin.gz","mimeType":"application/gzip","path":"./_file/data/district/15.bin.737ee089.gz","lastModified":1795450137712,"size":10794});
+registerFile("./data/district/16.bin.gz", {"name":"./data/district/16.bin.gz","mimeType":"application/gzip","path":"./_file/data/district/16.bin.c1f55ce6.gz","lastModified":1795450137727,"size":14610});
+registerFile("./data/district/17.bin.gz", {"name":"./data/district/17.bin.gz","mimeType":"application/gzip","path":"./_file/data/district/17.bin.e573cdf1.gz","lastModified":1795450137734,"size":7712});
+registerFile("./data/district/18.bin.gz", {"name":"./data/district/18.bin.gz","mimeType":"application/gzip","path":"./_file/data/district/18.bin.213e4281.gz","lastModified":1795450137742,"size":14703});
+registerFile("./data/district/19.bin.gz", {"name":"./data/district/19.bin.gz","mimeType":"application/gzip","path":"./_file/data/district/19.bin.ce8af8dd.gz","lastModified":1795450137742,"size":8474});
+registerFile("./data/district/21.bin.gz", {"name":"./data/district/21.bin.gz","mimeType":"application/gzip","path":"./_file/data/district/21.bin.2a55f5eb.gz","lastModified":1795450137761,"size":9552});
+registerFile("./data/district/31.bin.gz", {"name":"./data/district/31.bin.gz","mimeType":"application/gzip","path":"./_file/data/district/31.bin.017d9bd8.gz","lastModified":1795450137761,"size":4954});
+registerFile("./data/district/32.bin.gz", {"name":"./data/district/32.bin.gz","mimeType":"application/gzip","path":"./_file/data/district/32.bin.015ab25e.gz","lastModified":1795450137780,"size":26613});
+registerFile("./data/district/33.bin.gz", {"name":"./data/district/33.bin.gz","mimeType":"application/gzip","path":"./_file/data/district/33.bin.f531e9e1.gz","lastModified":1795450137792,"size":32842});
+registerFile("./data/district/34.bin.gz", {"name":"./data/district/34.bin.gz","mimeType":"application/gzip","path":"./_file/data/district/34.bin.8ce62c59.gz","lastModified":1795450137810,"size":5511});
+registerFile("./data/district/35.bin.gz", {"name":"./data/district/35.bin.gz","mimeType":"application/gzip","path":"./_file/data/district/35.bin.65d774f4.gz","lastModified":1795450137828,"size":41766});
+registerFile("./data/district/36.bin.gz", {"name":"./data/district/36.bin.gz","mimeType":"application/gzip","path":"./_file/data/district/36.bin.fe1a463f.gz","lastModified":1795450137828,"size":8441});
+registerFile("./data/district/51.bin.gz", {"name":"./data/district/51.bin.gz","mimeType":"application/gzip","path":"./_file/data/district/51.bin.657936c3.gz","lastModified":1795450137842,"size":11568});
+registerFile("./data/district/52.bin.gz", {"name":"./data/district/52.bin.gz","mimeType":"application/gzip","path":"./_file/data/district/52.bin.982b552f.gz","lastModified":1795450137842,"size":13492});
+registerFile("./data/district/53.bin.gz", {"name":"./data/district/53.bin.gz","mimeType":"application/gzip","path":"./_file/data/district/53.bin.c094a170.gz","lastModified":1795450137863,"size":28990});
+registerFile("./data/district/61.bin.gz", {"name":"./data/district/61.bin.gz","mimeType":"application/gzip","path":"./_file/data/district/61.bin.41339874.gz","lastModified":1795450137877,"size":8879});
+registerFile("./data/district/62.bin.gz", {"name":"./data/district/62.bin.gz","mimeType":"application/gzip","path":"./_file/data/district/62.bin.506ea750.gz","lastModified":1795450137882,"size":13686});
+registerFile("./data/district/63.bin.gz", {"name":"./data/district/63.bin.gz","mimeType":"application/gzip","path":"./_file/data/district/63.bin.95e10acb.gz","lastModified":1795450137898,"size":14680});
+registerFile("./data/district/64.bin.gz", {"name":"./data/district/64.bin.gz","mimeType":"application/gzip","path":"./_file/data/district/64.bin.61afcf58.gz","lastModified":1795450137898,"size":12251});
+registerFile("./data/district/65.bin.gz", {"name":"./data/district/65.bin.gz","mimeType":"application/gzip","path":"./_file/data/district/65.bin.f84e1ad2.gz","lastModified":1795450137916,"size":7427});
+registerFile("./data/district/71.bin.gz", {"name":"./data/district/71.bin.gz","mimeType":"application/gzip","path":"./_file/data/district/71.bin.d49245f0.gz","lastModified":1795450137932,"size":21741});
+registerFile("./data/district/72.bin.gz", {"name":"./data/district/72.bin.gz","mimeType":"application/gzip","path":"./_file/data/district/72.bin.13c0f9cd.gz","lastModified":1795450137942,"size":15633});
+registerFile("./data/district/73.bin.gz", {"name":"./data/district/73.bin.gz","mimeType":"application/gzip","path":"./_file/data/district/73.bin.9236ba56.gz","lastModified":1795450137959,"size":24163});
+registerFile("./data/district/74.bin.gz", {"name":"./data/district/74.bin.gz","mimeType":"application/gzip","path":"./_file/data/district/74.bin.c3a03edd.gz","lastModified":1795450137978,"size":19302});
+registerFile("./data/district/75.bin.gz", {"name":"./data/district/75.bin.gz","mimeType":"application/gzip","path":"./_file/data/district/75.bin.0a80a36c.gz","lastModified":1795450137986,"size":9049});
+registerFile("./data/district/76.bin.gz", {"name":"./data/district/76.bin.gz","mimeType":"application/gzip","path":"./_file/data/district/76.bin.84fa36af.gz","lastModified":1795450137994,"size":5332});
+registerFile("./data/district/81.bin.gz", {"name":"./data/district/81.bin.gz","mimeType":"application/gzip","path":"./_file/data/district/81.bin.d829bcd6.gz","lastModified":1795450138008,"size":14764});
+registerFile("./data/district/82.bin.gz", {"name":"./data/district/82.bin.gz","mimeType":"application/gzip","path":"./_file/data/district/82.bin.bab56994.gz","lastModified":1795450138025,"size":15169});
+registerFile("./data/district/91.bin.gz", {"name":"./data/district/91.bin.gz","mimeType":"application/gzip","path":"./_file/data/district/91.bin.fe9c2bd7.gz","lastModified":1795450138025,"size":7499});
+registerFile("./data/district/92.bin.gz", {"name":"./data/district/92.bin.gz","mimeType":"application/gzip","path":"./_file/data/district/92.bin.fa8c9cfe.gz","lastModified":1795450138049,"size":4301});
+registerFile("./data/district/93.bin.gz", {"name":"./data/district/93.bin.gz","mimeType":"application/gzip","path":"./_file/data/district/93.bin.7b17438d.gz","lastModified":1795450138058,"size":3035});
+registerFile("./data/district/94.bin.gz", {"name":"./data/district/94.bin.gz","mimeType":"application/gzip","path":"./_file/data/district/94.bin.ca79259d.gz","lastModified":1795450138063,"size":1706});
+registerFile("./data/district/95.bin.gz", {"name":"./data/district/95.bin.gz","mimeType":"application/gzip","path":"./_file/data/district/95.bin.1372e740.gz","lastModified":1795450138063,"size":785});
+registerFile("./data/district/96.bin.gz", {"name":"./data/district/96.bin.gz","mimeType":"application/gzip","path":"./_file/data/district/96.bin.11a3a920.gz","lastModified":1795450138075,"size":3318});
+registerFile("./data/events/nyepi2026/adjusted.u8.gz", {"name":"./data/events/nyepi2026/adjusted.u8.gz","mimeType":"application/gzip","path":"./_file/data/events/nyepi2026/adjusted.u8.7d5591d2.gz","lastModified":1795450154666,"size":13753});
+registerFile("./data/events/nyepi2026/cell_info.u8.gz", {"name":"./data/events/nyepi2026/cell_info.u8.gz","mimeType":"application/gzip","path":"./_file/data/events/nyepi2026/cell_info.u8.e4f5ef4f.gz","lastModified":1795450154672,"size":3999});
+registerFile("./data/events/nyepi2026/cells.u32.gz", {"name":"./data/events/nyepi2026/cells.u32.gz","mimeType":"application/gzip","path":"./_file/data/events/nyepi2026/cells.u32.91cba65d.gz","lastModified":1795450154427,"size":16566});
+registerFile("./data/events/nyepi2026/meta.json", {"name":"./data/events/nyepi2026/meta.json","mimeType":"application/json","path":"./_file/data/events/nyepi2026/meta.8e1a8da4.json","lastModified":1795450155198,"size":12521});
+registerFile("./data/events/nyepi2026/nights.u8.gz", {"name":"./data/events/nyepi2026/nights.u8.gz","mimeType":"application/gzip","path":"./_file/data/events/nyepi2026/nights.u8.1b98a1c4.gz","lastModified":1795450154579,"size":33923});
+registerFile("./data/events/nyepi2026/recovery.u8.gz", {"name":"./data/events/nyepi2026/recovery.u8.gz","mimeType":"application/gzip","path":"./_file/data/events/nyepi2026/recovery.u8.0ffd901b.gz","lastModified":1795450155125,"size":1707});
+registerFile("./data/events/nyepi2026/units.json", {"name":"./data/events/nyepi2026/units.json","mimeType":"application/json","path":"./_file/data/events/nyepi2026/units.a2441acc.json","lastModified":1795450155190,"size":90477});
+registerFile("./data/faint_cells.u32.gz", {"name":"./data/faint_cells.u32.gz","mimeType":"application/gzip","path":"./_file/data/faint_cells.u32.55a4d0bf.gz","lastModified":1795450144890,"size":71351});
+registerFile("./data/faint_province.u16.gz", {"name":"./data/faint_province.u16.gz","mimeType":"application/gzip","path":"./_file/data/faint_province.u16.35a0bd35.gz","lastModified":1795450144951,"size":7742});
+registerFile("./data/faint_usual.u16.gz", {"name":"./data/faint_usual.u16.gz","mimeType":"application/gzip","path":"./_file/data/faint_usual.u16.8cbc4830.gz","lastModified":1795450144933,"size":18635});
+registerFile("./data/files.js", {"name":"./data/files.js","mimeType":"text/javascript","path":"./_file/data/files.796d6738.js","lastModified":1795450144951,"size":10615});
+registerFile("./data/meta.json", {"name":"./data/meta.json","mimeType":"application/json","path":"./_file/data/meta.ea0cc5f4.json","lastModified":1795450144951,"size":27562});
+registerFile("./data/outlines/district.geojson", {"name":"./data/outlines/district.geojson","mimeType":"application/geo+json","path":"./_file/data/outlines/district.6db295d4.geojson","lastModified":1795450143864,"size":4728146});
+registerFile("./data/outlines/province.geojson", {"name":"./data/outlines/province.geojson","mimeType":"application/geo+json","path":"./_file/data/outlines/province.ff9fbc90.geojson","lastModified":1795450143604,"size":3075557});
+registerFile("./data/outlines/subdistrict/11.geojson", {"name":"./data/outlines/subdistrict/11.geojson","mimeType":"application/geo+json","path":"./_file/data/outlines/subdistrict/11.24af1612.geojson","lastModified":1795450143913,"size":379509});
+registerFile("./data/outlines/subdistrict/12.geojson", {"name":"./data/outlines/subdistrict/12.geojson","mimeType":"application/geo+json","path":"./_file/data/outlines/subdistrict/12.e980c8bd.geojson","lastModified":1795450143950,"size":516049});
+registerFile("./data/outlines/subdistrict/13.geojson", {"name":"./data/outlines/subdistrict/13.geojson","mimeType":"application/geo+json","path":"./_file/data/outlines/subdistrict/13.347b611f.geojson","lastModified":1795450143964,"size":270601});
+registerFile("./data/outlines/subdistrict/14.geojson", {"name":"./data/outlines/subdistrict/14.geojson","mimeType":"application/geo+json","path":"./_file/data/outlines/subdistrict/14.f93de132.geojson","lastModified":1795450143993,"size":250480});
+registerFile("./data/outlines/subdistrict/15.geojson", {"name":"./data/outlines/subdistrict/15.geojson","mimeType":"application/geo+json","path":"./_file/data/outlines/subdistrict/15.4818569a.geojson","lastModified":1795450144005,"size":193953});
+registerFile("./data/outlines/subdistrict/16.geojson", {"name":"./data/outlines/subdistrict/16.geojson","mimeType":"application/geo+json","path":"./_file/data/outlines/subdistrict/16.a43e2646.geojson","lastModified":1795450144026,"size":338311});
+registerFile("./data/outlines/subdistrict/17.geojson", {"name":"./data/outlines/subdistrict/17.geojson","mimeType":"application/geo+json","path":"./_file/data/outlines/subdistrict/17.118d5fe3.geojson","lastModified":1795450144047,"size":148229});
+registerFile("./data/outlines/subdistrict/18.geojson", {"name":"./data/outlines/subdistrict/18.geojson","mimeType":"application/geo+json","path":"./_file/data/outlines/subdistrict/18.5907c6a1.geojson","lastModified":1795450144067,"size":316337});
+registerFile("./data/outlines/subdistrict/19.geojson", {"name":"./data/outlines/subdistrict/19.geojson","mimeType":"application/geo+json","path":"./_file/data/outlines/subdistrict/19.fc2f6393.geojson","lastModified":1795450144070,"size":127380});
+registerFile("./data/outlines/subdistrict/21.geojson", {"name":"./data/outlines/subdistrict/21.geojson","mimeType":"application/geo+json","path":"./_file/data/outlines/subdistrict/21.b1ef0671.geojson","lastModified":1795450144102,"size":298054});
+registerFile("./data/outlines/subdistrict/31.geojson", {"name":"./data/outlines/subdistrict/31.geojson","mimeType":"application/geo+json","path":"./_file/data/outlines/subdistrict/31.2c59f4e0.geojson","lastModified":1795450144105,"size":29588});
+registerFile("./data/outlines/subdistrict/32.geojson", {"name":"./data/outlines/subdistrict/32.geojson","mimeType":"application/geo+json","path":"./_file/data/outlines/subdistrict/32.ad615a13.geojson","lastModified":1795450144137,"size":566430});
+registerFile("./data/outlines/subdistrict/33.geojson", {"name":"./data/outlines/subdistrict/33.geojson","mimeType":"application/geo+json","path":"./_file/data/outlines/subdistrict/33.1efd333b.geojson","lastModified":1795450144170,"size":558692});
+registerFile("./data/outlines/subdistrict/34.geojson", {"name":"./data/outlines/subdistrict/34.geojson","mimeType":"application/geo+json","path":"./_file/data/outlines/subdistrict/34.e053b3cd.geojson","lastModified":1795450144182,"size":62998});
+registerFile("./data/outlines/subdistrict/35.geojson", {"name":"./data/outlines/subdistrict/35.geojson","mimeType":"application/geo+json","path":"./_file/data/outlines/subdistrict/35.7a80201b.geojson","lastModified":1795450144222,"size":699621});
+registerFile("./data/outlines/subdistrict/36.geojson", {"name":"./data/outlines/subdistrict/36.geojson","mimeType":"application/geo+json","path":"./_file/data/outlines/subdistrict/36.74264b40.geojson","lastModified":1795450144234,"size":153863});
+registerFile("./data/outlines/subdistrict/51.geojson", {"name":"./data/outlines/subdistrict/51.geojson","mimeType":"application/geo+json","path":"./_file/data/outlines/subdistrict/51.2cd77814.geojson","lastModified":1795450144237,"size":66657});
+registerFile("./data/outlines/subdistrict/52.geojson", {"name":"./data/outlines/subdistrict/52.geojson","mimeType":"application/geo+json","path":"./_file/data/outlines/subdistrict/52.8c26016f.geojson","lastModified":1795450144254,"size":193467});
+registerFile("./data/outlines/subdistrict/53.geojson", {"name":"./data/outlines/subdistrict/53.geojson","mimeType":"application/geo+json","path":"./_file/data/outlines/subdistrict/53.23187606.geojson","lastModified":1795450144282,"size":449062});
+registerFile("./data/outlines/subdistrict/61.geojson", {"name":"./data/outlines/subdistrict/61.geojson","mimeType":"application/geo+json","path":"./_file/data/outlines/subdistrict/61.9ca92f62.geojson","lastModified":1795450144330,"size":412108});
+registerFile("./data/outlines/subdistrict/62.geojson", {"name":"./data/outlines/subdistrict/62.geojson","mimeType":"application/geo+json","path":"./_file/data/outlines/subdistrict/62.f94ae3ae.geojson","lastModified":1795450144350,"size":231818});
+registerFile("./data/outlines/subdistrict/63.geojson", {"name":"./data/outlines/subdistrict/63.geojson","mimeType":"application/geo+json","path":"./_file/data/outlines/subdistrict/63.cf123f52.geojson","lastModified":1795450144366,"size":190595});
+registerFile("./data/outlines/subdistrict/64.geojson", {"name":"./data/outlines/subdistrict/64.geojson","mimeType":"application/geo+json","path":"./_file/data/outlines/subdistrict/64.06eec58a.geojson","lastModified":1795450144387,"size":300710});
+registerFile("./data/outlines/subdistrict/65.geojson", {"name":"./data/outlines/subdistrict/65.geojson","mimeType":"application/geo+json","path":"./_file/data/outlines/subdistrict/65.ab471a54.geojson","lastModified":1795450144403,"size":172413});
+registerFile("./data/outlines/subdistrict/71.geojson", {"name":"./data/outlines/subdistrict/71.geojson","mimeType":"application/geo+json","path":"./_file/data/outlines/subdistrict/71.84a841d8.geojson","lastModified":1795450144421,"size":176880});
+registerFile("./data/outlines/subdistrict/72.geojson", {"name":"./data/outlines/subdistrict/72.geojson","mimeType":"application/geo+json","path":"./_file/data/outlines/subdistrict/72.73e701cb.geojson","lastModified":1795450144454,"size":455568});
+registerFile("./data/outlines/subdistrict/73.geojson", {"name":"./data/outlines/subdistrict/73.geojson","mimeType":"application/geo+json","path":"./_file/data/outlines/subdistrict/73.6d626caf.geojson","lastModified":1795450144482,"size":391046});
+registerFile("./data/outlines/subdistrict/74.geojson", {"name":"./data/outlines/subdistrict/74.geojson","mimeType":"application/geo+json","path":"./_file/data/outlines/subdistrict/74.141d7114.geojson","lastModified":1795450144518,"size":289381});
+registerFile("./data/outlines/subdistrict/75.geojson", {"name":"./data/outlines/subdistrict/75.geojson","mimeType":"application/geo+json","path":"./_file/data/outlines/subdistrict/75.6aeb6826.geojson","lastModified":1795450144528,"size":99736});
+registerFile("./data/outlines/subdistrict/76.geojson", {"name":"./data/outlines/subdistrict/76.geojson","mimeType":"application/geo+json","path":"./_file/data/outlines/subdistrict/76.679dbdb6.geojson","lastModified":1795450144538,"size":111169});
+registerFile("./data/outlines/subdistrict/81.geojson", {"name":"./data/outlines/subdistrict/81.geojson","mimeType":"application/geo+json","path":"./_file/data/outlines/subdistrict/81.8c247348.geojson","lastModified":1795450144564,"size":411218});
+registerFile("./data/outlines/subdistrict/82.geojson", {"name":"./data/outlines/subdistrict/82.geojson","mimeType":"application/geo+json","path":"./_file/data/outlines/subdistrict/82.dba401a9.geojson","lastModified":1795450144582,"size":258560});
+registerFile("./data/outlines/subdistrict/91.geojson", {"name":"./data/outlines/subdistrict/91.geojson","mimeType":"application/geo+json","path":"./_file/data/outlines/subdistrict/91.d7971ce9.geojson","lastModified":1795450144616,"size":298053});
+registerFile("./data/outlines/subdistrict/92.geojson", {"name":"./data/outlines/subdistrict/92.geojson","mimeType":"application/geo+json","path":"./_file/data/outlines/subdistrict/92.f01995df.geojson","lastModified":1795450144640,"size":358739});
+registerFile("./data/outlines/subdistrict/93.geojson", {"name":"./data/outlines/subdistrict/93.geojson","mimeType":"application/geo+json","path":"./_file/data/outlines/subdistrict/93.57efed5d.geojson","lastModified":1795450144653,"size":241998});
+registerFile("./data/outlines/subdistrict/94.geojson", {"name":"./data/outlines/subdistrict/94.geojson","mimeType":"application/geo+json","path":"./_file/data/outlines/subdistrict/94.a69185e4.geojson","lastModified":1795450144673,"size":235711});
+registerFile("./data/outlines/subdistrict/95.geojson", {"name":"./data/outlines/subdistrict/95.geojson","mimeType":"application/geo+json","path":"./_file/data/outlines/subdistrict/95.9337891f.geojson","lastModified":1795450144693,"size":264130});
+registerFile("./data/outlines/subdistrict/96.geojson", {"name":"./data/outlines/subdistrict/96.geojson","mimeType":"application/geo+json","path":"./_file/data/outlines/subdistrict/96.3e536143.geojson","lastModified":1795450144724,"size":499450});
+registerFile("./data/province/all.bin.gz", {"name":"./data/province/all.bin.gz","mimeType":"application/gzip","path":"./_file/data/province/all.bin.875daefd.gz","lastModified":1795450136224,"size":33112});
+registerFile("./data/subdistrict/11.bin.gz", {"name":"./data/subdistrict/11.bin.gz","mimeType":"application/gzip","path":"./_file/data/subdistrict/11.bin.695dc13f.gz","lastModified":1795450140544,"size":114843});
+registerFile("./data/subdistrict/12.bin.gz", {"name":"./data/subdistrict/12.bin.gz","mimeType":"application/gzip","path":"./_file/data/subdistrict/12.bin.c68c4e2b.gz","lastModified":1795450140768,"size":160744});
+registerFile("./data/subdistrict/13.bin.gz", {"name":"./data/subdistrict/13.bin.gz","mimeType":"application/gzip","path":"./_file/data/subdistrict/13.bin.5e7712f2.gz","lastModified":1795450140861,"size":76802});
+registerFile("./data/subdistrict/14.bin.gz", {"name":"./data/subdistrict/14.bin.gz","mimeType":"application/gzip","path":"./_file/data/subdistrict/14.bin.255992ad.gz","lastModified":1795450140982,"size":132460});
+registerFile("./data/subdistrict/15.bin.gz", {"name":"./data/subdistrict/15.bin.gz","mimeType":"application/gzip","path":"./_file/data/subdistrict/15.bin.385ea535.gz","lastModified":1795450141064,"size":71200});
+registerFile("./data/subdistrict/16.bin.gz", {"name":"./data/subdistrict/16.bin.gz","mimeType":"application/gzip","path":"./_file/data/subdistrict/16.bin.c78813a6.gz","lastModified":1795450141161,"size":126494});
+registerFile("./data/subdistrict/17.bin.gz", {"name":"./data/subdistrict/17.bin.gz","mimeType":"application/gzip","path":"./_file/data/subdistrict/17.bin.20ac3185.gz","lastModified":1795450141205,"size":29411});
+registerFile("./data/subdistrict/18.bin.gz", {"name":"./data/subdistrict/18.bin.gz","mimeType":"application/gzip","path":"./_file/data/subdistrict/18.bin.5383b372.gz","lastModified":1795450141295,"size":162711});
+registerFile("./data/subdistrict/19.bin.gz", {"name":"./data/subdistrict/19.bin.gz","mimeType":"application/gzip","path":"./_file/data/subdistrict/19.bin.e4004d88.gz","lastModified":1795450141317,"size":39781});
+registerFile("./data/subdistrict/21.bin.gz", {"name":"./data/subdistrict/21.bin.gz","mimeType":"application/gzip","path":"./_file/data/subdistrict/21.bin.b049dea8.gz","lastModified":1795450141337,"size":44391});
+registerFile("./data/subdistrict/31.bin.gz", {"name":"./data/subdistrict/31.bin.gz","mimeType":"application/gzip","path":"./_file/data/subdistrict/31.bin.a0601e04.gz","lastModified":1795450141355,"size":35126});
+registerFile("./data/subdistrict/32.bin.gz", {"name":"./data/subdistrict/32.bin.gz","mimeType":"application/gzip","path":"./_file/data/subdistrict/32.bin.181b289d.gz","lastModified":1795450141679,"size":511398});
+registerFile("./data/subdistrict/33.bin.gz", {"name":"./data/subdistrict/33.bin.gz","mimeType":"application/gzip","path":"./_file/data/subdistrict/33.bin.1fa83ec3.gz","lastModified":1795450141972,"size":463602});
+registerFile("./data/subdistrict/34.bin.gz", {"name":"./data/subdistrict/34.bin.gz","mimeType":"application/gzip","path":"./_file/data/subdistrict/34.bin.6d587cc5.gz","lastModified":1795450142013,"size":66369});
+registerFile("./data/subdistrict/35.bin.gz", {"name":"./data/subdistrict/35.bin.gz","mimeType":"application/gzip","path":"./_file/data/subdistrict/35.bin.24a3592b.gz","lastModified":1795450142362,"size":649367});
+registerFile("./data/subdistrict/36.bin.gz", {"name":"./data/subdistrict/36.bin.gz","mimeType":"application/gzip","path":"./_file/data/subdistrict/36.bin.29bda287.gz","lastModified":1795450142445,"size":128080});
+registerFile("./data/subdistrict/51.bin.gz", {"name":"./data/subdistrict/51.bin.gz","mimeType":"application/gzip","path":"./_file/data/subdistrict/51.bin.b74d6250.gz","lastModified":1795450142496,"size":67663});
+registerFile("./data/subdistrict/52.bin.gz", {"name":"./data/subdistrict/52.bin.gz","mimeType":"application/gzip","path":"./_file/data/subdistrict/52.bin.0f942e2b.gz","lastModified":1795450142562,"size":118535});
+registerFile("./data/subdistrict/53.bin.gz", {"name":"./data/subdistrict/53.bin.gz","mimeType":"application/gzip","path":"./_file/data/subdistrict/53.bin.0065c08d.gz","lastModified":1795450142605,"size":73156});
+registerFile("./data/subdistrict/61.bin.gz", {"name":"./data/subdistrict/61.bin.gz","mimeType":"application/gzip","path":"./_file/data/subdistrict/61.bin.565156f6.gz","lastModified":1795450142667,"size":48906});
+registerFile("./data/subdistrict/62.bin.gz", {"name":"./data/subdistrict/62.bin.gz","mimeType":"application/gzip","path":"./_file/data/subdistrict/62.bin.6f055674.gz","lastModified":1795450142712,"size":61949});
+registerFile("./data/subdistrict/63.bin.gz", {"name":"./data/subdistrict/63.bin.gz","mimeType":"application/gzip","path":"./_file/data/subdistrict/63.bin.fc5776ff.gz","lastModified":1795450142796,"size":107317});
+registerFile("./data/subdistrict/64.bin.gz", {"name":"./data/subdistrict/64.bin.gz","mimeType":"application/gzip","path":"./_file/data/subdistrict/64.bin.55d15870.gz","lastModified":1795450142863,"size":107966});
+registerFile("./data/subdistrict/65.bin.gz", {"name":"./data/subdistrict/65.bin.gz","mimeType":"application/gzip","path":"./_file/data/subdistrict/65.bin.e444e48b.gz","lastModified":1795450142883,"size":32560});
+registerFile("./data/subdistrict/71.bin.gz", {"name":"./data/subdistrict/71.bin.gz","mimeType":"application/gzip","path":"./_file/data/subdistrict/71.bin.7d05a778.gz","lastModified":1795450142946,"size":132548});
+registerFile("./data/subdistrict/72.bin.gz", {"name":"./data/subdistrict/72.bin.gz","mimeType":"application/gzip","path":"./_file/data/subdistrict/72.bin.7b1db1de.gz","lastModified":1795450143024,"size":65540});
+registerFile("./data/subdistrict/73.bin.gz", {"name":"./data/subdistrict/73.bin.gz","mimeType":"application/gzip","path":"./_file/data/subdistrict/73.bin.4f4271fc.gz","lastModified":1795450143146,"size":150011});
+registerFile("./data/subdistrict/74.bin.gz", {"name":"./data/subdistrict/74.bin.gz","mimeType":"application/gzip","path":"./_file/data/subdistrict/74.bin.5ba3ef61.gz","lastModified":1795450143196,"size":78990});
+registerFile("./data/subdistrict/75.bin.gz", {"name":"./data/subdistrict/75.bin.gz","mimeType":"application/gzip","path":"./_file/data/subdistrict/75.bin.de4dc9cc.gz","lastModified":1795450143226,"size":65170});
+registerFile("./data/subdistrict/76.bin.gz", {"name":"./data/subdistrict/76.bin.gz","mimeType":"application/gzip","path":"./_file/data/subdistrict/76.bin.f641cfd0.gz","lastModified":1795450143262,"size":14077});
+registerFile("./data/subdistrict/81.bin.gz", {"name":"./data/subdistrict/81.bin.gz","mimeType":"application/gzip","path":"./_file/data/subdistrict/81.bin.f7620b5f.gz","lastModified":1795450143282,"size":28337});
+registerFile("./data/subdistrict/82.bin.gz", {"name":"./data/subdistrict/82.bin.gz","mimeType":"application/gzip","path":"./_file/data/subdistrict/82.bin.1184fefd.gz","lastModified":1795450143299,"size":40975});
+registerFile("./data/subdistrict/91.bin.gz", {"name":"./data/subdistrict/91.bin.gz","mimeType":"application/gzip","path":"./_file/data/subdistrict/91.bin.9118d915.gz","lastModified":1795450143332,"size":23022});
+registerFile("./data/subdistrict/92.bin.gz", {"name":"./data/subdistrict/92.bin.gz","mimeType":"application/gzip","path":"./_file/data/subdistrict/92.bin.86595907.gz","lastModified":1795450143357,"size":11393});
+registerFile("./data/subdistrict/93.bin.gz", {"name":"./data/subdistrict/93.bin.gz","mimeType":"application/gzip","path":"./_file/data/subdistrict/93.bin.2faeecf0.gz","lastModified":1795450143386,"size":7770});
+registerFile("./data/subdistrict/94.bin.gz", {"name":"./data/subdistrict/94.bin.gz","mimeType":"application/gzip","path":"./_file/data/subdistrict/94.bin.6be24b3f.gz","lastModified":1795450143398,"size":4618});
+registerFile("./data/subdistrict/95.bin.gz", {"name":"./data/subdistrict/95.bin.gz","mimeType":"application/gzip","path":"./_file/data/subdistrict/95.bin.7efa945b.gz","lastModified":1795450143398,"size":2529});
+registerFile("./data/subdistrict/96.bin.gz", {"name":"./data/subdistrict/96.bin.gz","mimeType":"application/gzip","path":"./_file/data/subdistrict/96.bin.47739ddc.gz","lastModified":1795450143413,"size":14377});
+registerFile("./data/units_district.json", {"name":"./data/units_district.json","mimeType":"application/json","path":"./_file/data/units_district.ffb4209d.json","lastModified":1795450137586,"size":51271});
+registerFile("./data/units_province.json", {"name":"./data/units_province.json","mimeType":"application/json","path":"./_file/data/units_province.60d26997.json","lastModified":1795450136190,"size":4597});
+registerFile("./data/units_subdistrict.json", {"name":"./data/units_subdistrict.json","mimeType":"application/json","path":"./_file/data/units_subdistrict.dde4d022.json","lastModified":1795450140317,"size":456752});
+
+define({id: "7c6e3955", outputs: ["files","national","loadTyped","drawMap","nightExplorer","NO_VALUE","d3"], body: async () => {
+const [{files}, {files: national}, {loadTyped}, {drawMap}, {nightExplorer}, {NO_VALUE}, d3] = await Promise.all([import("./_import/data/events/nyepi2026/files.64bec751.js"), import("./_import/data/files.a4c9cf92.js"), import("./_import/components/load.054d4540.js"), import("./_import/components/map.ef9eee7a.js"), import("./_import/components/explorer.dbc2604f.js"), import("./_import/components/palette.2cf889e5.js"), import("./_npm/d3@7.9.2/172963d6.js")]);
+
+return {files,national,loadTyped,drawMap,nightExplorer,NO_VALUE,d3};
+}});
+
+define({id: "697f6113", inputs: ["files","loadTyped","national","d3","NO_VALUE","drawMap","html"], outputs: ["meta","S","units","cells","raw","D","N","dates","night","K","provinces","districtOutlines","names","shown","COLS","DEG","lon","lat","day","pct","brbg","CLASS_COLOURS","rgb","colours","FOCUS","outlines","nightMap","classLegend","F","C","M","show","district","nyepiK","afterK","laterK","refDates"], body: async (files,loadTyped,national,d3,NO_VALUE,drawMap,html) => {
+const meta = await files["meta.json"].json();
+const S = meta.story;
+const units = (await files["units.json"].json()).district;
+const cells = await loadTyped("nyepi-cells", files["cells.u32.gz"], Uint32Array);
+const raw = await loadTyped("nyepi-nights", files["nights.u8.gz"], Uint8Array);
+const D = meta.dates.length, N = cells.length;
+const dates = meta.dates.map((s) => new Date(`${s}T00:00:00Z`));
+const night = (iso) => meta.dates.indexOf(iso);
+const K = night(meta.marks[0].date);
+const provinces = await national["outlines/province.geojson"].json();
+const districtOutlines = await national["outlines/district.geojson"].json();
+const names = new Map(districtOutlines.features.map((f) => [f.properties.code, f.properties.name]));
+const shown = districtOutlines.features.filter((f) => units.code.includes(f.properties.code));
+const COLS = 86400, DEG = 1 / 240;
+const lon = Float32Array.from(cells, (i) => -180 + ((i % COLS) + 0.5) * DEG);
+const lat = Float32Array.from(cells, (i) => 90 - (Math.floor(i / COLS) + 0.5) * DEG);
+const day = (k, long = true) => dates[k].toLocaleDateString("en-GB", {day: "numeric", month: long ? "long" : "short", timeZone: "UTC"});
+const pct = (v, digits = 0) => `${(100 * v).toFixed(digits)}%`;
+const brbg = d3.schemeBrBG[7];
+const CLASS_COLOURS = [null, NO_VALUE, NO_VALUE, brbg[0], brbg[1], brbg[3], brbg[5], NO_VALUE];
+const rgb = (hex) => [1, 3, 5].map((k) => parseInt(hex.slice(k, k + 2), 16)).join(", ");
+const colours = CLASS_COLOURS.map((c) => (c ? rgb(c) : null));
+const FOCUS = {key: "nyepi", bounds: [[114.25, -8.95], [116.45, -8.0]]};
+const outlines = shown.map((feature) => ({feature, id: null, state: null, weak: false, fill: "transparent", text: ""}));
+const nightMap = (k, sync = null) => (width) => {
+  const level = new Uint8Array(N);
+  for (let i = 0; i < N; i++) level[i] = raw[k * N + i] & 7;
+  return drawMap({width, land: provinces.features, units: outlines, context: [], selected: [], lights: {lon, lat, level, colours}, focus: FOCUS, sync, onPick: () => {}});
+};
+const classLegend = html`<div class="legend">${[[3, "under 50% of its reference"], [4, "50 to 80%"], [5, "80 to 125%: about the same"], [6, "125% or more"]].map(([k, label]) =>
+  html`<span class="legend-item"><span class="swatch" style=${`background:${CLASS_COLOURS[k]};`}></span>Cell at ${label}</span>`)}
+  <span class="legend-item"><span class="swatch" style=${`background:${NO_VALUE};`}></span>Cell not seen that night (cloud or an unusable retrieval), which is not the same as dark</span></div>`;
+const F = S.focus, C = S.control, M = S.matched;
+const show = (v, digits = 0) => (v === null || v === undefined ? "no figure" : pct(v, digits));
+const district = (code) => { const u = units.code.indexOf(code); return {name: names.get(code) ?? String(code), ratio: units.ratio[u][K], coverage: units.coverage[u][K], cells: units.cells[u]}; };
+const [nyepiK, afterK, laterK] = meta.story_nights.map(night);
+const refDates = meta.reference.dates.map((iso) => day(night(iso))).join(" and ");
+return {meta,S,units,cells,raw,D,N,dates,night,K,provinces,districtOutlines,names,shown,COLS,DEG,lon,lat,day,pct,brbg,CLASS_COLOURS,rgb,colours,FOCUS,outlines,nightMap,classLegend,F,C,M,show,district,nyepiK,afterK,laterK,refDates};
+}});
+
+define({id: "942e362a", mode: "inline", inputs: ["day","K","display"], body: async (day,K,display) => {
+display(await(
+day(K)
+))
+}});
+
+define({id: "115e9f67", mode: "inline", inputs: ["pct","F","K","display"], body: async (pct,F,K,display) => {
+display(await(
+pct(F.light[K], 1)
+))
+}});
+
+define({id: "16e59e07", mode: "inline", inputs: ["refDates","display"], body: async (refDates,display) => {
+display(await(
+refDates
+))
+}});
+
+define({id: "a9423214", mode: "inline", inputs: ["F","K","display"], body: async (F,K,display) => {
+display(await(
+F.raw.seen[K].toLocaleString("en")
+))
+}});
+
+define({id: "ba3ee2ab", mode: "inline", inputs: ["F","display"], body: async (F,display) => {
+display(await(
+F.raw.cells.toLocaleString("en")
+))
+}});
+
+define({id: "299b70d1", mode: "inline", inputs: ["show","C","K","display"], body: async (show,C,K,display) => {
+display(await(
+show(C.light[K])
+))
+}});
+
+define({id: "dc73d3d1", mode: "inline", inputs: ["M","K","display"], body: async (M,K,display) => {
+display(await(
+M.zenith[K].toFixed(0)
+))
+}});
+
+define({id: "8b081847", mode: "inline", inputs: ["M","display"], body: async (M,display) => {
+display(await(
+M.tolerance
+))
+}});
+
+define({id: "7943ddbe", mode: "inline", inputs: ["show","M","K","display"], body: async (show,M,K,display) => {
+display(await(
+show(M.focus.light[K], 1)
+))
+}});
+
+define({id: "7d8d390a", mode: "inline", inputs: ["M","K","display"], body: async (M,K,display) => {
+display(await(
+M.focus.cells[K].toLocaleString("en")
+))
+}});
+
+define({id: "1b1a8144", inputs: ["meta","dates","F","C","Plot","K","day"], outputs: ["series","lightChart"], body: (meta,dates,F,C,Plot,K,day) => {
+const series = meta.dates.map((_, k) => ({k, date: dates[k], bali: F.light[k] === null ? null : 100 * F.light[k], seen: F.raw.seen[k],
+  control: C.light[k] === null ? null : 100 * C.light[k]}));
+const lightChart = (width) => Plot.plot({
+  width, height: 300, marginLeft: 48, marginRight: 20,
+  x: {label: null}, y: {label: "% of the reference nights", domain: [0, 160], grid: true},
+  marks: [
+    Plot.ruleY([100], {stroke: "#898781"}),
+    Plot.ruleX([dates[K]], {stroke: "#c53030", strokeDasharray: "2,3"}),
+    Plot.text([dates[K]], {x: (d) => d, y: 160, text: ["Nyepi night"], dy: 8, dx: 4, textAnchor: "start", fontSize: 10, fill: "#c53030"}),
+    Plot.dot(series.filter((r) => r.control !== null), {x: "date", y: "control", r: 3.5, fill: "#5ab4ac", stroke: "#0b0b0b", strokeWidth: 0.5, symbol: "square"}),
+    Plot.dot(series.filter((r) => r.bali !== null), {x: "date", y: "bali", r: (r) => (r.seen >= 1000 ? 5 : 2.5), fill: "#0b0b0b"}),
+    Plot.tip(series.filter((r) => r.bali !== null), Plot.pointer({x: "date", y: "bali",
+      title: (r) => `${day(r.k)}\nBali: ${r.bali.toFixed(0)}% of its reference light\n${r.seen.toLocaleString("en")} of ${F.raw.cells.toLocaleString("en")} cells seen\nNeighbours: ${r.control === null ? "not seen well enough" : r.control.toFixed(0) + "%"}`}))
+  ]
+});
+return {series,lightChart};
+}});
+
+define({id: "d17316bf", mode: "inline", inputs: ["resize","lightChart","display"], body: async (resize,lightChart,display) => {
+display(await(
+resize(lightChart)
+))
+}});
+
+define({id: "16e59e07-1", mode: "inline", inputs: ["refDates","display"], body: async (refDates,display) => {
+display(await(
+refDates
+))
+}});
+
+define({id: "d286dcef", mode: "inline", inputs: ["show","F","afterK","display"], body: async (show,F,afterK,display) => {
+display(await(
+show(F.light[afterK])
+))
+}});
+
+define({id: "2c2f041b", mode: "inline", inputs: ["district","display"], body: async (district,display) => {
+display(await(
+district(5171).name
+))
+}});
+
+define({id: "a1c2a054", mode: "inline", inputs: ["pct","district","display"], body: async (pct,district,display) => {
+display(await(
+pct(district(5171).ratio)
+))
+}});
+
+define({id: "a57018cb", mode: "inline", inputs: ["district","display"], body: async (district,display) => {
+display(await(
+district(5103).name
+))
+}});
+
+define({id: "181e23c2", mode: "inline", inputs: ["pct","district","display"], body: async (pct,district,display) => {
+display(await(
+pct(district(5103).ratio)
+))
+}});
+
+define({id: "d93b2ecf", mode: "inline", inputs: ["district","display"], body: async (district,display) => {
+display(await(
+district(5271).name
+))
+}});
+
+define({id: "89355402", mode: "inline", inputs: ["pct","district","display"], body: async (pct,district,display) => {
+display(await(
+pct(district(5271).ratio)
+))
+}});
+
+define({id: "b3e947e5", mode: "inline", inputs: ["district","display"], body: async (district,display) => {
+display(await(
+district(5201).name
+))
+}});
+
+define({id: "e8cd34b3", mode: "inline", inputs: ["pct","district","display"], body: async (pct,district,display) => {
+display(await(
+pct(district(5201).ratio)
+))
+}});
+
+define({id: "33933aad", mode: "inline", inputs: ["district","display"], body: async (district,display) => {
+display(await(
+district(3510).name
+))
+}});
+
+define({id: "dd00eb1c", mode: "inline", inputs: ["pct","district","display"], body: async (pct,district,display) => {
+display(await(
+pct(district(3510).ratio)
+))
+}});
+
+define({id: "35cc4407", mode: "inline", inputs: ["pct","district","display"], body: async (pct,district,display) => {
+display(await(
+pct(district(3510).coverage)
+))
+}});
+
+define({id: "ab179c58", mode: "inline", inputs: ["nyepiK","afterK","laterK","html","day","resize","nightMap","F","pct","display"], body: async (nyepiK,afterK,laterK,html,day,resize,nightMap,F,pct,display) => {
+display(await(
+[[nyepiK, "Nyepi night"], [afterK, "The night after"], [laterK, "Ten nights later (a reference night)"]].map(([k, label]) => html`<div>
+      <h4>${day(k)}</h4><p class="sub">${label}</p>
+      ${resize(nightMap(k, "nyepi"))}
+      <p>Bali: <strong>${F.light[k] === null ? "not seen" : pct(F.light[k])}</strong> of its reference light. ${F.raw.seen[k].toLocaleString("en")} of ${F.raw.cells.toLocaleString("en")} cells seen.</p>
+    </div>`)
+))
+}});
+
+define({id: "9fe34e31", mode: "inline", inputs: ["classLegend","display"], body: async (classLegend,display) => {
+display(await(
+classLegend
+))
+}});
+
+define({id: "411bd1a3", mode: "inline", inputs: ["show","S","K","display"], body: async (show,S,K,display) => {
+display(await(
+show(S.brightness[3].light[K], 1)
+))
+}});
+
+define({id: "63742680", mode: "inline", inputs: ["show","S","K","display"], body: async (show,S,K,display) => {
+display(await(
+show(S.brightness[0].light[K])
+))
+}});
+
+define({id: "24ab4e7a", mode: "inline", inputs: ["S","K","display"], body: async (S,K,display) => {
+display(await(
+S.brightness.map((b) => b.mean_nw[K].toFixed(1)).join(", ")
+))
+}});
+
+define({id: "aa511772", mode: "inline", inputs: ["S","display"], body: async (S,display) => {
+display(await(
+S.brightness.map((b) => b.reference_mean_nw.toFixed(0)).join(", ")
+))
+}});
+
+define({id: "9a576b38", mode: "inline", inputs: ["S","display"], body: async (S,display) => {
+display(await(
+S.brightness[3].reference_mean_nw.toFixed(0)
+))
+}});
+
+define({id: "b64ca6b6", mode: "inline", inputs: ["S","display"], body: async (S,display) => {
+display(await(
+S.brightness[0].reference_mean_nw.toFixed(0)
+))
+}});
+
+define({id: "1d3284c7", mode: "inline", inputs: ["show","F","K","display"], body: async (show,F,K,display) => {
+display(await(
+show(F.light[K], 1)
+))
+}});
+
+define({id: "1d54ab11", inputs: ["S","K","Plot","brbg","units","district"], outputs: ["bands","bandChart","rows","districtChart"], body: (S,K,Plot,brbg,units,district) => {
+const bands = S.brightness.map((b) => ({name: b.name, range: b.nw[1] === null ? `over ${b.nw[0]}` : `${b.nw[0]} to ${b.nw[1]}`, value: 100 * b.light[K], seen: b.seen[K], cells: b.cells}));
+const bandChart = (width) => Plot.plot({
+  width, height: 220, marginLeft: 150, marginRight: 60,
+  x: {label: "% of reference light on Nyepi night", domain: [0, 25], grid: true}, y: {label: null, domain: bands.map((b) => b.name)},
+  marks: [Plot.barX(bands, {y: "name", x: "value", fill: brbg[0]}),
+          Plot.text(bands, {y: "name", x: "value", text: (b) => `${b.value.toFixed(1)}%`, dx: 6, textAnchor: "start", fontSize: 11}),
+          Plot.tip(bands, Plot.pointer({y: "name", x: "value", title: (b) => `${b.name}: cells usually at ${b.range} nW cm-2 sr-1\n${b.value.toFixed(1)}% of reference light\n${b.seen.toLocaleString("en")} of ${b.cells.toLocaleString("en")} cells seen`}))]
+});
+const rows = units.code.map((code) => ({code, ...district(code)})).filter((r) => r.ratio !== null && r.coverage >= 0.3 && r.cells >= 20).sort((a, b) => a.ratio - b.ratio);
+const districtChart = (width) => Plot.plot({
+  width, height: 26 * rows.length + 50, marginLeft: 130, marginRight: 60,
+  x: {label: "% of reference light on Nyepi night", grid: true}, y: {label: null, domain: rows.map((r) => r.name)},
+  marks: [Plot.ruleX([100], {stroke: "#898781"}),
+          Plot.barX(rows, {y: "name", x: (r) => 100 * r.ratio, fill: (r) => (Math.floor(r.code / 100) === 51 ? brbg[0] : "#5ab4ac")}),
+          Plot.text(rows, {y: "name", x: (r) => 100 * r.ratio, text: (r) => `${(100 * r.ratio).toFixed(0)}%`, dx: 6, textAnchor: "start", fontSize: 11}),
+          Plot.tip(rows, Plot.pointerY({y: "name", x: (r) => 100 * r.ratio, title: (r) => `${r.name}${Math.floor(r.code / 100) === 51 ? " (Bali)" : " (neighbour)"}\n${(100 * r.ratio).toFixed(1)}% of its reference light on Nyepi night\n${(100 * r.coverage).toFixed(0)}% of its light seen, ${r.cells.toLocaleString("en")} lit cells`}))]
+});
+return {bands,bandChart,rows,districtChart};
+}});
+
+define({id: "7754088a", mode: "inline", inputs: ["S","K","display"], body: async (S,K,display) => {
+display(await(
+S.brightness[3].seen[K]
+))
+}});
+
+define({id: "62e2c6e2", mode: "inline", inputs: ["resize","bandChart","display"], body: async (resize,bandChart,display) => {
+display(await(
+resize(bandChart)
+))
+}});
+
+define({id: "b3eaef7c", mode: "inline", inputs: ["resize","districtChart","display"], body: async (resize,districtChart,display) => {
+display(await(
+resize(districtChart)
+))
+}});
+
+define({id: "a9423214-1", mode: "inline", inputs: ["F","K","display"], body: async (F,K,display) => {
+display(await(
+F.raw.seen[K].toLocaleString("en")
+))
+}});
+
+define({id: "ba3ee2ab-1", mode: "inline", inputs: ["F","display"], body: async (F,display) => {
+display(await(
+F.raw.cells.toLocaleString("en")
+))
+}});
+
+define({id: "966e3331", mode: "inline", inputs: ["meta","display"], body: async (meta,display) => {
+display(await(
+meta.reference.nights
+))
+}});
+
+define({id: "16e59e07-2", mode: "inline", inputs: ["refDates","display"], body: async (refDates,display) => {
+display(await(
+refDates
+))
+}});
+
+define({id: "43a597be", mode: "inline", inputs: ["Inputs","S","names","display"], body: async (Inputs,S,names,display) => {
+display(await(
+Inputs.table(S.brightest.cells.map((c) => ({District: names.get(c.district) ?? c.district, Longitude: c.lon, Latitude: c.lat, "Radiance that night": c.radiance, "Its reference": c.reference, "% of reference": 100 * c.radiance / c.reference})),
+    {format: {Longitude: (v) => v.toFixed(4), Latitude: (v) => v.toFixed(4), "Radiance that night": (v) => v.toFixed(1), "Its reference": (v) => v.toFixed(1), "% of reference": (v) => v.toFixed(0)}, select: false, rows: 12})
+))
+}});
+
+define({id: "dc413744", inputs: ["files","display","nightExplorer","meta","lon","lat","colours","provinces","districtOutlines","FOCUS","K","classLegend","national","N","raw","day","pct","F"], outputs: ["nyepiUnits"], body: async (files,display,nightExplorer,meta,lon,lat,colours,provinces,districtOutlines,FOCUS,K,classLegend,national,N,raw,day,pct,F) => {
+const nyepiUnits = await files["units.json"].json();
+display(nightExplorer({
+  meta, units: nyepiUnits, lon, lat, colours, provinces: provinces.features, districts: districtOutlines.features,
+  focus: {key: "nyepi-explorer", bounds: FOCUS.bounds}, start: K, scope: "Banyuwangi, Bali and Lombok", legend: classLegend.cloneNode(true),
+  subOutlines: (p) => { const f = national[`outlines/subdistrict/${p}.geojson`]; return f ? f.json() : Promise.resolve(null); },
+  levelAt: (k) => { const level = new Uint8Array(N); for (let i = 0; i < N; i++) level[i] = raw[k * N + i] & 7; return level; },
+  noteAt: (k) => `The night that began on the evening of ${day(k)}${k === K ? ", Nyepi night" : ""}${meta.reference.dates.includes(meta.dates[k]) ? ", one of the two reference nights" : ""}. `
+    + `Cells are shown against their own reference. ${pct(meta.seen_share_by_night[k])} of the cells of the three areas were seen; on Bali, ${F.raw.seen[k].toLocaleString("en")} of ${F.raw.cells.toLocaleString("en")}.`
+}));
+return {nyepiUnits};
+}});
+
+define({id: "839b7e62", mode: "inline", inputs: ["N","display"], body: async (N,display) => {
+display(await(
+N.toLocaleString("en")
+))
+}});
+
+define({id: "8d554a2e", mode: "inline", inputs: ["meta","display"], body: async (meta,display) => {
+display(await(
+meta.cells.with_reference.toLocaleString("en")
+))
+}});
+
+</script>
+</head>
+<body>
+<div id="observablehq-center">
+<main id="observablehq-main" class="observablehq">
+<style>
+.page-head {margin: 0.5rem 0 1.25rem;}
+.page-head h1 {margin: 0 0 0.4rem; font-size: 2rem; line-height: 1.15; max-width: none; display: flex; align-items: center; gap: 0.6rem;}
+.page-head h1 .logo {width: 32px; height: 32px; flex: none;}
+.brand {margin: 0 0 0.35rem; max-width: none; font: 600 0.78rem var(--sans-serif); letter-spacing: 0.06em; text-transform: uppercase; color: #a2431a;}
+.brand a {color: inherit; text-decoration: none;}
+.brand a:hover {text-decoration: underline;}
+.lede {margin: 0; max-width: none; color: #52514e; font-size: 1rem; line-height: 1.5;}
+.notice {border-left: 4px solid #eda100; padding: 0.6rem 0.9rem; background: #fdf6e3; font-size: 0.9rem; border-radius: 0 8px 8px 0; margin: 0 0 1.5rem;}
+.notice p {margin: 0; max-width: none;}
+section.part {margin: 0 0 2.25rem;}
+section.part:last-of-type {margin-bottom: 1rem;}
+.kicker {font: 600 0.72rem/1 var(--sans-serif); letter-spacing: 0.08em; text-transform: uppercase; color: #8a5a00; margin: 0 0 0.4rem;}
+section.part h2 {margin: 0 0 0.5rem; font-size: 1.45rem; line-height: 1.2; max-width: none;}
+/* the story text fills the page in two balanced columns on a wide screen, one on a narrow one (as drywet-explorer) */
+section.part > p:not(.kicker) {max-width: none; margin: 0 0 1rem; line-height: 1.55; columns: 2 26rem; column-gap: 2.5rem; text-align: justify; hyphens: auto;}
+.card {padding: 1.1rem 1.25rem;}
+.card h3 {max-width: none; margin: 0 0 0.45rem; font-family: var(--sans-serif); font-size: 1.02rem; font-weight: 600; color: #0b0b0b;}
+.card > .fine {margin: 0 0 0.8rem; max-width: none; line-height: 1.45;}
+.fine {font-size: 0.8rem; color: #52514e;}
+/* values that come from the data */
+.dyn {font-weight: 600; font-family: var(--sans-serif); font-size: 0.95em; color: #a2431a; white-space: nowrap;}
+.keys {display: flex; flex-wrap: wrap; gap: 0.3rem 1rem; font-size: 0.8rem; color: #52514e; margin: 0 0 0.6rem;}
+.keys span {display: inline-flex; align-items: center; gap: 0.35rem;}
+.key-line {display: inline-block; width: 22px; height: 0; border-top: 2px solid #0b0b0b;}
+.triptych {display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0.8rem;}
+.triptych h4 {margin: 0; font: 600 0.95rem/1.2 var(--sans-serif);}
+.triptych p.sub {margin: 0.1rem 0 0.4rem; min-height: 1.2em; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;}
+#observablehq-main {min-height: 0;}        /* Framework keeps the main column a screen tall: no gap above the footer */
+#observablehq-footer {margin-top: 1.5rem;}
+.triptych p {margin: 0.3rem 0 0; font-size: 0.8rem; color: #52514e; max-width: none;}
+.triptych .map-buttons {display: none;}   /* three small maps side by side: drag and scroll still zoom */
+@media (max-width: 800px) {.triptych {grid-template-columns: 1fr;}}
+.map-hover {display: none;}
+.map-buttons {position: absolute; top: 8px; right: 8px; display: flex; gap: 4px;}
+.map-buttons button {font: inherit; font-size: 0.8rem; min-width: 1.8rem; padding: 0.15rem 0.45rem; border: 1px solid #c3c2b7; border-radius: 6px; background: #fcfcfb; color: #0b0b0b; cursor: pointer;}
+.map-buttons button:disabled {color: #898781; cursor: default;}
+.legend {display: flex; flex-wrap: wrap; gap: 0.35rem 1rem; font-size: 0.8rem; color: #52514e; margin: 0.7rem 0 0;}
+.legend-item {display: inline-flex; align-items: center; gap: 0.35rem;}
+.swatch {width: 14px; height: 14px; display: inline-block; border-radius: 50%; border: 1px solid #c3c2b7; flex: none;}
+.tiles {display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 1rem;}
+.tile-value {font-size: 1.7rem; font-weight: 600; line-height: 1.15; margin-bottom: 0.3rem;}
+.tile-label {font-size: 0.82rem; color: #52514e; line-height: 1.4;}
+.when {display: grid; grid-template-columns: auto auto minmax(160px, 1fr); gap: 1rem 1.5rem; align-items: center; margin: 0 0 0.6rem;}
+.night-label {font-size: 1.15rem; font-weight: 600; width: 10.5rem; white-space: nowrap;}
+.when input[type=range] {width: 100%;}
+.steps {display: inline-flex;}
+.steps .step {font: inherit; line-height: 1; min-width: 2rem; padding: 0.3rem 0.5rem; border: 1px solid #c3c2b7; border-left-width: 0; background: #fcfcfb; cursor: pointer;}
+.steps .step:first-child {border-left-width: 1px; border-radius: 8px 0 0 8px;}
+.steps .step:last-child {border-radius: 0 8px 8px 0;}
+</style>
+<header class="page-head">
+  <p class="brand"><a href="./" title="Back to the main dashboard">← Nightlights Explorer</a> · Case study</p>
+  <h1><svg class="logo" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10.5" fill="#10151c"></circle><path d="M12 1.5a10.500 10.500 0 0 1 0 21 13.500 13.500 0 0 0 0-21Z" fill="#2a3644"></path><circle cx="8.300" cy="9.400" r="3" fill="#ffd76a" opacity=".22"></circle><circle cx="8.300" cy="9.400" r="1.500" fill="#ffd76a"></circle><circle cx="12.700" cy="13.700" r="1.100" fill="#ffd76a"></circle><circle cx="7.300" cy="14.900" r=".800" fill="#f2b24a"></circle><circle cx="11.300" cy="6.700" r=".600" fill="#f2b24a"></circle><circle cx="10.200" cy="17.600" r=".600" fill="#f2b24a"></circle></svg>Nyepi 2026: an island at under a tenth of its light</h1>
+  <p class="lede">Nyepi is the Balinese day of silence, when by custom lights are kept off for a night. It is the one night of the year when a dimming is known in advance, which makes it a test of what a satellite can measure.</p>
+</header>
+<div class="notice">
+  <p><strong>What this page can and cannot say.</strong> March is the wet season: the only clear nights near Nyepi came ten nights later, so they are the reference, and readings the product marks as poor quality had to be admitted to see the island at all. In 2026 Nyepi also fell two nights before Eid al-Fitr, and the reference nights a week after it, so neither is an ordinary night. The page says how much light was seen. It does not measure how many people took part, it says nothing about electricity, and it has not been checked against any record on the ground.</p>
+</div>
+<div class="observablehq observablehq--block"><!--:7c6e3955:--></div>
+<div class="observablehq observablehq--block"><!--:697f6113:--></div>
+<section class="part">
+<p class="kicker">1 · A known darkness, measured</p>
+<h2 id="an-island-at-under-a-tenth-of-itself" tabindex="-1"><a class="observablehq-header-anchor" href="#an-island-at-under-a-tenth-of-itself">An island at under a tenth of itself</a></h2>
+<p>On the night of <observablehq-loading></observablehq-loading><!--:942e362a:--> 2026 the lit cells of Bali that the satellite could see gave <span class="dyn"><observablehq-loading></observablehq-loading><!--:115e9f67:--></span> of the light the same cells gave on <observablehq-loading></observablehq-loading><!--:16e59e07:-->. That is <span class="dyn"><observablehq-loading></observablehq-loading><!--:a9423214:--></span> of Bali's <observablehq-loading></observablehq-loading><!--:ba3ee2ab:--> lit cells; the rest had no usable reading. The neighbours across the straits read <span class="dyn"><observablehq-loading></observablehq-loading><!--:299b70d1:--></span> of their own reference that night. That figure cannot be leaned on: it moves from about 60% to over 110% with how strictly the viewing angle is matched, so it says only that the neighbours were not dark. Bali's figure does not move like that. Nyepi night was seen from <span class="dyn"><observablehq-loading></observablehq-loading><!--:dc73d3d1:--> degrees</span>; of the two reference nights only 30 March was seen from within <observablehq-loading></observablehq-loading><!--:8b081847:--> degrees of that, and against that night alone Bali gave <span class="dyn"><observablehq-loading></observablehq-loading><!--:7943ddbe:--></span> on <observablehq-loading></observablehq-loading><!--:7d8d390a:--> cells. Under a tenth, whichever way it is measured.</p>
+<div class="observablehq observablehq--block"><!--:1b1a8144:--></div>
+<div class="card">
+  <h3>Bali's light, night by night</h3>
+  <div class="keys"><span><span class="swatch" style="background:#0b0b0b;"></span>Bali (small points: fewer than 1,000 of its cells seen)</span>
+    <span><span class="swatch" style="background:#5ab4ac;border-radius:2px;"></span>Lombok and Banyuwangi the same night</span>
+    <span><span class="key-line" style="border-top:2px dashed #c53030"></span>Nyepi night</span></div>
+  <observablehq-loading></observablehq-loading><!--:d17316bf:-->
+  <p class="fine" style="margin-top:0.6rem;">Each point is the summed light of the cells seen that night over the summed reference of the same cells. Most nights have no point at all: the island was under cloud. The two reference nights, <observablehq-loading></observablehq-loading><!--:16e59e07-1:-->, sit near 100% by construction. The night after Nyepi reads <observablehq-loading></observablehq-loading><!--:d286dcef:-->, above the reference, but the neighbours were not seen that night, so whether Bali was truly brighter cannot be said.</p>
+</div>
+</section>
+<section class="part">
+<p class="kicker">2 · What only a satellite could show</p>
+<h2 id="the-darkness-stops-at-the-shore" tabindex="-1"><a class="observablehq-header-anchor" href="#the-darkness-stops-at-the-shore">The darkness stops at the shore</a></h2>
+<p>Seen from above, the dark has an edge, and the edge is the coast. On Nyepi night <observablehq-loading></observablehq-loading><!--:2c2f041b:--> stood at <span class="dyn"><observablehq-loading></observablehq-loading><!--:a1c2a054:--></span> of its reference and <observablehq-loading></observablehq-loading><!--:a57018cb:--> at <span class="dyn"><observablehq-loading></observablehq-loading><!--:181e23c2:--></span>. Across the Lombok Strait, <observablehq-loading></observablehq-loading><!--:d93b2ecf:--> stood at <span class="dyn"><observablehq-loading></observablehq-loading><!--:89355402:--></span> and <observablehq-loading></observablehq-loading><!--:b3e947e5:--> at <span class="dyn"><observablehq-loading></observablehq-loading><!--:e8cd34b3:--></span>. Across the Bali Strait, <observablehq-loading></observablehq-loading><!--:33933aad:--> read <observablehq-loading></observablehq-loading><!--:dd00eb1c:-->, but only <observablehq-loading></observablehq-loading><!--:35cc4407:--> of its light was seen, too little to count. These district figures use the plain reference; the viewing angle is not matched in them.</p>
+<div class="card">
+  <div class="triptych">
+    <observablehq-loading></observablehq-loading><!--:ab179c58:-->
+  </div>
+  <observablehq-loading></observablehq-loading><!--:9fe34e31:-->
+  <p class="fine" style="margin-top:0.6rem;">Banyuwangi on the left, Bali in the middle, Lombok on the right. The three maps move together: zoom or drag one and the others follow. Each lit cell is coloured by its light that night over its own reference. A cell is about 460 m across and the sensor's view is wider, so read the pattern, not single cells.</p>
+</div>
+</section>
+<section class="part">
+<p class="kicker">3 · The shape of the silence</p>
+<h2 id="everything-fell-to-the-same-floor" tabindex="-1"><a class="observablehq-header-anchor" href="#everything-fell-to-the-same-floor">Everything fell to the same floor</a></h2>
+<p>Sort Bali's cells by how bright they usually are and the percentages look like a finding: the brightest 1% gave <span class="dyn"><observablehq-loading></observablehq-loading><!--:411bd1a3:--></span> of their reference light, the dimmer half <span class="dyn"><observablehq-loading></observablehq-loading><!--:63742680:--></span>. It is arithmetic. In radiance, every group ended at about the same level: <span class="dyn"><observablehq-loading></observablehq-loading><!--:24ab4e7a:--></span> nW from dimmest to brightest, down from <span class="dyn"><observablehq-loading></observablehq-loading><!--:aa511772:--></span>. A cell that starts at <observablehq-loading></observablehq-loading><!--:9a576b38:--> and one that starts at <observablehq-loading></observablehq-loading><!--:b64ca6b6:--> both arrive near 1, and 1 is close to the least the product is designed to detect. So the honest reading is that Bali's light fell to the floor of the measurement on every group of cells seen, and the <observablehq-loading></observablehq-loading><!--:1d3284c7:--> is nearer a ceiling than a measurement.</p>
+<div class="observablehq observablehq--block"><!--:1d54ab11:--></div>
+<div class="grid grid-cols-2" style="gap:1.1rem; grid-auto-rows:auto;">
+  <div class="card">
+    <h3>Bali's cells by how bright they usually are</h3>
+    <p class="fine">The summed light of each group on Nyepi night over its summed reference, on the cells seen. The differences between the bars restate where each group started, not how far it fell. The brightest group is <observablehq-loading></observablehq-loading><!--:7754088a:--> cells.</p>
+    <observablehq-loading></observablehq-loading><!--:62e2c6e2:-->
+  </div>
+  <div class="card">
+    <h3>District by district</h3>
+    <p class="fine">Districts of Bali in brown, their neighbours in teal. Only districts with at least 30% of their reference light seen that night and at least 20 lit cells are shown.</p>
+    <observablehq-loading></observablehq-loading><!--:b3eaef7c:-->
+  </div>
+</div>
+</section>
+<section class="part">
+<p class="kicker">4 · What stayed lit, and what stayed invisible</p>
+<h2 id="a-few-bright-cells-and-two-lost-years" tabindex="-1"><a class="observablehq-header-anchor" href="#a-few-bright-cells-and-two-lost-years">A few bright cells, and two lost years</a></h2>
+<p>Not everything went dark. The brightest cells on Bali that night are listed below with their positions. This page does not say what stands at each: that needs a map and local knowledge, and has not been checked. And the satellite's view of Nyepi is a matter of luck. It falls in the wet season: on Nyepi night 2024 and 2025 the share of Bali's cells with any reading rounds to 0%.</p>
+<div class="tiles" style="margin-bottom:1.1rem;">
+  <div class="card"><div class="tile-value"><observablehq-loading></observablehq-loading><!--:a9423214-1:--> of <observablehq-loading></observablehq-loading><!--:ba3ee2ab-1:--></div><div class="tile-label">Bali's lit cells with a usable reading on Nyepi night 2026.</div></div>
+  <div class="card"><div class="tile-value">0 of 2</div><div class="tile-label">Earlier years that could be measured. On Nyepi night 2024 (11 March) and 2025 (29 March) the share of Bali's cells with a reading rounds to 0%.</div></div>
+  <div class="card"><div class="tile-value"><observablehq-loading></observablehq-loading><!--:966e3331:--> nights</div><div class="tile-label">Make up the reference, <observablehq-loading></observablehq-loading><!--:16e59e07-2:-->: the first clear nights after Nyepi, and a week after Eid al-Fitr. The nights before Nyepi were mostly under cloud.</div></div>
+  <div class="card"><div class="tile-value">Poor quality</div><div class="tile-label">Is how the product marks most of Bali's readings that night. With only the readings it calls high quality, about one cell in twenty is left, and those cells alone read about a fifth of their reference, not under a tenth. The headline depends on admitting the poor-quality readings.</div></div>
+</div>
+<div class="card">
+  <h3>The brightest cells on Bali on Nyepi night</h3>
+  <observablehq-loading></observablehq-loading><!--:43a597be:-->
+  <p class="fine" style="margin-top:0.6rem;">Radiance in nW cm-2 sr-1. A cell brighter than its reference on the night the island went dark is worth a visit; it can also be a fire, moonlit cloud that the product missed, or a single bad reading.</p>
+</div>
+</section>
+<section class="part">
+<p class="kicker">Every night, place by place</p>
+<h2 id="step-through-the-nights-district-by-district" tabindex="-1"><a class="observablehq-header-anchor" href="#step-through-the-nights-district-by-district">Step through the nights, district by district</a></h2>
+<p>The sections above tell one story. This map is for looking yourself. Move the slider to a night, click a district to open it and move the map to it, then click one of its sub-districts. The text under the map follows what is open: its light that night against its reference, how much of it was seen, where it stands among its neighbours, and its own nights.</p>
+<div class="observablehq observablehq--block"><!--:dc413744:--></div>
+</section>
+<p class="fine" style="max-width:none;">Source: NASA Black Marble daily, VNP46A2, Collection 2, the moonlight-corrected radiance, readings flagged high quality or poor quality, over the <observablehq-loading></observablehq-loading><!--:839b7e62:--> lit cells of Banyuwangi, Bali and Lombok (<observablehq-loading></observablehq-loading><!--:8d554a2e:--> with a reference). A file dated D is the night that begins on the evening of local date D. Nyepi 2026 (19 March) and Eid al-Fitr 2026 (21 to 22 March): the joint ministerial decree on national holidays for 2026, published by the State Secretariat (setneg.go.id). The 2024 date is in the 2024 decree (setkab.go.id); the 2025 date was not traced to its decree. View angles: the sensor zenith layer of VNP46A1 (the file for 18 March 2026 is missing from the archive; that night takes its angle from 2018, 171 cycles of 16 nights earlier, which was checked to agree within half a degree on the other nights). The product's stated detection-limit targets are 3.0 nW (threshold) to 0.25 nW (goal), from the product user guide. This page measures dimming and says nothing about electricity.</p>
+<p class="fine" style="max-width:none; margin-top:1.2rem;"><a href="./">\← Back to the main dashboard</a> · <a href="https://github.com/bennyistanto/nightlights-explorer" target="_blank" rel="noopener">Code and method on GitHub</a></p>
+</main>
+<footer id="observablehq-footer">
+<div>Developed by <a href="https://benny.istan.to" target="_blank" rel="noopener">Benny Istanto</a> as a casual weekend project. Night-time lights from NASA Black Marble, Collection 2 (VNP46A3 monthly, VNP46A2 daily, view angles from VNP46A1). Long view: DMSP-OLS stable lights processed by the Earth Observation Group, Payne Institute, Colorado School of Mines; DMSP data collected by the US Air Force Weather Agency. Roads on the Mudik map: OpenStreetMap contributors. Admin boundaries: Badan Informasi Geospasial. Built with Observable Framework.</div>
+</footer>
+</div>
+</body>
+</html>

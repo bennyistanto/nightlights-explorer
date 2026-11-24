@@ -1,0 +1,270 @@
+{
+ "script": "python -m ntl.litshare",
+ "version": 3,
+ "rule": {
+  "dark_max": 0.5,
+  "lit_min": 2.0,
+  "min_months_per_year": 3,
+  "yearly_value": "median of the year's usable monthly values (quality 0)",
+  "min_subunit_cells": 5,
+  "support": "cells in a province that hold people in at least one population year, any land or water class"
+ },
+ "product": "VNP46A3",
+ "view": "AllAngle",
+ "years": [
+  2012,
+  2013,
+  2014,
+  2015,
+  2016,
+  2017,
+  2018,
+  2019,
+  2020,
+  2021,
+  2022,
+  2023,
+  2024,
+  2025,
+  2026
+ ],
+ "cells": 2354937,
+ "tiles": [
+  "h27v08",
+  "h28v08",
+  "h29v08",
+  "h30v08",
+  "h27v09",
+  "h28v09",
+  "h29v09",
+  "h30v09",
+  "h31v09",
+  "h32v09",
+  "h30v10"
+ ],
+ "tiles_without_files": [
+  {
+   "tile": "h31v08",
+   "cells": 29,
+   "people": 1378,
+   "people_year": 2026
+  },
+  {
+   "tile": "h29v10",
+   "cells": 30,
+   "people": 461,
+   "people_year": 2026
+  }
+ ],
+ "cells_outside_tiles": 0,
+ "months": [
+  "2012-01-01",
+  "2026-11-01"
+ ],
+ "population": {
+  "years": [
+   2015,
+   2016,
+   2017,
+   2018,
+   2019,
+   2020,
+   2021,
+   2022,
+   2023,
+   2024,
+   2025,
+   2026
+  ],
+  "used": {
+   "2012": 2015,
+   "2013": 2015,
+   "2014": 2015,
+   "2015": 2015,
+   "2016": 2016,
+   "2017": 2017,
+   "2018": 2018,
+   "2019": 2019,
+   "2020": 2020,
+   "2021": 2021,
+   "2022": 2022,
+   "2023": 2023,
+   "2024": 2024,
+   "2025": 2025,
+   "2026": 2026
+  },
+  "carried_back": [
+   2012,
+   2013,
+   2014
+  ],
+  "carried_forward": [],
+  "fixed_year": null,
+  "files": {
+   "2015": "idn_pop_2015_CN_100m_R2025A_v1.tif",
+   "2016": "idn_pop_2016_CN_100m_R2025A_v1.tif",
+   "2017": "idn_pop_2017_CN_100m_R2025A_v1.tif",
+   "2018": "idn_pop_2018_CN_100m_R2025A_v1.tif",
+   "2019": "idn_pop_2019_CN_100m_R2025A_v1.tif",
+   "2020": "idn_pop_2020_CN_100m_R2025A_v1.tif",
+   "2021": "idn_pop_2021_CN_100m_R2025A_v1.tif",
+   "2022": "idn_pop_2022_CN_100m_R2025A_v1.tif",
+   "2023": "idn_pop_2023_CN_100m_R2025A_v1.tif",
+   "2024": "idn_pop_2024_CN_100m_R2025A_v1.tif",
+   "2025": "idn_pop_2025_CN_100m_R2025A_v1.tif",
+   "2026": "idn_pop_2026_CN_100m_R2025A_v1.tif"
+  },
+  "description": "IDN population 2015 [WorldPop R2025A v1]",
+  "licence_tag": "CC-BY-4.0",
+  "pixel_arcsec": 3.0,
+  "people_in_raster": {
+   "2015": 260363854,
+   "2016": 263234642,
+   "2017": 266020190,
+   "2018": 268673122,
+   "2019": 271230566,
+   "2020": 273748190,
+   "2021": 275881536,
+   "2022": 277634565,
+   "2023": 280026486,
+   "2024": 282353641,
+   "2025": 284622215,
+   "2026": 286820252
+  },
+  "grid": {
+   "west": 94.98750000000001,
+   "north": 6.079166666666666,
+   "shape": [
+    4101,
+    11049
+   ]
+  }
+ },
+ "national": [
+  {
+   "year": 2012,
+   "people": 259234245,
+   "unseen": 1.56,
+   "dark": 15.38,
+   "faint": 31.2,
+   "lit": 51.87
+  },
+  {
+   "year": 2013,
+   "people": 259234245,
+   "unseen": 3.9,
+   "dark": 16.34,
+   "faint": 28.98,
+   "lit": 50.78
+  },
+  {
+   "year": 2014,
+   "people": 259234245,
+   "unseen": 0.55,
+   "dark": 14.38,
+   "faint": 31.16,
+   "lit": 53.91
+  },
+  {
+   "year": 2015,
+   "people": 259234245,
+   "unseen": 0.11,
+   "dark": 14.04,
+   "faint": 29.92,
+   "lit": 55.93
+  },
+  {
+   "year": 2016,
+   "people": 262092049,
+   "unseen": 1.44,
+   "dark": 15.91,
+   "faint": 28.62,
+   "lit": 54.03
+  },
+  {
+   "year": 2017,
+   "people": 264865313,
+   "unseen": 3.08,
+   "dark": 16.93,
+   "faint": 24.6,
+   "lit": 55.39
+  },
+  {
+   "year": 2018,
+   "people": 267506058,
+   "unseen": 1.23,
+   "dark": 15.13,
+   "faint": 24.52,
+   "lit": 59.12
+  },
+  {
+   "year": 2019,
+   "people": 270051421,
+   "unseen": 0.34,
+   "dark": 15.37,
+   "faint": 22.99,
+   "lit": 61.3
+  },
+  {
+   "year": 2020,
+   "people": 272557508,
+   "unseen": 0.83,
+   "dark": 15.37,
+   "faint": 22.16,
+   "lit": 61.63
+  },
+  {
+   "year": 2021,
+   "people": 274680982,
+   "unseen": 1.83,
+   "dark": 12.74,
+   "faint": 20.92,
+   "lit": 64.51
+  },
+  {
+   "year": 2022,
+   "people": 276426121,
+   "unseen": 6.86,
+   "dark": 7.81,
+   "faint": 20.73,
+   "lit": 64.61
+  },
+  {
+   "year": 2023,
+   "people": 278806772,
+   "unseen": 0.9,
+   "dark": 5.15,
+   "faint": 21.11,
+   "lit": 72.84
+  },
+  {
+   "year": 2024,
+   "people": 281123307,
+   "unseen": 2.42,
+   "dark": 7.64,
+   "faint": 18.93,
+   "lit": 71.01
+  },
+  {
+   "year": 2025,
+   "people": 283381613,
+   "unseen": 3.54,
+   "dark": 6.74,
+   "faint": 17.41,
+   "lit": 72.31
+  },
+  {
+   "year": 2026,
+   "people": 285569623,
+   "unseen": 0.19,
+   "dark": 6.52,
+   "faint": 16.31,
+   "lit": 76.98
+  }
+ ],
+ "files": {
+  "province.json": 34080,
+  "district.json": 354533,
+  "subdistrict.json": 1866129
+ }
+}

@@ -15,7 +15,7 @@ import os
 import numpy as np
 import pytest
 
-from ntl import cellmaps, export, monitor, persistence, trend
+from ntl import cellmaps, export, files, monitor, persistence, trend
 from ntl import conventions as c
 from ntl.stack import TileStack
 
@@ -165,7 +165,7 @@ def test_a_held_file_is_retried_then_reported(tmp_path, monkeypatch, caplog):
     target = tmp_path / "files.js"
     target.write_text("old", encoding="utf-8")
     real, calls, naps = os.replace, [], []
-    monkeypatch.setattr(export.time, "sleep", naps.append)
+    monkeypatch.setattr(files.time, "sleep", naps.append)
 
     def held_twice(source, destination):
         calls.append(1)
@@ -173,8 +173,8 @@ def test_a_held_file_is_retried_then_reported(tmp_path, monkeypatch, caplog):
             raise PermissionError("in use")
         real(source, destination)
 
-    monkeypatch.setattr(export.os, "replace", held_twice)
-    with caplog.at_level(logging.WARNING, logger="ntl.export"):
+    monkeypatch.setattr(files.os, "replace", held_twice)
+    with caplog.at_level(logging.WARNING, logger="ntl.files"):
         export._replace_with(target, lambda temporary: temporary.write_text("new", encoding="utf-8"))
     assert target.read_text(encoding="utf-8") == "new" and len(calls) == 3 and len(naps) == 2
     assert caplog.text.count("held open") == 1                   # said once, not on every try
@@ -182,7 +182,7 @@ def test_a_held_file_is_retried_then_reported(tmp_path, monkeypatch, caplog):
     def always(source, destination):
         raise PermissionError("in use")
 
-    monkeypatch.setattr(export.os, "replace", always)
+    monkeypatch.setattr(files.os, "replace", always)
     with pytest.raises(PermissionError, match="still held open"):
         export._replace_with(target, lambda temporary: temporary.write_text("newer", encoding="utf-8"))
     assert target.read_text(encoding="utf-8") == "new" and [p.name for p in tmp_path.iterdir()] == ["files.js"]

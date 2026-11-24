@@ -75,10 +75,8 @@ import datetime as dt
 import gzip
 import json
 import logging
-import os
 import sys
-import time
-from collections.abc import Callable, Mapping, Sequence
+from collections.abc import Mapping, Sequence
 from pathlib import Path
 from typing import Any
 
@@ -87,6 +85,7 @@ from numpy.typing import ArrayLike, NDArray
 
 from ntl import conventions as c
 from ntl import cellmaps, firstlight, monitor, persistence, trend
+from ntl.files import replace_with as _replace_with
 from ntl.stack import TileStack, load_folder
 
 log = logging.getLogger("ntl.export")
@@ -113,56 +112,6 @@ def cell_area_km2(lat: ArrayLike) -> NDArray[np.float64]:
     lat = np.asarray(lat, dtype=np.float64)
     side = c.CELL_SIZE_DEG * KM_PER_DEGREE
     return side * side * np.cos(np.radians(np.asarray(lat, dtype=np.float64)))
-
-
-#: Tries at renaming a finished file over one that another program holds open.
-_REPLACE_ATTEMPTS = 8
-
-
-def _replace_with(path: Path, write: Callable[[Path], object]) -> int:
-    """Write through a temporary file and rename it over ``path``.
-
-    Parameters
-    ----------
-    path : Path
-        Target file; its folder is created. An existing file is replaced
-        only once the new one is complete.
-    write : callable
-        Called with the temporary path; must write the whole content there.
-
-    Returns
-    -------
-    int
-        Size of the file written, bytes.
-
-    Raises
-    ------
-    PermissionError
-        If the target is still held open by another program after
-        ``_REPLACE_ATTEMPTS`` tries (about 7 seconds). The first failed try
-        is logged, so the wait is not silent. Any error leaves the old file
-        as it was and removes the temporary one.
-    """
-    path.parent.mkdir(parents=True, exist_ok=True)
-    temporary = path.with_name(path.name + ".part")
-    try:
-        write(temporary)
-        # On Windows a file that another program has open (a preview server
-        # watching the folder, a sync client) cannot be replaced for a moment.
-        for attempt in range(_REPLACE_ATTEMPTS):
-            try:
-                os.replace(temporary, path)
-                break
-            except PermissionError as exc:
-                if attempt == _REPLACE_ATTEMPTS - 1:
-                    raise PermissionError(f"{path} is still held open by another program (a preview server or a sync client?): {exc}") from exc
-                if attempt == 0:
-                    log.warning("%s is held open by another program; retrying for a few seconds", path)
-                time.sleep(0.25 * (attempt + 1))
-    except BaseException:
-        temporary.unlink(missing_ok=True)
-        raise
-    return path.stat().st_size
 
 
 def gz_write(path: Path, data: bytes) -> int:

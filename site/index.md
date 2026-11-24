@@ -53,7 +53,23 @@ h2 {margin-top: 2rem;}
 .steps .step:focus-visible {outline: 2px solid #2a78d6; outline-offset: 2px; position: relative; z-index: 1;}
 /* a layer: its on/off switch, then its menu */
 .layer {display: flex; align-items: flex-end; gap: 0.6rem; min-width: 0;}
-.layer > form {flex: 1 1 auto; min-width: 0;}
+.layer > .layer-menu {position: relative; flex: 1 1 auto; min-width: 0;}
+/* the "i" beside a menu's label, and the list of what each choice shows */
+.info-btn {position: absolute; top: -0.2rem; right: 0; width: 1.15rem; height: 1.15rem; padding: 0; border: 1px solid #898781; border-radius: 50%; background: #fcfcfb; color: #52514e; font: italic 600 0.78rem/1 Georgia, "Times New Roman", serif; cursor: pointer;}
+.info-btn:hover, .info-btn[aria-expanded=true] {background: #0b0b0b; border-color: #0b0b0b; color: #fff;}
+.info-btn:focus-visible {outline: 2px solid #2a78d6; outline-offset: 2px;}
+.info-pop {position: absolute; z-index: 30; top: calc(100% + 6px); right: 0; width: max(100%, 25rem); max-width: calc(100vw - 2rem); max-height: 70vh; overflow-y: auto; padding: 0.8rem 0.9rem; background: #fff; border: 1px solid #c3c2b7; border-radius: 10px; box-shadow: 0 6px 24px rgba(0, 0, 0, 0.14); font-family: var(--sans-serif); font-size: 0.82rem; line-height: 1.4; color: #0b0b0b;}
+.info-pop[hidden] {display: none;}
+.info-pop p {margin: 0; max-width: none;}
+.info-pop .info-head {font-size: 0.72rem; font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase; color: #52514e; margin-bottom: 0.4rem;}
+.info-pop dl {margin: 0;}
+.info-pop .info-row {padding: 0.35rem 0.5rem; border-left: 3px solid transparent; border-radius: 0 6px 6px 0;}
+.info-pop .info-row.current {border-left-color: #a2431a; background: #fbf3ee;}
+.info-pop dt {font-weight: 600;}
+.info-pop .info-row.current dt::after {content: " (shown now)"; font-weight: 400; color: #a2431a;}
+.info-pop dd {margin: 0; color: #3d3c39;}
+.info-pop .info-foot {margin-top: 0.5rem; padding-top: 0.5rem; border-top: 1px solid #e1e0d9; color: #52514e;}
+@media (max-width: 760px) {.info-pop {width: 100%;}}
 .switch {position: relative; flex: none; width: 2.3rem; height: 1.3rem; margin-bottom: 0.45rem; cursor: pointer;}
 .switch input {position: absolute; inset: 0; width: 100%; height: 100%; margin: 0; opacity: 0; cursor: pointer;}
 .switch span {position: absolute; inset: 0; border-radius: 1rem; background: #c3c2b7; transition: background 0.15s;}
@@ -168,6 +184,10 @@ const MAX_DROP = meta.thresholds.max_detectable_drop;
 const FLAG = meta.encoding.flags;
 const cap = (text) => text.charAt(0).toUpperCase() + text.slice(1);
 const n0 = (v) => v.toLocaleString("en");
+// Year by year: lit cells, and people living in them (python -m ntl.litshare). One file per level, fetched when first needed.
+const YEARLY = {province: FileAttachment("data/yearly/province.json"), district: FileAttachment("data/yearly/district.json"),
+                subdistrict: FileAttachment("data/yearly/subdistrict.json")};
+const yearlyMeta = await FileAttachment("data/yearly/meta.json").json();
 
 async function unitList(level) {
   const u = await files[`units_${level}.json`].json();
@@ -266,16 +286,55 @@ const select = (lv, code, note = null) => {
 // ---- controls that do not depend on the selection (built once, so they keep keyboard focus)
 const levelInput = Inputs.radio(new Map([["Provinces", "province"], ["Districts", "district"], ["Sub-districts", "subdistrict"]]), {label: "Map shows", value: "district"});
 const level = Generators.input(levelInput);
-const variableInput = Inputs.select(new Map([["Status", "status"], ["Light against expected", "expected"], ["Light against usual", "usual"],
-                                             ["Radiance", "radiance"], ["How well seen", "seen"], ["Months not observed", "unseen"],
-                                             ["Months reading low", "run"], ["Trend against the median", "trend"], ["Newly lit cells", "newlit"]]),
-                                    {label: "Units coloured by", value: "status"});
+// Each choice: its name in the menu, its key, and one line for the "i" beside the menu (what it shows, and what it is
+// for). The lines carry no figures; the full account of the current choice is VARIABLE_NOTE and CELL_NOTE below, in
+// the card under the map. Change a rule there and the line here must follow.
+const UNIT_OPTIONS = [
+  ["Status", "status", "The month's verdict on each unit, judged against its own past and, for districts and sub-districts, against the rest of the district or province around them. Start here to see where light is unusually low."],
+  ["Light against expected", "expected", "This month's light as a percentage of what the unit's own previous years lead one to expect. It is the number behind the status, without the judgement: use it to see how far off a unit is."],
+  ["Light against usual", "usual", "This month's light as a percentage of the unit's usual level over the whole record. Use it to see growth over the years; it is a poor guide to what is unusual in one month."],
+  ["Radiance", "radiance", "The mean radiance of the unit's lit cells this month, an estimate. Use it to compare how bright the lit places are, not how much light a unit gives off in all."],
+  ["How well seen", "seen", "The share of the unit's usual light that sat in cells with a usable value this month. Use it to judge what every other figure for the month is worth."],
+  ["Months not observed", "unseen", "For units not observed this month, how many months in a row they have gone without a usable reading. Use it to find places this page cannot speak about."],
+  ["Months reading low", "run", "For units in Watch or Alarm this month, how many months of the current spell have read that way. Use it to tell a single low month from a lasting one."],
+  ["Trend against the median", "trend", "The unit's rate of change over the record, compared with the median unit of its level. Use it to find where growth was unusually slow or fast. It does not change with the month."],
+  ["Newly lit cells", "newlit", "The share of the unit's cells that were dark at the start of the record and lit at its end. Use it to find where light appeared. It does not change with the month."]
+];
+const CELL_OPTIONS = [
+  ["Usual light", "usual", "The lit cells the statuses rest on, drawn by their usual brightness over the record. It does not change with the month: use it as the base picture of where light is."],
+  ["Radiance this month", "radiance", "Each lit cell's radiance this month, in classes; grey cells have no usable value. Use it to see what was recorded this month, place by place."],
+  ["Change from a year earlier", "change", "Each lit cell's radiance this month against the same month a year earlier. Use it to see where inside a unit light fell or rose."],
+  ["Observations this month", "observations", "How many observations stand behind each cell's value this month. Use it to see where a value rests on little."],
+  ["Then and now", "thennow", "Each cell's light at the start of the record against its end: lit at both, brightened, emerged from dark, or faded; grey where neither can be said. Use it to see where light appeared or went."],
+  ...(FAINT ? [["Faint sources too", "faint", "Adds the cells too dim to count as lit that still stand above their surroundings. They are on the map only, in no figure, and what they are has not been checked."]] : [])
+];
+const menuOf = (options) => new Map(options.map(([label, value]) => [label, value]));
+const variableInput = Inputs.select(menuOf(UNIT_OPTIONS), {label: "Units coloured by", value: "status"});
 const variableChoice = Generators.input(variableInput);
 // what the lit cells themselves show: pixel by pixel, under the same month slider
-const cellsInput = Inputs.select(new Map([["Usual light", "usual"], ["Radiance this month", "radiance"], ["Change from a year earlier", "change"],
-                                          ["Observations this month", "observations"], ["Then and now", "thennow"],
-                                          ...(FAINT ? [["Faint sources too", "faint"]] : [])]), {label: "Lit cells show", value: "usual"});
+const cellsInput = Inputs.select(menuOf(CELL_OPTIONS), {label: "Lit cells show", value: "usual"});
 const cellChoice = Generators.input(cellsInput);
+// A menu with an "i" beside its label. The button opens a list with one line per choice, the current one marked;
+// Escape, a second click or a click elsewhere closes it.
+const withInfo = (input, heading, options, foot) => {
+  const rows = options.map(([label, value, line]) => html`<div class="info-row" data-value=${value}><dt>${label}</dt><dd>${line}</dd></div>`);
+  const id = `info-${heading.toLowerCase().replace(/\W+/g, "-")}`;
+  const pop = html`<div class="info-pop" id=${id} role="region" aria-label=${`${heading}: what each choice shows`} hidden>
+    <p class="info-head">${heading}</p><dl>${rows}</dl><p class="info-foot">${foot}</p></div>`;
+  const button = html`<button type="button" class="info-btn" aria-expanded="false" aria-controls=${id} aria-label=${`What the choices under "${heading}" show`} title="What each choice shows">i</button>`;
+  const mark = () => rows.forEach((row) => row.classList.toggle("current", row.dataset.value === input.value));
+  const set = (open) => {pop.hidden = !open; button.setAttribute("aria-expanded", String(open)); if (open) mark();};
+  button.onclick = () => set(pop.hidden);
+  input.addEventListener("input", mark);
+  const wrap = html`<div class="layer-menu">${input}${button}${pop}</div>`;
+  wrap.addEventListener("keydown", (event) => {if (event.key === "Escape" && !pop.hidden) {set(false); button.focus();}});
+  const outside = (event) => {if (!pop.hidden && !wrap.contains(event.target)) set(false);};
+  document.addEventListener("pointerdown", outside);
+  invalidation.then(() => document.removeEventListener("pointerdown", outside));
+  return wrap;
+};
+const variableMenu = withInfo(variableInput, "Units coloured by", UNIT_OPTIONS, "The switch beside the menu hides the unit fills. The text above the map explains the current choice in full.");
+const cellsMenu = withInfo(cellsInput, "Lit cells show", CELL_OPTIONS, "The switch beside the menu hides the lit cells. The text above the map explains the current choice in full.");
 // each layer has its own switch: units only, lit cells only, or both
 const layerSwitch = (name) => html`<input type="checkbox" checked role="switch" aria-label=${`Show ${name} on the map`}>`;
 const unitsSwitch = layerSwitch("the unit fills"), cellsSwitch = layerSwitch("the lit cells");
@@ -293,8 +352,8 @@ const whereEl = html`<div></div>`;
 display(html`<div class="panel">
   <div class="panel-row what">
     <div>${levelInput}</div>
-    <div class="layer"><label class="switch" title="Show or hide the unit fills">${unitsSwitch}<span></span></label>${variableInput}</div>
-    <div class="layer"><label class="switch" title="Show or hide the lit cells">${cellsSwitch}<span></span></label>${cellsInput}</div>
+    <div class="layer"><label class="switch" title="Show or hide the unit fills">${unitsSwitch}<span></span></label>${variableMenu}</div>
+    <div class="layer"><label class="switch" title="Show or hide the lit cells">${cellsSwitch}<span></span></label>${cellsMenu}</div>
   </div>
   ${whereEl}
   <div class="panel-row when">
@@ -1019,6 +1078,86 @@ display(unit && rows ? (() => {
     </div>
   </div>`;
 })() : html`<span></span>`);
+```
+
+```js
+// ---- year by year: the people of the selected unit (or the country) by the light recorded where they live (ntl.litshare).
+// Every populated cell has a state in each year, from that year's months alone: unseen (too few usable months), no
+// light (median under the product's floor), faint (under the lit threshold), or lit. People are each year's own
+// population grid; a year before the first grid uses the first one, and is marked with an asterisk.
+const yearlyLevel = unit ? unit.level : "province";
+const yearly = await loadJSON(`yearly/${yearlyLevel}`, YEARLY[yearlyLevel]);
+display((() => {
+  const where = unit ? [yearly.codes.indexOf(unit.code)] : yearly.codes.map((_, i) => i); // the country is the sum of its provinces
+  if (where[0] < 0) return html`<span></span>`;
+  const R = yearlyMeta.rule, P = yearlyMeta.population;
+  const STATES = [{key: "dark", label: "No light above the floor", colour: "#10151c"}, {key: "faint", label: `Faint, under ${R.lit_min} nW`, colour: "#b5651d"},
+                  {key: "lit", label: `${R.lit_min} nW or more`, colour: "#f2b24a"}, {key: "unseen", label: "Not seen that year", colour: "#d9d7cf"}];
+  const total = (column, y) => (column ? d3.sum(where, (i) => column[y][i]) : null);
+  const withPeople = Boolean(yearly.people_lit); // the sub-district file carries cells only
+  const kind = withPeople ? "people" : "cells";
+  const carried = new Set(P.carried_back); // years before the first population grid: they use that first grid
+  const subunits = yearly.subunits ? d3.sum(where, (i) => yearly.subunits[i]) : null;
+  const lastYear = +meta.months[LAST].slice(0, 4), lastMonth = monthLabel(meta.months[LAST]).split(" ")[0];
+  const table = yearly.years.map((year, y) => {
+    const n = Object.fromEntries(STATES.map((s) => [s.key, total(yearly[`${kind}_${s.key}`], y)]));
+    const all = d3.sum(STATES, (s) => n[s.key]), seen = all - n.unseen;
+    const cells = Object.fromEntries(STATES.map((s) => [s.key, total(yearly[`cells_${s.key}`], y)]));
+    const months = rows ? rows.filter((r) => r.date.getUTCFullYear() === year) : null;
+    return {Year: (year === lastYear && lastMonth !== "December" ? `${year}, to ${lastMonth}` : String(year)) + (withPeople && carried.has(year) ? " *" : ""), year, n, all, seen,
+            people: d3.sum(where, (i) => yearly.people[y][i]),
+            // the three light classes as shares of what was seen; "unseen" as a share of everything
+            "No light": seen ? n.dark / seen : null, "Faint": seen ? n.faint / seen : null, "Lit": seen ? n.lit / seen : null, "Unseen": all ? n.unseen / all : null,
+            "Cells, no light": cells.dark, "Cells, faint": cells.faint, "Cells, lit": cells.lit, "Cells, unseen": cells.unseen,
+            "Sub-districts lit": yearly.subunits_lit ? total(yearly.subunits_lit, y) : null,
+            "Months low": months && big(unit) ? months.filter((r) => LOW.has(r.state)).length : null,
+            "Months unseen": months ? months.filter((r) => r.state === 0).length : null};
+  });
+  const pc = (v) => (v === null || !Number.isFinite(v) ? "" : `${(100 * v).toFixed(1)}%`);
+  const count = (v) => (v === null ? "" : n0(Math.round(v)));
+  const name = unit ? unit.name : "Indonesia";
+  const last = table.filter((r) => r.seen > 0).at(-1);
+  const columns = ["Year",
+                   ...(withPeople ? ["No light", "Faint", "Lit", "Unseen", "Cells, lit"] : ["Cells, no light", "Cells, faint", "Cells, lit", "Cells, unseen"]),
+                   ...(yearly.subunits_lit ? ["Sub-districts lit"] : []),
+                   ...(unit && rows ? [...(big(unit) ? ["Months low"] : []), "Months unseen"] : [])];
+  // one bar per year, split by state: shares of all people (or of all populated cells), so the bars are of equal height
+  const bars = table.flatMap((r) => STATES.map((s) => ({year: r.year, label: r.Year, state: s.label, share: r.all ? r.n[s.key] / r.all : 0, n: r.n[s.key]})));
+  const chart = (width) => Plot.plot({
+    width, height: 190, marginLeft: 44, marginBottom: 28,
+    x: {label: null, tickFormat: (d) => String(d), padding: 0.12},
+    y: {label: `% of ${withPeople ? "people" : "populated cells"}`, percent: true, domain: [0, 100], grid: true},
+    color: {domain: STATES.map((s) => s.label), range: STATES.map((s) => s.colour)},
+    marks: [
+      Plot.barY(bars, {x: "year", y: "share", z: "state", fill: "state", order: STATES.map((s) => s.label), stroke: "#ffffff", strokeWidth: 0.5}),
+      Plot.tip(bars, Plot.pointerX(Plot.stackY({x: "year", y: "share", z: "state", order: STATES.map((s) => s.label),
+        title: (d) => `${d.label}\n${d.state}: ${(100 * d.share).toFixed(1)}% (${n0(Math.round(d.n))} ${withPeople ? "people" : "cells"})`})))
+    ]
+  });
+  const dyn = (text) => html`<span class="dyn">${text}</span>`;
+  const when = last ? last.Year.replace(" *", "").replace(", to ", " (January to ") + (last.Year.includes(", to ") ? ")" : "") : "";
+  const lead = !last ? ""
+    : withPeople ? html`<p class="fine">In ${when}, of the ${dyn(n0(Math.round(last.seen)))} people counted in ${name} whose cells were seen, ${dyn(pc(last["No light"]))} lived in a cell with no light above the product's floor, ${dyn(pc(last["Faint"]))} in a cell with faint light, and ${dyn(pc(last["Lit"]))} in a cell at ${R.lit_min} nW or more.${last["Unseen"] >= 0.005 ? html` Another ${pc(last["Unseen"])} of its people were in cells not seen that year.` : ""}${subunits ? html` ${dyn(n0(last["Sub-districts lit"]))} of its ${n0(subunits)} sub-districts that hold people had ${R.min_subunit_cells} or more lit cells.` : ""}</p>`
+    : html`<p class="fine">In ${when}, of the ${dyn(n0(last.seen))} populated cells of ${name} that were seen, ${dyn(n0(last.n.dark))} had no light above the product's floor, ${dyn(n0(last.n.faint))} faint light, and ${dyn(n0(last.n.lit))} were at ${R.lit_min} nW or more. About ${dyn(n0(last.people))} people are placed in this sub-district by the population grid for that year; no share of people is given at this level, where both the people and where they sit are modelled.</p>`;
+  return html`<div class="card">
+    <h3>Year by year: ${withPeople ? "the people" : "the populated cells"} of ${name}, by the light recorded where they live</h3>
+    ${lead}
+    <div class="keys">${STATES.map((s) => html`<span><span class="swatch" style=${`background:${s.colour};`}></span>${s.label}</span>`)}</div>
+    ${resize(chart)}
+    <p class="fine"><strong>Supporting information, not a measure of access to electricity.</strong> Every cell that holds people gets a state for each year from that year's usable months alone: <em>no light</em> when its median is under ${R.dark_max} nW cm-2 sr-1, the floor below which the product stores zero (dimmer light is not told apart from none); <em>faint</em> from there to under ${R.lit_min}; <em>lit</em> at ${R.lit_min} or more; <em>unseen</em> with fewer than ${R.min_months_per_year} usable months (too few clear observations). The satellite passes in the small hours (nominally 01:30 local time; at a given place the time moves from night to night by an hour or more) and records mostly outdoor lighting: light inside a house may not show, so a household with a connection and no outdoor lighting can sit in a "no light" cell. The sensor's view is wider than a cell, so light spills onto neighbours: "no light" is the firmer reading, and a faint or lit cell may owe its light to the place next door.</p>
+    <p class="fine"><strong>Do not read a rise in "lit" as people gaining light or power.</strong> The line at ${R.lit_min} nW is a picked one and the cells that were already lit nearly doubled their light between 2015 and 2026, so people move from faint to lit without this page being able to say what changed on the ground. Read faint and lit together, against no light. The bars are shares of all ${kind}, unseen included. In the table the three light columns are shares of the ${kind} in cells that were seen; "Unseen" is a share of all, and it is not random: it falls on the same provinces again and again. Only cells that hold people are counted, so a lit road or plant with nobody living in its cell is not in the "lit" count.${withPeople ? ` People are each year's own figures from ${P.years[0]} to ${P.years.at(-1)} (${(P.description ?? "").match(/\[(.+)\]/)?.[1] ?? "a gridded population"})${P.carried_back.length ? `; the years marked * (${P.carried_back[0]} to ${P.carried_back.at(-1)}) have no grid of their own and use that of ${P.years[0]}` : ""}. That grid places census counts of about district level on mapped buildings with a model that has night-time lights among its inputs: where people sit inside a unit is modelled, and not independently of light.` : ""}${yearly.subunits_lit ? ` "Sub-districts lit" counts those with at least ${R.min_subunit_cells} lit populated cells, out of the sub-districts that hold people.` : ""}${unit && rows ? " The months columns count this unit's statuses in the year: low is Watch, Alarm or regional dimming." : ""}</p>
+    <p class="fine"><strong>Against the official figure.</strong> The levels do not compare: BPS reports that 99.55% of households had electricity as their main lighting in March 2025 (Susenas), while nationally 7.0% of the people in cells seen that year were in a "no light" cell (3.5% of all were in cells not seen). The ranking does compare: across the 38 provinces in 2025, the share of people in "no light" cells and the share of households whose main lighting is not PLN electricity have a rank correlation of 0.87 (0.83 against households not lit by any electricity). That is one year at province level; nothing below a province has been compared. Nationally the "no light" share falls from 15.5% to 5.2% between 2020 and 2023, where no earlier three years fell by more than 2 points, and stands at 6.5% in 2026: whether that is light on the ground or a change in the record is not established.</p>
+    ${Inputs.table(table, {
+      columns,
+      format: {"No light": pc, "Faint": pc, "Lit": pc, "Unseen": pc, "Cells, no light": count, "Cells, faint": count, "Cells, lit": count, "Cells, unseen": count,
+               "Sub-districts lit": (v) => (v === null ? "" : subunits ? `${n0(v)} of ${n0(subunits)}` : n0(v)),
+               "Months low": (v) => (v === null ? "" : v), "Months unseen": (v) => (v === null ? "" : v)},
+      align: Object.fromEntries(columns.slice(1).map((c) => [c, "right"])),
+      header: withPeople ? {"No light": "People, no light", "Faint": "People, faint", "Lit": "People, lit", "Unseen": "People, unseen", "Cells, lit": "Populated cells, lit"} : {},
+      rows: 16, select: false, sort: null
+    })}
+  </div>`;
+})());
 ```
 
 </div>

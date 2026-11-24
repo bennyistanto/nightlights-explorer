@@ -398,6 +398,147 @@ Jakarta, 55 per 100 in Bangka Belitung.
 
 They are shown on the map and used in no status. Section 7 says why.
 
+### 5.4 Year by year: people by the light recorded where they live
+
+`ntl.litshare` writes a yearly table per province, district and
+sub-district, shown under the charts of the selected area (the country is
+the sum of its provinces). It is meant as supporting information beside an
+official figure such as the share of households with electricity. It is not
+that figure.
+
+**A first version was withdrawn the day it was built.** It counted a cell
+as lit only if it belonged to the lit cells of section 2.3, and gave 52.8%
+of people in lit cells in 2015 and 60.8% in 2026. A method critique
+(`temp/litshare-critique.md`) showed that the people living in those cells
+are 60.9% of the country in every year, so the 2026 figure was that
+ceiling and the rise was the 2 nW line being crossed inside a fixed set of
+cells (+0.2 points at 1 nW, +16.2 at 3 nW). Section 7 keeps the lesson.
+
+Rules now (**choice**). The computation was checked by a method review
+that recomputed two tiles and one district from the raw files without the
+pipeline's code and found no difference; the choice of rules has not had a
+second critique.
+
+- **Support.** Every cell that lies in a province and holds people in at
+  least one population year, in any land or water class: 2,354,937 cells.
+  Coastal-class cells hold towns, and the lit cells of section 2.3 leave
+  them out. Cells without people (a lit road, a plant) are in no count.
+- **A value per cell and year, from that year alone.** The median of the
+  year's usable months (quality 0, which the user guide's Table 12 defines
+  as more than 3 observations), needing at least 3. Nothing is fixed with
+  hindsight.
+- **Four states.** *Unseen*: too few usable months. *No light*: median
+  under 0.5 nW, the floor below which the product stores zero, so dimmer
+  light is not told apart from none. *Faint*: from there to under 2 nW.
+  *Lit*: 2 nW or more.
+- **People of each year** (owner's decision). WorldPop R2025A v1,
+  `idn_pop_<year>_CN_100m_R2025A_v1.tif`, licence tag CC-BY-4.0, one file
+  a year from 2015 to 2026, summed five by five onto the cells (the
+  3 arc-second pixels nest in them). **2012 to 2014 use the 2015 file**,
+  carried back and marked with an asterisk on the page: nothing is
+  extrapolated. An alternative, projecting the 2015 to 2026 trend of each
+  cell backwards, was not taken; it would add a model on top of a model.
+- **Shares** of the three light states are taken over the people in seen
+  cells; the unseen share is given beside them, over everyone. The page's
+  bars are the exception: they show all four states as shares of everyone.
+- **Sub-districts lit**: those with at least 5 lit populated cells that
+  year, out of the 7,264 sub-districts that hold people.
+- **No people share at sub-district level**: there both the people and
+  where they sit inside the unit are modelled. Cell counts are shown.
+
+Measured on the run of 2026-11-24 (`temp/litshare-run-v3.log`,
+`temp/litshare-check-v3.log`), people in seen cells:
+
+| Year | People counted | No light | Faint | Lit | Unseen, of all | Sub-districts with 5 lit cells |
+|---|---|---|---|---|---|---|
+| 2012 * | 259.2 million | 15.6% | 31.7% | 52.7% | 1.6% | 3,131 |
+| 2015 | 259.2 million | 14.1% | 30.0% | 56.0% | 0.1% | 3,343 |
+| 2020 | 272.6 million | 15.5% | 22.4% | 62.2% | 0.8% | 3,763 |
+| 2022 | 276.4 million | 8.4% | 22.3% | 69.4% | 6.9% | 4,045 |
+| 2023 | 278.8 million | 5.2% | 21.3% | 73.5% | 0.9% | 4,526 |
+| 2026, to October | 285.6 million | 6.5% | 16.3% | 77.1% | 0.2% | 4,815 |
+
+\* people of 2015.
+
+The 2026 raster holds 286.8 million people, of whom 285.6 million are in a
+province and counted. In 2026 the share in "no light" cells runs from 0.0%
+(DKI Jakarta) to 74.2% (Papua Pegunungan). Every cell is in exactly one
+state each year, and each unit's people by state add up to its total
+within 2 people (each figure is rounded on its own). Two tiles the
+population grid touches have no monthly files (h31v08 and h29v10): their
+59 cells are unseen in every year. The yearly files hold every unit with
+people; the page can open only those that also have a lit cell of section
+2.3, which leaves out 24 of 514 districts and 2,785 of 7,264
+sub-districts.
+
+**How much the population year matters.** The same run with the 2020
+people in every year (`--population-year 2020`) moves the national "no
+light" share by at most 0.04 points. A share of seen people moves by at
+most 0.33 points for a province and 1.0 for a district, in any year and
+state. The critique had measured why: the twelve grids differ by a
+near-uniform rescaling (people grow 10.1 to 10.3% in every class of cell,
+2015 to 2026). So the yearly grids change the people counts and hardly the
+shares; WorldPop's release statement itself asks that comparisons between
+timepoints be made with care at small scales.
+
+**Against the official figure.** BPS publishes, from Susenas, the share of
+households by main source of lighting, by province. The March 2025 tables
+were read in a browser on 2026-11-24 and saved as
+`temp/bps-penerangan-2025.csv` (the pages render by script, so a plain
+fetch returns their titles only):
+
+- electricity: https://www.bps.go.id/id/statistics-table/2/NzcyIzI=/persentase-rumah-tangga-menurut-provinsi-dan-sumber-penerangan-utama-dari-listrik-persen.html (Indonesia 99.55%)
+- PLN electricity: https://www.bps.go.id/id/statistics-table/2/ODcjMg==/persentase-rumah-tangga-menurut-provinsi-dan-sumber-penerangan-utama-dari-listrik-pln.html (Indonesia 98.46%)
+
+Across the 38 provinces, against the 2025 row of the table:
+
+| Satellite share, 2025 | Households not lit by PLN | Not lit by any electricity |
+|---|---|---|
+| People in "no light" cells | Spearman 0.87 | 0.83 |
+| People in lit cells (sign reversed) | 0.74 | 0.71 |
+
+Without the six provinces lowest on PLN lighting the first figure is 0.83,
+so it does not rest on Papua alone. The levels do not compare: nationally
+7.0% of the people in seen cells are in "no light" cells (3.5% of all
+were unseen), against 0.45% of households without electric lighting. One
+year, province level only; districts have not been compared.
+
+How to read it:
+
+- "No light" is the firmer reading. Footprint and glow spread light onto
+  neighbours, so a "no light" cell gave less than the floor even with its
+  neighbours' spill, while a faint or lit cell may owe its light to the
+  place next door. With an even number of usable months a cell can be "no
+  light" with light recorded in half of them (1.1 to 1.4% of seen
+  cell-years on the two tiles the method review counted).
+- Do not read a rise in "lit" as people gaining light or power. The 2 nW
+  line is picked, and the cells that were already lit nearly doubled their
+  light: a balanced panel of 239,839 lit cells of section 2.3 has 1.94
+  times its 2015 light in 2026 (critique finding 4; the populated cells
+  outside that set were not measured). Read faint and lit together against
+  no light.
+- The "no light" share falls from 15.5% to 5.2% between 2020 and 2023,
+  where no earlier three years fell by more than 2 points, and is 6.5% in
+  2026. Whether that is light on the ground or a change in the record is
+  not established.
+- Unseen is not random: in 2025 it is 76.2% of people in Papua Tengah and
+  43.8% in Papua Pegunungan.
+- The population grid is a model. By WorldPop's release statement and
+  covariate sheet (URLs in the critique, finding 5) it is constrained to
+  mapped buildings, uses census counts of about district level for
+  Indonesia (517 units in 2020), and has night-time lights among its
+  covariates. Province and district totals are census-based, scaled to a
+  national projection; where people sit inside a unit is not independent
+  of light. The critique put an upper bound of 17 points on what that
+  placement adds to the old lit share; it has not been measured for the
+  new columns.
+- The satellite passes in the small hours (nominally 01:30 local time;
+  the time at a given cell moves from night to night) and records mostly
+  outdoor lighting. Falchetta et al. 2019
+  (https://pmc.ncbi.nlm.nih.gov/articles/PMC6610126/) put it as "limited
+  interior lighting might not be visible from outside": a household with a
+  connection and no outdoor lighting can sit in a "no light" cell.
+
 ## 6. The case studies
 
 A month hides an event that lasts days. `ntl.events` and `ntl.lightup`
@@ -753,8 +894,9 @@ that faded on the coasts of Aceh, North Sumatra and Riau.
 | Mudik: the line overlaps mapped roads | so do cells picked on ordinary nights (28% to 50%) | the overlay is shown, the claim is not made |
 | The source filter in place of the 2 nW rule | it drops 49% of the light: it finds peaks, not extents | not used that way |
 | Faint sources added to the lit domain | 281 of 759 alarm readings lost, 67 in units that gained no cell | a map layer only (5.3) |
+| People in lit cells, counted on the lit cells of the statuses | capped at the 60.9% of people who live in those cells; 60.8% in 2026 was the cap | a state per year for every populated cell (5.4) |
 
-The last row deserves a line. Adding the faint cells looked harmless on
+The row on faint sources deserves a line. Adding the faint cells looked harmless on
 averages (alarm rate 1.10% to 0.92%). Looked at reading by reading, the
 extra cells had shifted the pooled thresholds of every unit, and they read
 exactly zero in 7.8% of their good months against 1.8% for ordinary dim
@@ -871,6 +1013,7 @@ An Earthdata token goes in a file `.env` in the repository root, as a line
 | Status of every unit | `python -m ntl.monitor --cache E:\temp\ntl\cache --out E:\temp\ntl\cache\run_monthly.npz` | about 15 minutes |
 | Display outlines | `python -m ntl.boundaries --boundaries <adm3 file> --out E:\temp\ntl\cache\outlines` | minutes |
 | Files for the page | `python -m ntl.export --cache E:\temp\ntl\cache --run E:\temp\ntl\cache\run_monthly.npz --outlines E:\temp\ntl\cache\outlines --out site\data` | about a minute |
+| People by the light where they live | `python -m ntl.litshare --root E:\temp\ntl --population <folder of yearly population rasters> --boundaries <adm3 file> --work E:\temp\ntl\litshare --out site\data\yearly` | about 25 minutes the first time (rasters, unit maps, tiles); seconds once cached in `--work` |
 
 The boundary file is a polygon file of sub-districts with integer fields
 `a1siak`, `a2siak` and `a3siak`. A tile already cached is skipped unless
@@ -932,6 +1075,8 @@ data, because `site/data` is not in the repository.
 | `ntl.persistence`, `ntl.trend` | spells of low readings; the long-run rate |
 | `ntl.firstlight`, `ntl.cellmaps` | then-and-now classes; monthly classes per cell |
 | `ntl.sources` | faint light sources |
+| `ntl.litshare` | yearly cells and people by light state (no light, faint, lit, unseen) |
+| `ntl.files` | writing a file under a temporary name and renaming it, with a retry |
 | `ntl.events`, `ntl.lightup` | the daily case studies |
 | `ntl.boundaries`, `ntl.export` | display outlines; the files the page loads |
 

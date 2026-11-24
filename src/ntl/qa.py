@@ -159,7 +159,7 @@ def composite_observed(quality: ArrayLike, good_only: bool = False) -> NDArray[n
 
     Notes
     -----
-    User Guide Table 13. A gap-filled cell carries a radiance taken from
+    User Guide Table 12. A gap-filled cell carries a radiance taken from
     history, with zero observations in the period (checked on VNP46A3
     A2018213 h29v09: quality 2 always has ``_Num`` 0 and no ``_Std``). It
     cannot show a change, so it is "not observed" for status purposes.

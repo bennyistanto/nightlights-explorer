@@ -70,6 +70,7 @@ import {files} from "./data/events/lombok2018/files.js";
 import {files as national} from "./data/files.js";
 import {loadTyped} from "./components/load.js";
 import {drawMap} from "./components/map.js";
+import {nightExplorer} from "./components/explorer.js";
 import {NO_VALUE} from "./components/palette.js";
 import * as d3 from "npm:d3";
 ```
@@ -247,36 +248,29 @@ const countChart = (width) => Plot.plot({
 </section>
 
 <section class="part">
-<p class="kicker">Every night</p>
+<p class="kicker">Every night, place by place</p>
 
-## Step through the nights yourself
+## Step through the nights, district by district
 
-```js
-const nightInput = html`<input type="range" min="0" max="${D - 1}" step="1" value="${duringK}" aria-label="Night, from ${day(0)} to ${day(D - 1)}">`;
-const chosen = Generators.input(nightInput);
-const setNight = (k) => { nightInput.value = Math.max(0, Math.min(D - 1, k)); nightInput.dispatchEvent(new Event("input", {bubbles: true})); };
-const step = (label, title, by) => html`<button type="button" class="step" title=${title} aria-label=${title} onclick=${() => setNight(+nightInput.value + by)}>${label}</button>`;
-const labelEl = html`<div class="night-label" aria-live="polite"></div>`;
-const noteEl = html`<p class="fine" style="margin:0 0 0.7rem; max-width:none;"></p>`;
-const mapEl = html`<div></div>`;
-display(html`<div class="card">
-  <div class="when">${labelEl}<div class="steps">${step("‹", "One night back", -1)}${step("›", "One night forward", 1)}</div>${nightInput}</div>
-  ${noteEl}${mapEl}${classLegend}
-</div>`);
-```
+<p>The sections above tell one story. This map is for looking yourself. Move the slider to a night, click a district to open it and move the map to it, then click one of its sub-districts. The text under the map follows what is open: its light that night against its reference, how much of it was seen, where it stands among its neighbours, and its own nights.</p>
 
 ```js
-{
-  const hasControl = C.light[chosen] !== null;
-  const mark = marks.find((m) => m.k === chosen);
-  labelEl.textContent = `${day(chosen)} 2018`;
-  nightInput.setAttribute("aria-valuetext", `${day(chosen)} 2018`);
-  noteEl.textContent = `The night that began on the evening of ${day(chosen)}. ` + (mark ? `First night after the earthquake of ${mark.label}. ` : "")
-    + (hasControl ? `Cells are shown against Bali, which stood at ${pct(C.light[chosen])} of its own reference. ` : "Bali was not seen well enough this night, so cells are shown uncorrected: a shared dip cannot be told from a local one. ")
-    + `${pct(meta.seen_share_by_night[chosen])} of the cells of Bali, Lombok and west Sumbawa were seen; on Lombok, ${F.raw.seen[chosen].toLocaleString("en")} of ${F.raw.cells.toLocaleString("en")}.`;
-  mapEl.replaceChildren(resize(nightMap(chosen, hasControl ? adjusted : raw)));
-}
+const lombokUnits = await files["units.json"].json();
+display(nightExplorer({
+  meta, units: lombokUnits, lon, lat, colours, provinces: provinces.features, districts: districtOutlines.features, focus: FOCUS, start: duringK,
+  scope: "Bali, Lombok and west Sumbawa", legend: classLegend.cloneNode(true),
+  subOutlines: (p) => { const f = national[`outlines/subdistrict/${p}.geojson`]; return f ? f.json() : Promise.resolve(null); },
+  // against Bali on the nights it was seen well enough, uncorrected on the others
+  levelAt: (k) => { const source = C.light[k] !== null ? adjusted : raw, level = new Uint8Array(N); for (let i = 0; i < N; i++) level[i] = source[k * N + i] & 7; return level; },
+  noteAt: (k) => {
+    const mark = marks.find((m) => m.k === k);
+    return `The night that began on the evening of ${day(k)}. ` + (mark ? `First night after the earthquake of ${mark.label}. ` : "")
+      + (C.light[k] !== null ? `Cells are shown against Bali, which stood at ${pct(C.light[k])} of its own reference. ` : "Bali was not seen well enough this night, so cells are shown uncorrected: a shared dip cannot be told from a local one. ")
+      + `${pct(meta.seen_share_by_night[k])} of the cells of Bali, Lombok and west Sumbawa were seen; on Lombok, ${F.raw.seen[k].toLocaleString("en")} of ${F.raw.cells.toLocaleString("en")}.`;
+  }
+}));
 ```
+
 </section>
 
 <p class="fine" style="max-width:none;">Source: NASA Black Marble daily, VNP46A2, Collection 2, the moonlight-corrected radiance, high-quality retrievals only, over the ${N.toLocaleString("en")} lit cells of Bali, Lombok and west Sumbawa (${meta.cells.with_reference.toLocaleString("en")} with a reference). A cell's reference is its median over the nights of ${day(0)} to ${day(night(meta.reference.last))}, with at least ${meta.reference.min_nights} of them seen. Earthquake times, magnitudes and the epicentre: USGS catalogue. A file dated D is the night that begins on the evening of local date D.</p>

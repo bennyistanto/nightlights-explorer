@@ -69,6 +69,7 @@ import {files} from "./data/events/nyepi2026/files.js";
 import {files as national} from "./data/files.js";
 import {loadTyped} from "./components/load.js";
 import {drawMap} from "./components/map.js";
+import {nightExplorer} from "./components/explorer.js";
 import {NO_VALUE} from "./components/palette.js";
 import * as d3 from "npm:d3";
 ```
@@ -229,6 +230,27 @@ const districtChart = (width) => Plot.plot({
     {format: {Longitude: (v) => v.toFixed(4), Latitude: (v) => v.toFixed(4), "Radiance that night": (v) => v.toFixed(1), "Its reference": (v) => v.toFixed(1), "% of reference": (v) => v.toFixed(0)}, select: false, rows: 12})}
   <p class="fine" style="margin-top:0.6rem;">Radiance in nW cm-2 sr-1. A cell brighter than its reference on the night the island went dark is worth a visit; it can also be a fire, moonlit cloud that the product missed, or a single bad reading.</p>
 </div>
+</section>
+
+<section class="part">
+<p class="kicker">Every night, place by place</p>
+
+## Step through the nights, district by district
+
+<p>The sections above tell one story. This map is for looking yourself. Move the slider to a night, click a district to open it and move the map to it, then click one of its sub-districts. The text under the map follows what is open: its light that night against its reference, how much of it was seen, where it stands among its neighbours, and its own nights.</p>
+
+```js
+const nyepiUnits = await files["units.json"].json();
+display(nightExplorer({
+  meta, units: nyepiUnits, lon, lat, colours, provinces: provinces.features, districts: districtOutlines.features,
+  focus: {key: "nyepi-explorer", bounds: FOCUS.bounds}, start: K, scope: "Banyuwangi, Bali and Lombok", legend: classLegend.cloneNode(true),
+  subOutlines: (p) => { const f = national[`outlines/subdistrict/${p}.geojson`]; return f ? f.json() : Promise.resolve(null); },
+  levelAt: (k) => { const level = new Uint8Array(N); for (let i = 0; i < N; i++) level[i] = raw[k * N + i] & 7; return level; },
+  noteAt: (k) => `The night that began on the evening of ${day(k)}${k === K ? ", Nyepi night" : ""}${meta.reference.dates.includes(meta.dates[k]) ? ", one of the two reference nights" : ""}. `
+    + `Cells are shown against their own reference. ${pct(meta.seen_share_by_night[k])} of the cells of the three areas were seen; on Bali, ${F.raw.seen[k].toLocaleString("en")} of ${F.raw.cells.toLocaleString("en")}.`
+}));
+```
+
 </section>
 
 <p class="fine" style="max-width:none;">Source: NASA Black Marble daily, VNP46A2, Collection 2, the moonlight-corrected radiance, readings flagged high quality or poor quality, over the ${N.toLocaleString("en")} lit cells of Banyuwangi, Bali and Lombok (${meta.cells.with_reference.toLocaleString("en")} with a reference). A file dated D is the night that begins on the evening of local date D. Nyepi 2026 (19 March) and Eid al-Fitr 2026 (21 to 22 March): the joint ministerial decree on national holidays for 2026, published by the State Secretariat (setneg.go.id). The 2024 date is in the 2024 decree (setkab.go.id); the 2025 date was not traced to its decree. View angles: the sensor zenith layer of VNP46A1 (the file for 18 March 2026 is missing from the archive; that night takes its angle from 2018, 171 cycles of 16 nights earlier, which was checked to agree within half a degree on the other nights). The product's stated detection-limit targets are 3.0 nW (threshold) to 0.25 nW (goal), from the product user guide. This page measures dimming and says nothing about electricity.</p>

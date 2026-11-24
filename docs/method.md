@@ -940,7 +940,122 @@ that followed the second round have not themselves been reviewed.
 
 Numbers are little-endian, gzip compressed, and written under a temporary
 name then renamed. The page is static: the browser does no statistics
-beyond counting what is on the map.
+beyond counting what is on the map, with the two exceptions named in 9.2.
+
+### 9.1 The main page: one level at a time
+
+The level the map and the text speak about follows the selection
+(**choice**, 2026-11-24; it replaced a switch that set the level by hand).
+
+| What is open | Map | A click | Units the text counts |
+|---|---|---|---|
+| Nothing | every district of the country, filled | opens the province the district lies in | all districts |
+| A province | its districts, filled | opens a district; another province moves there | its districts |
+| A district | its sub-districts, filled; the province's other districts stay | opens a sub-district, or another district | its sub-districts |
+
+Provinces are never the level shown. A province has no Watch or Alarm
+(3.6), so a map of provinces alone would hide where the low readings are;
+the country's map therefore keeps the district fills and uses the province
+only as the thing a click opens. Every selection moves the map to the
+extent of what was selected, from the display outlines.
+
+"What this map says" has one part per menu. The part for the unit layer
+counts the units in the table above. The part for the cell layer counts
+lit cells by the layer's classes and stays at province scope when a
+district is open. With a province open it gives one share per layer for
+the province and for the country, and how many other provinces lie below
+and above; a province enters that ranking with at least 200 cells in the
+share's denominator (**choice**, to keep a share of a handful of cells out
+of a ranking). The shares are:
+
+| Cell layer | Share | Of |
+|---|---|---|
+| Usual light | cells at 15 nW cm-2 sr-1 or more | all lit cells |
+| Radiance this month | cells under 2 nW (classes "no detectable light" and the first interval) | cells with a usable value |
+| Change from a year earlier | cells under 85% of the same month a year earlier | cells that can be compared |
+| Observations this month | cells with four observations or more | all lit cells |
+| Then and now | cells that emerged from dark | cells that can be compared |
+
+### 9.2 The card of the selected unit
+
+Under the unit's text and tiles, the card "(unit) under the layers shown"
+again has one part per menu. The standing charts below it (light observed
+and expected, the status strip, how much was seen, year by year) do not
+change with the menus.
+
+**The unit layer.** The unit gets one number on the layer, the same number
+is taken for its siblings (the other provinces; the other districts of its
+province; the other sub-districts of its district), and the card says how
+many siblings are lower, higher or the same, and draws them as dots.
+
+| Layer | The number | The unit's own record beside it |
+|---|---|---|
+| Status, Light against expected | $100\,e^{a}$, light as a percentage of expected (3.2) | months in the slider's window counted by status; the percentage month by month |
+| Light against usual | light as a percentage of its usual level | every same calendar month of the record |
+| Radiance | the unit's usual mean radiance times that month's light against usual (3.1): an estimate | month by month |
+| How well seen | coverage | month by month, with the minimum for a reading |
+| Months not observed | months in a row without a reading | month by month |
+| Months reading low | months of the current spell (4.1); units of 20 lit cells or more | month by month |
+| Trend against the median | percent a year (4.2); units of 20 lit cells or more | yearly points, see below |
+| Newly lit cells | share of its classed cells that emerged (5.2) | its cells by then-and-now class |
+
+A unit not observed, or seen with no light, has no number on the first
+three layers and is left out of the comparison, never counted as low.
+
+**The cell layer.** The unit's own lit cells are counted by class. A cell
+belongs to the unit `cell_<level>.u16.gz` names for it, which comes from
+the exact boundaries of 2.4, not from the outlines on the map; on the
+three units checked the count equals the unit's lit cells (2,589, 437 and
+62). The card gives the share of the table in 9.1 for the unit beside the
+same share for the unit that holds it (the country for a province). When
+that share rests on fewer than 20 cells the card says so. For the three
+layers that move with the month it also draws the unit's cells by class in
+every month of the year on the map, from `cells/<year>.u8.gz`. The faint
+sources (5.3) are known by province only and get no breakdown.
+
+These are counts of single cells. No status is judged from them, and
+neighbouring cells are not independent (1.1).
+
+**Two things the browser works out itself.** The yearly points of the
+trend layer are medians of the unit's observed months in each year, for
+years with at least the months 4.2 asks for, taken from the monthly values
+on the page. They show the shape; the rate quoted comes from the pipeline
+and may differ from a line through them. The same-month bars of "light
+against usual" are the monthly values, selected, not recomputed.
+
+### 9.3 The case study pages: the night explorer
+
+Each case study ends with the same control (`site/components/explorer.js`):
+a night slider, a map on which a click opens a district and then one of
+its sub-districts, moving to its extent each time, and under it the
+figures of what is open on the night chosen. Each page keeps its own
+story and its own fixed maps above it.
+
+Every figure is read from the event's `units.json`
+(`ntl.events.unit_nights`); nothing is recomputed in the browser:
+
+- **Light**: $R_G(k)$ of 6.2 over the unit's cells seen that night.
+- **Seen**: the share of the unit's reference light in cells seen that
+  night. Under 50% the unit is "too little seen to read" and is left out
+  of every count and comparison; its figure is still shown, marked.
+- **Reading**: down under 80% of the reference, up at 125% or more, about
+  the same in between (**choice**, the thresholds of `ntl.events`).
+- **Cells down**: the share of its seen cells under 50% of their own
+  reference.
+- **Against the control**: the light divided by what the control did that
+  night, on the nights the control was seen.
+
+The card places the unit among its siblings that night (the districts of
+the study's box, or the sub-districts of the open district) and draws its
+own nights. A unit with fewer than 20 lit cells is flagged: its figure
+swings on its own.
+
+**These unit figures use the plain reference nights.** The viewing angle
+is not matched in them (6.4), so they are for looking, not for the claims
+of the pages, which rest on the matched figures in the text above the
+control. The cells on the map are coloured against their own reference;
+on the Lombok page they are divided by Bali on the nights Bali was seen
+well enough, and the note under the slider says which.
 
 ## 10. Known limits
 

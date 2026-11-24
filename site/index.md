@@ -125,20 +125,41 @@ details p, details li {max-width: 80ch; font-size: 0.9rem;}
 #observablehq-footer {margin-top: 1.5rem;}
 .insight h4 {font: 600 0.78rem var(--sans-serif); margin: 0.7rem 0 0.15rem; color: #52514e;}
 .insight .narrative p {margin-top: 0;}
+/* the card has two parts, one per menu: the units, then the lit cells */
+.insight h4.part {font-size: 0.9rem; color: #0b0b0b; border-top: 1px solid #e1e0d9; padding-top: 0.6rem; margin: 0.8rem 0 0.35rem;}
+.insight h3 + h4.part {border-top: 0; padding-top: 0; margin-top: 0.3rem;}
 .chips {margin: 0.55rem 0 0; display: flex; flex-wrap: wrap; gap: 0.3rem 0.4rem; align-items: center; max-width: none;}
 .chips-label {font: 0.78rem var(--sans-serif); color: #52514e; margin-right: 0.2rem;}
 .chip {font: 0.78rem var(--sans-serif); border: 1px solid #d9d7cf; background: #fff; border-radius: 999px; padding: 0.15rem 0.6rem; cursor: pointer;}
 .chip:hover, .chip:focus-visible {border-color: #a2431a;}
 .chip span {color: #a2431a; margin-left: 0.4rem; font-weight: 600;}
+/* the other pages, as cards under the title: the long view, then the four case studies */
+.more-lead {max-width: none; margin: -0.5rem 0 0.7rem; font: 0.88rem/1.5 var(--sans-serif); color: #52514e;}
+.more-lead strong {color: #0b0b0b;}
+.more {display: grid; grid-template-columns: repeat(auto-fit, minmax(138px, 1fr)); gap: 0.7rem; margin: 0 0 1.25rem;}
+.more-card {display: flex; flex-direction: column; gap: 0.2rem; padding: 0.7rem 0.9rem 0.75rem; border: 1px solid #e1e0d9; border-left: 4px solid #a2431a; border-radius: 8px; background: #fff; color: inherit; text-decoration: none; transition: border-color 0.12s, box-shadow 0.12s, transform 0.12s;}
+.more-card.long {border-left-color: #4f6475;}
+.more-card:hover, .more-card:focus-visible {border-color: #a2431a; box-shadow: 0 2px 8px rgba(11, 11, 11, 0.08); transform: translateY(-1px); text-decoration: none;}
+.more-card.long:hover, .more-card.long:focus-visible {border-color: #4f6475;}
+.more-kind {font: 600 0.68rem/1.2 var(--sans-serif); letter-spacing: 0.07em; text-transform: uppercase; color: #a2431a;}
+.more-card.long .more-kind {color: #4f6475;}
+.more-title {font: 600 1.02rem/1.25 var(--sans-serif); color: #0b0b0b;}
+.more-title::after {content: " \2192"; color: #898781; font-weight: 400;}
+.more-line {font: 0.82rem/1.4 var(--sans-serif); color: #52514e;}
 .below-col > .observablehq:first-child h2 {margin-top: 0.4rem;}
 .below-col .card {overflow-x: auto;}
 .below-col .card table {min-width: 46rem;}
 @media (min-width: 1800px) {
-  .below {display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 0 1.75rem; align-items: start;}
+  /* left: the story of the map and of the selected unit. Right: the list of units, and under it the yearly card */
+  .below {display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); grid-template-rows: auto 1fr; gap: 0 1.75rem; align-items: start;}
   .below .narrative {columns: 1;}
   .below .grid-cols-4 {grid-template-columns: repeat(2, minmax(0, 1fr));}
-  /* the list of units stays in view while the story of the selected unit scrolls beside it */
-  .below-col:last-child {position: sticky; top: 0.75rem;}
+  .below-main {grid-column: 1; grid-row: 1 / span 2;}
+  .below-units {grid-column: 2; grid-row: 1;}
+  .below-yearly {grid-column: 2; grid-row: 2;}
+  /* with no unit open the left column is short: the yearly card then runs across both columns */
+  .below.no-unit .below-main {grid-row: 1;}
+  .below.no-unit .below-yearly {grid-column: 1 / -1;}
 }
 </style>
 
@@ -147,7 +168,35 @@ details p, details li {max-width: 80ch; font-size: 0.9rem;}
   <p class="lede">Indonesia after dark, by province, district and sub-district. Month by month, the night-time radiance a satellite records over each area's lit cells, set against what the area's own past would lead one to expect.</p>
 </header>
 
-<p class="fine" style="max-width:none; margin: -0.6rem 0 1rem;">Before 2012: <a href="./long-view">the long view, 1992 to 2026: a review of the older DMSP record, shown beside VIIRS and not joined</a>. Case studies, night by night: <a href="./lombok-2018">Lombok 2018, two dark nights, one of them unexplained</a>; <a href="./palu-2018">Palu 2018, the light that took weeks to return</a>; <a href="./nyepi-2026">Nyepi 2026, an island at under a tenth of its light</a>; <a href="./mudik-2019">Mudik 2019, looking for an exodus in the dark</a>.</p>
+<p class="more-lead"><strong>This page</strong> is the explorer for the whole VIIRS record, month by month from ${monthLabel(meta.months[0])} to ${monthLabel(meta.months[LAST])}: the map and everything under it. <strong>The cards below</strong> open separate pages: the longer record back to 1992, and four events followed night by night.</p>
+
+<nav class="more" aria-label="Other pages of this site">
+  <a class="more-card long" href="./long-view">
+    <span class="more-kind">The long view</span>
+    <span class="more-title">1992 to 2026</span>
+    <span class="more-line">The older DMSP record, shown beside VIIRS and not joined.</span>
+  </a>
+  <a class="more-card" href="./lombok-2018">
+    <span class="more-kind">Case study</span>
+    <span class="more-title">Lombok 2018</span>
+    <span class="more-line">Two dark nights, one of them unexplained.</span>
+  </a>
+  <a class="more-card" href="./palu-2018">
+    <span class="more-kind">Case study</span>
+    <span class="more-title">Palu 2018</span>
+    <span class="more-line">The light that took weeks to return.</span>
+  </a>
+  <a class="more-card" href="./nyepi-2026">
+    <span class="more-kind">Case study</span>
+    <span class="more-title">Nyepi 2026</span>
+    <span class="more-line">An island at under a tenth of its light.</span>
+  </a>
+  <a class="more-card" href="./mudik-2019">
+    <span class="more-kind">Case study</span>
+    <span class="more-title">Mudik 2019</span>
+    <span class="more-line">Looking for an exodus in the dark.</span>
+  </a>
+</nav>
 
 <div class="notice">
   <p><strong>How to read a status.</strong> A status says how a unit's light compares with its own past. It does not say why: this page makes no claim about electricity, outages or the economy, and none of it has been checked against records on the ground.</p>
@@ -239,6 +288,24 @@ const FAINT = meta.variables.faint ?? null;
 const faintIndex = FAINT ? await loadTyped("faint", files["faint_cells.u32.gz"], Uint32Array) : new Uint32Array(0);
 const faintProvince = FAINT ? await loadTyped("faint_province", files["faint_province.u16.gz"], Uint16Array) : new Uint16Array(0);
 const cellProvince = await loadTyped("cell_province", files["cell_province.u16.gz"], Uint16Array); // position + 1 in the province list
+// the unit of each lit cell at every level, from the exact boundaries (ntl.export): position + 1 in the level's list, 0 for none
+const cellUnit = {province: cellProvince,
+                  district: await loadTyped("cell_district", files["cell_district.u16.gz"], Uint16Array),
+                  subdistrict: await loadTyped("cell_subdistrict", files["cell_subdistrict.u16.gz"], Uint16Array)};
+// "Usual light": the four classes the points of light are drawn in (see lightsData), brighter cream for brighter cells
+const USUAL_CLASSES = {breaks: [5, 15, 40].map((b) => b * meta.encoding.cells.usual_scale), colours: ["#8a8263", "#b9ad7d", "#e2d49b", "#fff4d6"],
+                       labels: ["under 5", "5 to 15", "15 to 40", "40 or more nW cm-2 sr-1"]};
+const usualClass = (i) => USUAL_CLASSES.breaks.reduce((n, b) => n + (cellUsual[i] >= b ? 1 : 0), 0);
+// One share per cell layer, used wherever places are compared on it: counts by class -> [cells counted, cells they
+// are a share of], the words that follow the percentage, and the short form for a list.
+const sumOf = (c) => c.reduce((a, b) => a + b, 0);
+const CELL_SHARE = {
+  usual: [(c) => [c[2] + c[3], sumOf(c)], "of lit cells usually give 15 nW or more", "of cells at 15 nW or more"],
+  radiance: [(c) => [c[1] + c[2], sumOf(c) - c[0]], "of the cells with a usable value read under 2 nW", "of valued cells under 2 nW"],
+  change: [(c) => [c[1] + c[2] + c[3], sumOf(c) - c[0]], "of the cells that can be compared are dimmer than 85% of a year earlier", "of cells dimmer than a year earlier"],
+  observations: [(c) => [c[2] + c[3], sumOf(c)], "of the lit cells had four observations or more", "of cells with four observations or more"],
+  thennow: [(c) => [c[3], sumOf(c) - c[0] - c[5]], "of the cells that can be compared emerged from dark", "of cells emerged from dark"]
+};
 const TN = meta.variables.then_now;
 const rgb = (hex) => [1, 3, 5].map((k) => parseInt(hex.slice(k, k + 2), 16)).join(", ");
 const thenNowData = {lon: lightsData.lon, lat: lightsData.lat, level: cellThenNow, colours: CELL_LAYERS.thennow.colours.map(rgb)};
@@ -284,8 +351,6 @@ const select = (lv, code, note = null) => {
 
 ```js
 // ---- controls that do not depend on the selection (built once, so they keep keyboard focus)
-const levelInput = Inputs.radio(new Map([["Provinces", "province"], ["Districts", "district"], ["Sub-districts", "subdistrict"]]), {label: "Map shows", value: "district"});
-const level = Generators.input(levelInput);
 // Each choice: its name in the menu, its key, and one line for the "i" beside the menu (what it shows, and what it is
 // for). The lines carry no figures; the full account of the current choice is VARIABLE_NOTE and CELL_NOTE below, in
 // the card under the map. Change a rule there and the line here must follow.
@@ -351,7 +416,6 @@ const monthNoteEl = html`<p class="month-note"></p>`;
 const whereEl = html`<div></div>`;
 display(html`<div class="panel">
   <div class="panel-row what">
-    <div>${levelInput}</div>
     <div class="layer"><label class="switch" title="Show or hide the unit fills">${unitsSwitch}<span></span></label>${variableMenu}</div>
     <div class="layer"><label class="switch" title="Show or hide the lit cells">${cellsSwitch}<span></span></label>${cellsMenu}</div>
   </div>
@@ -397,8 +461,11 @@ const dist = selection.district === null ? null : byCode.district.get(selection.
 const sub = selection.subdistrict === null ? null : byCode.subdistrict.get(selection.subdistrict) ?? null;
 const unit = sub ?? dist ?? prov; // the deepest unit selected, or null for the whole country
 
-// The map cannot show sub-districts for the whole country (their files are per province).
-const shown = level === "subdistrict" && !prov ? "district" : level;
+// The level the map and the text speak about follows the selection, one step at a time: the districts of the
+// country, then of the open province, then the sub-districts of the open district. On the country's map a click
+// opens a province, in a province a district, in a district a sub-district. (Provinces are never the level shown:
+// they have no Watch or Alarm, so a map of them alone would hide where the low readings are.)
+const shown = dist ? "subdistrict" : "district";
 const bundles = {province: {all: provinceBundle}, district: {}, subdistrict: {}};
 if (prov) {
   bundles.district[prov.code] = await loadBundle(files, meta, "district", String(prov.code));
@@ -639,20 +706,25 @@ const mapUnits = (() => {
         feature, id: {level: "province", code: feature.properties.code, name: feature.properties.name}, state: null, weak: false,
         text: `${feature.properties.name} (province): click to open it.`}))
     : [];
-  if (shown === "province") return make("province", outlines.province.features);
-  if (shown === "district") {
-    const features = prov ? outlines.district.features.filter((f) => Math.floor(f.properties.code / 100) === prov.code) : outlines.district.features;
-    return [...others, ...make("district", features)];
-  }
-  return [...others, ...make("subdistrict", subOutlines ? subOutlines.features : [])];
+  // The country: every district is filled, but a click opens the province it lies in.
+  if (!prov) return make("district", outlines.district.features).map((d) => {
+    const p = byCode.province.get(Math.floor(d.id.code / 100));
+    return p ? {...d, id: {level: "province", code: p.code, name: p.name}, text: `${d.text} Click to open ${p.name}.`} : d;
+  });
+  const districts = make("district", outlines.district.features.filter((f) => Math.floor(f.properties.code / 100) === prov.code));
+  if (!dist) return [...others, ...districts];
+  // A district is open: its sub-districts are drawn over it, and the other districts of the province stay as they were.
+  const subs = make("subdistrict", subOutlines ? subOutlines.features.filter((f) => Math.floor(f.properties.code / 100) === dist.code) : []);
+  return [...others, ...districts.filter((d) => d.id.code !== dist.code || !subs.length), ...subs];
 })();
 const selectedFeatures = [
   prov && outlines.province.features.find((f) => f.properties.code === prov.code),
   dist && outlines.district.features.find((f) => f.properties.code === dist.code),
   sub && subOutlines && subOutlines.features.find((f) => f.properties.code === sub.code)
 ].filter(Boolean);
+// the map moves to whatever was selected last: a province, a district or a sub-district
 const focus = selectedFeatures.length
-  ? {key: `${selection.province}/${selection.district}`, bounds: boundsOf([selectedFeatures[Math.min(1, selectedFeatures.length - 1)]])}
+  ? {key: `${selection.province}/${selection.district}/${selection.subdistrict}`, bounds: boundsOf([selectedFeatures.at(-1)])}
   : null;
 // A click on a unit selects it. A unit without lit cells has no status, so the click selects what holds it, and says so.
 const pick = (id) => {
@@ -667,8 +739,8 @@ const pick = (id) => {
 ```
 
 <div class="card">
-  <h3>${STATIC ? "" : `${monthLabel(meta.months[month])}: `}${cap(variable === "none" && CELL_LAYERS[cellMode] ? `lit cells by ${CELL_LAYERS[cellMode].title}` : VARIABLE_TITLE[variable])}, ${LEVEL_PLURAL[shown]} of ${prov && shown !== "province" ? prov.name : "Indonesia"}</h3>
-  <p class="fine">${level === "subdistrict" && !prov ? "Sub-districts are shown one province at a time: choose a province, or click one. Until then the map shows districts. " : ""}${VARIABLE_NOTE[variable]}${CELL_NOTE[cellMode]} A cell is about 460 m across but the sensor's view of the ground is wider, so read patterns rather than single cells. Outlines are simplified for display: near a border, a lit cell can be drawn in the neighbouring unit (about 2% of cells at sub-district level), while the figures use the exact boundaries.</p>
+  <h3>${STATIC ? "" : `${monthLabel(meta.months[month])}: `}${cap(variable === "none" && CELL_LAYERS[cellMode] ? `lit cells by ${CELL_LAYERS[cellMode].title}` : VARIABLE_TITLE[variable])}, ${LEVEL_PLURAL[shown]} of ${scopeName}</h3>
+  <p class="fine">${!prov ? "Click the map to open a province; inside it a click opens a district, and inside a district a sub-district. " : !dist ? `Click a district of ${prov.name} to open it and see its sub-districts, or another province to move there. ` : `The sub-districts of ${dist.name} are drawn inside it; the other districts of ${prov.name} can still be clicked. `}${VARIABLE_NOTE[variable]}${CELL_NOTE[cellMode]} A cell is about 460 m across but the sensor's view of the ground is wider, so read patterns rather than single cells. Outlines are simplified for display: near a border, a lit cell can be drawn in the neighbouring unit (about 2% of cells at sub-district level), while the figures use the exact boundaries.</p>
   ${resize((width) => drawMap({width, land: outlines.province.features, units: mapUnits, context: shown === "province" ? [] : outlines.province.features, selected: selectedFeatures, lights: cellLayer, describeCell, focus, onPick: pick}))}
   ${legend({lights: cellLegend, items: variableLegend})}
 </div>
@@ -676,8 +748,10 @@ const pick = (id) => {
 ```js
 // ---- the insight under the map (1): one number per unit and month for the layer shown.
 // Kept apart from the month so that moving the slider does not recount every month.
-const scopeUnits = (shown === "province" ? units.province : prov ? units[shown].filter((u) => u.province === prov.code) : units[shown]).filter((u) => bundleOf(u));
-const scopeName = prov && shown !== "province" ? prov.name : "Indonesia";
+// The units the map speaks about: the sub-districts of the open district, the districts of the open province, or
+// every district of the country.
+const scopeUnits = (dist ? units.subdistrict.filter((u) => Math.floor(u.code / 100) === dist.code) : prov ? units.district.filter((u) => u.province === prov.code) : units.district).filter((u) => bundleOf(u));
+const scopeName = dist ? dist.name : prov ? prov.name : "Indonesia";
 const fin = (v) => v !== null && v !== undefined && Number.isFinite(v);
 const share = (test) => (values) => d3.mean(values, (v) => +test(v));
 const INSIGHT = {
@@ -782,7 +856,7 @@ function unitNarrative(u, r) {
 
 <!-- below the map: one column, or two on a wide screen (the story of the map and of the selected unit, beside the list of units) -->
 <div class="below">
-<div class="below-col">
+<div class="below-col below-main">
 
 ```js
 // ---- the insight under the map (2): what the layer shown says this month. Always displays something.
@@ -810,6 +884,7 @@ display((() => {
     for (const v of values) counts[classOf(ramp, v)]++;
     return [...head, ...ramp.colours.map((colour, i) => ({label: ramp.labels[i], colour, n: counts[i]}))];
   };
+  const labelOf = (options, value) => (options.find((option) => option[1] === value)?.[0] ?? "").toLowerCase();
   const out = [];
   let bar = null, barTitle = `The ${plural} on the map, counted by colour`, side = null;
 
@@ -897,12 +972,37 @@ display((() => {
     }
   }
 
-  // ---- the lit cells
-  let cellBar = null, cellTitle = null;
+  // ---- the lit cells: a part of its own, since the two menus are independent
+  const cellOut = [];
+  let cellBar = null, cellTitle = null, cellSide = null;
   if (cellMode !== "off") {
-    const mine = prov && shown !== "province" ? prov.pos + 1 : 0;
+    // A lit cell is known by its province only, so with a district open this part still speaks of the province.
+    const scopeName = prov ? prov.name : "Indonesia";
+    const mine = prov ? prov.pos + 1 : 0;
     const inScope = (i) => mine === 0 || cellProvince[i] === mine;
     const layer = CELL_LAYERS[cellMode], N = cellIndex.length;
+    // One share of the layer, province by province. `by` holds the cells of each province counted by class
+    // (index: position + 1), `key` turns a row of counts into [cells counted, cells they are a share of].
+    // An open province is set against the country and the other provinces; the country gets the two ends of the list.
+    const MIN_OF = 200; // a share of fewer cells than this is not ranked
+    const pct = (v) => `${v.toFixed(v < 10 ? 1 : 0)}%`;
+    const compare = (by, key, what, short) => {
+      const shareOf = (c) => { const [n, of] = key(c); return of >= MIN_OF ? (100 * n) / of : null; };
+      const country = shareOf(by[0].map((_, k) => d3.sum(by, (c) => c[k])));
+      const ranked = units.province.map((p) => ({p, v: shareOf(by[p.pos + 1])})).filter((r) => r.v !== null).sort((a, b) => b.v - a.v);
+      if (mine === 0) {
+        if (ranked.length > 6) cellSide = html`${chips(`Highest share ${short}:`, ranked.slice(0, 3).map((r) => chip(r.p, pct(r.v))))}${chips("Lowest:", ranked.slice(-3).reverse().map((r) => chip(r.p, pct(r.v))))}`;
+        return;
+      }
+      const here = shareOf(by[mine]), others = ranked.filter((r) => r.p.pos + 1 !== mine);
+      if (here === null || country === null) return;
+      cellOut.push(html`<p>Beside the country: ${dyn(pct(here))} ${what} in ${scopeName}, against ${dyn(pct(country))} across Indonesia. Of the other ${n0(others.length)} provinces with at least ${MIN_OF} such cells, ${dyn(n0(others.filter((r) => r.v < here).length))} have a lower share and ${dyn(n0(others.filter((r) => r.v > here).length))} a higher one.</p>`);
+    };
+    const byProvince = (K, classAt) => {
+      const by = Array.from({length: units.province.length + 1}, () => new Array(K).fill(0));
+      for (let i = 0; i < N; i++) (by[cellProvince[i]] ?? by[0])[classAt(i)]++;
+      return by;
+    };
     if (cellMode === "faint") {
       let lit = 0, faintHere = 0;
       const litBy = new Map(), faintBy = new Map();
@@ -913,8 +1013,8 @@ display((() => {
       // where faint sources are most common beside the lit cells: provinces with at least 200 lit cells
       const ranked = units.province.map((p) => ({p, lit: litBy.get(p.pos + 1) ?? 0, faint: faintBy.get(p.pos + 1) ?? 0})).filter((r) => r.lit >= 200).sort((a, b) => b.faint / b.lit - a.faint / a.lit);
       const per100 = (r) => `${((100 * r.faint) / r.lit).toFixed(0)} per 100 lit cells`;
-      out.push(html`<p>The faint sources: beside its ${dyn(n0(lit))} lit cells, ${scopeName} has ${dyn(n0(faintHere))} cells too dim to count as lit that still stand above their surroundings in half of their good months, ${dyn(((100 * faintHere) / Math.max(lit, 1)).toFixed(0))} for every 100 lit cells.${mine === 0 && ranked.length > 4 ? html` They are a small addition where light is dense and a large one where it is sparse: ${dyn(per100(ranked.at(-1)))} in ${ranked.at(-1).p.name}, ${dyn(per100(ranked[0]))} in ${ranked[0].p.name}.` : ""} They sit near the least the product registers, so no status here is judged from them, and whether each is a village, a mine, a plantation or a flare has not been checked.</p>`);
-      side = html`${side ?? ""}${mine === 0 ? chips("Most faint sources for their lit cells:", ranked.slice(0, 5).map((r) => chip(r.p, per100(r)))) : ""}`;
+      cellOut.push(html`<p>The faint sources: beside its ${dyn(n0(lit))} lit cells, ${scopeName} has ${dyn(n0(faintHere))} cells too dim to count as lit that still stand above their surroundings in half of their good months, ${dyn(((100 * faintHere) / Math.max(lit, 1)).toFixed(0))} for every 100 lit cells.${mine === 0 && ranked.length > 4 ? html` They are a small addition where light is dense and a large one where it is sparse: ${dyn(per100(ranked.at(-1)))} in ${ranked.at(-1).p.name}, ${dyn(per100(ranked[0]))} in ${ranked[0].p.name}.` : ""} They sit near the least the product registers, so no status here is judged from them, and whether each is a village, a mine, a plantation or a flare has not been checked.</p>`);
+      cellSide = html`${mine === 0 ? chips("Most faint sources for their lit cells:", ranked.slice(0, 5).map((r) => chip(r.p, per100(r)))) : ""}`;
     } else if (cellMode === "usual") {
       const light = [];
       for (let i = 0; i < N; i++) if (inScope(i)) light.push(cellUsual[i]);
@@ -922,34 +1022,35 @@ display((() => {
       const total = d3.sum(light);
       let run = 0, k = 0;
       while (k < light.length && run < total / 2) run += light[k++];
-      // the four classes the points are drawn in (see lightsData), brighter cream for brighter cells
-      const breaks = [5, 15, 40].map((b) => b * meta.encoding.cells.usual_scale), colours = ["#8a8263", "#b9ad7d", "#e2d49b", "#fff4d6"], labels = ["under 5", "5 to 15", "15 to 40", "40 or more nW cm-2 sr-1"];
+      const {breaks, colours, labels} = USUAL_CLASSES;
       const counts = colours.map(() => 0);
       for (const v of light) counts[breaks.reduce((n, b) => n + (v >= b ? 1 : 0), 0)]++;
       cellBar = colours.map((colour, i) => ({label: `Usual radiance ${labels[i]}`, colour, n: counts[i]}));
       cellTitle = "The lit cells, counted by their usual radiance";
-      out.push(html`<p>The points of light: ${scopeName} has ${dyn(n0(light.length))} lit cells, and half of all their light comes from the brightest ${dyn(`${((100 * k) / Math.max(light.length, 1)).toFixed(1)}%`)} of them (${n0(k)} cells).</p>`);
+      cellOut.push(html`<p>The points of light: ${scopeName} has ${dyn(n0(light.length))} lit cells, and half of all their light comes from the brightest ${dyn(`${((100 * k) / Math.max(light.length, 1)).toFixed(1)}%`)} of them (${n0(k)} cells). This layer does not move with the month.</p>`);
+      compare(byProvince(colours.length, usualClass), ...CELL_SHARE.usual);
     } else {
-      const counts = layer.colours.map(() => 0);
-      for (let i = 0; i < N; i++) if (inScope(i)) counts[cellMode === "thennow" ? cellThenNow[i] : cellMonth ? classOfCell(i, cellMode) : 0]++;
+      const by = byProvince(layer.colours.length, (i) => (cellMode === "thennow" ? cellThenNow[i] : cellMonth ? classOfCell(i, cellMode) : 0));
+      const counts = layer.colours.map((_, k) => (mine === 0 ? d3.sum(by, (c) => c[k]) : by[mine][k]));
       const total = d3.sum(counts), pc = (n, of = total) => dyn(`${((100 * n) / Math.max(of, 1)).toFixed(0)}%`);
       cellBar = layer.colours.map((colour, i) => ({label: layer.labels[i], colour: colour === "#000000" ? "#0b0b0b" : colour, n: counts[i]}));
       cellTitle = `The lit cells, counted by ${layer.title}`;
       if (cellMode === "radiance") {
         const valued = total - counts[0];
-        out.push(html`<p>Cell by cell in ${dyn(when)}: ${pc(valued)} of the ${n0(total)} lit cells of ${scopeName} had a usable value. Of those, ${pc(counts[5] + counts[6] + counts[7], valued)} read 10 nW or more and ${pc(counts[1] + counts[2], valued)} read under 2, cells that are lit on average but were faint or dark this month.</p>`);
+        cellOut.push(html`<p>Cell by cell in ${dyn(when)}: ${pc(valued)} of the ${n0(total)} lit cells of ${scopeName} had a usable value. Of those, ${pc(counts[5] + counts[6] + counts[7], valued)} read 10 nW or more and ${pc(counts[1] + counts[2], valued)} read under 2, cells that are lit on average but were faint or dark this month.</p>`);
       } else if (cellMode === "change") {
         const compared = total - counts[0], dimmer = counts[1] + counts[2] + counts[3], brighter = counts[5] + counts[6] + counts[7];
-        out.push(html`<p>Cell by cell, ${dyn(when)} against the same month a year earlier: of the ${dyn(n0(compared))} cells of ${scopeName} that can be compared (${pc(compared)} of all), ${pc(brighter, compared)} are brighter than 115%, ${pc(counts[4], compared)} about the same and ${pc(dimmer, compared)} dimmer than 85%. ${brighter > dimmer ? "Brighter outnumbers dimmer, which is the ordinary state of a country whose lights are growing." : "Dimmer outnumbers brighter this month, which is not the ordinary state of a country whose lights are growing: check how well the two months were seen before reading anything into it."}</p>`);
+        cellOut.push(html`<p>Cell by cell, ${dyn(when)} against the same month a year earlier: of the ${dyn(n0(compared))} cells of ${scopeName} that can be compared (${pc(compared)} of all), ${pc(brighter, compared)} are brighter than 115%, ${pc(counts[4], compared)} about the same and ${pc(dimmer, compared)} dimmer than 85%. ${brighter > dimmer ? "Brighter outnumbers dimmer, which is the ordinary state of a country whose lights are growing." : "Dimmer outnumbers brighter this month, which is not the ordinary state of a country whose lights are growing: check how well the two months were seen before reading anything into it."}</p>`);
       } else if (cellMode === "observations") {
-        out.push(html`<p>Cell by cell in ${dyn(when)}: ${pc(counts[2] + counts[3])} of the lit cells of ${scopeName} had the four observations a value needs, ${pc(counts[3])} had ten or more, and ${pc(counts[0])} were not observed at all. A month is only a handful of clear nights, and here is how many.</p>`);
+        cellOut.push(html`<p>Cell by cell in ${dyn(when)}: ${pc(counts[2] + counts[3])} of the lit cells of ${scopeName} had the four observations a value needs, ${pc(counts[3])} had ten or more, and ${pc(counts[0])} were not observed at all. A month is only a handful of clear nights, and here is how many.</p>`);
       } else if (cellMode === "thennow") {
         const compared = total - counts[0] - counts[5];
-        out.push(html`<p>Cell by cell, ${TN.then[0]} to ${TN.then[1]} against ${TN.now[0]} to ${TN.now[1]}: of the ${dyn(n0(compared))} cells of ${scopeName} that can be compared, ${pc(counts[3], compared)} emerged from dark, ${pc(counts[2], compared)} brightened from dim, ${pc(counts[1], compared)} were lit at both ends and ${pc(counts[4], compared)} faded.</p>`);
+        cellOut.push(html`<p>Cell by cell, ${TN.then[0]} to ${TN.then[1]} against ${TN.now[0]} to ${TN.now[1]}: of the ${dyn(n0(compared))} cells of ${scopeName} that can be compared, ${pc(counts[3], compared)} emerged from dark, ${pc(counts[2], compared)} brightened from dim, ${pc(counts[1], compared)} were lit at both ends and ${pc(counts[4], compared)} faded. This layer does not move with the month.</p>`);
       }
+      if (CELL_SHARE[cellMode]) compare(by, ...CELL_SHARE[cellMode]);
     }
   }
-  if (!out.length) return html`<p class="fine" style="max-width:none;">Both layers are switched off: the map shows outlines only, and there is nothing to summarise.</p>`;
+  if (!out.length && !cellOut.length) return html`<p class="fine" style="max-width:none;">Both layers are switched off: the map shows outlines only, and there is nothing to summarise.</p>`;
 
   // ---- every month, with this one marked (only for layers that change with the month)
   const timeline = insightSeries && insightSeries.some((d) => d.value !== null) ? resize((width) => clickToMonth(Plot.plot({
@@ -965,17 +1066,22 @@ display((() => {
   }))) : null;
   return html`<div class="card insight">
     <h3>What this map says${STATIC || variable === "none" ? "" : `, ${when}`}</h3>
+    ${out.length ? html`<h4 class="part">The ${plural}: ${labelOf(UNIT_OPTIONS, variable)}</h4>
     <div class="narrative">${out}</div>
     <div class="grid grid-cols-2" style="gap:1.1rem; grid-auto-rows:auto; margin-top:0.4rem;">
-      <div>${bar ? html`<h4>${barTitle}</h4>${countBar(bar, plural)}` : ""}${cellBar ? html`<h4>${cellTitle}</h4>${countBar(cellBar, "cells")}` : ""}${side ?? ""}</div>
+      <div>${bar ? html`<h4>${barTitle}</h4>${countBar(bar, plural)}` : ""}${side ?? ""}</div>
       <div>${timeline ? html`<h4>Every month: ${insight.what}</h4>${timeline}<p class="fine" style="margin:0.2rem 0 0;">Rust points are every ${when.split(" ")[0]}; the large one is the month on the map. Click to move the map to a month.</p>` : ""}</div>
-    </div>
+    </div>` : ""}
+    ${cellOut.length ? html`<h4 class="part">The lit cells: ${labelOf(CELL_OPTIONS, cellMode)}</h4>
+    <div class="narrative">${cellOut}</div>
+    ${cellBar ? html`<h4>${cellTitle}</h4>${countBar(cellBar, "cells")}` : ""}${cellSide ?? ""}` : ""}
   </div>`;
 })());
 ```
 
 ```js
 // ---- the panel for the selected unit: text and tiles. Always displays something, so nothing stale is left.
+document.querySelector(".below")?.classList.toggle("no-unit", !(unit && rows)); // the wide layout depends on it (see the styles)
 display(unit && rows ? (() => {
   const s = STATUS[now.state];
   const weak = LOW.has(now.state) && now.judged !== "yes";
@@ -1000,6 +1106,211 @@ display(unit && rows ? html`<div class="card time-card">
   ${resize((width) => timeSlider({width, dates: dates.slice(0, LAST + 1), values: rows.map((r) => (Number.isFinite(r.observed) ? r.observed : null)), marker: month,
     colours: {line: "#0b0b0b", fill: "#e1e0d9", axis: "#c3c2b7", ink: "#52514e", window: "#a2431a"}, onChange: setTimeRange}))}
 </div>` : html`<span></span>`);
+```
+
+```js
+// ---- the selected unit under the two layers shown. One part per menu, like "What this map says": for the unit
+// layer, where the unit stands among its siblings this month and its own record on that layer; for the cell layer,
+// the unit's own lit cells (by the exact boundaries, cellUnit) beside those of the unit that holds it, and through
+// the year. The standing charts further down do not change with the menus.
+const MONTH_LAYERS = ["radiance", "change", "observations"];
+const cellYear = unit && rows && MONTH_LAYERS.includes(cellMode) && CM.files[monthYear]
+  ? await loadTyped(CM.files[monthYear].file, files[CM.files[monthYear].file], Uint8Array) : null; // [month of the year, cell]
+display(unit && rows && (variable !== "none" || cellMode !== "off") ? (() => {
+  const dyn = (text) => html`<span class="dyn">${text}</span>`;
+  const labelOf = (options, value) => (options.find((option) => option[1] === value)?.[0] ?? "").toLowerCase();
+  const finite = (v) => v !== null && v !== undefined && Number.isFinite(v);
+  const when = monthLabel(meta.months[month]), calendar = when.split(" ")[0];
+  const [T0, T1] = timeRange;
+  const span = [dates[T0], new Date(Date.UTC(dates[T1].getUTCFullYear(), dates[T1].getUTCMonth() + 1, 1))];
+  const here = month >= T0 && month <= T1 ? [dates[month]] : [];
+  const band = rows.filter((r) => r.t >= T0 && r.t <= T1).map((r) => ({...r, next: new Date(Date.UTC(r.date.getUTCFullYear(), r.date.getUTCMonth() + 1, 1))}));
+  const read = (r) => r.state !== 0 && r.state !== 7; // observed, with light
+  const months = (v) => `${v} month${v === 1 ? "" : "s"}`;
+  const part = (heading, body) => html`<h4 class="part">${heading}</h4>${body}`;
+  const chart = (title, note, plot) => html`<h4>${title}</h4>${plot ? resize(plot) : ""}<p class="fine" style="margin:0.2rem 0 0;">${note}</p>`;
+  // one stacked bar of counts by class
+  const classBar = (segments, noun) => {
+    const total = d3.sum(segments, (d) => d.n), drawn = segments.filter((d) => d.n > 0);
+    return (width) => Plot.plot({
+      width, height: 58, marginLeft: 0, marginRight: 0, marginTop: 4, marginBottom: 4, x: {axis: null, domain: [0, Math.max(1, total)]}, y: {axis: null},
+      marks: [Plot.barX(drawn, Plot.stackX({x: "n", fill: (d) => d.colour, stroke: "#ffffff", strokeWidth: 0.6, order: null})),
+              Plot.text(drawn.filter((d) => d.n / total >= 0.06), Plot.stackX({x: "n", text: (d) => n0(d.n), fill: "#0b0b0b", stroke: "#ffffff", strokeWidth: 3, fontSize: 11, fontWeight: 600, order: null})),
+              Plot.tip(drawn, Plot.pointerX(Plot.stackX({x: "n", title: (d) => `${d.label}\n${n0(d.n)} ${noun} (${((100 * d.n) / total).toFixed(1)}%)`, order: null})))]
+    });
+  };
+  // a value month by month inside the window of the slider above
+  const monthly = (y, {label, fmt, rules = [], bars = false, domain}) => (width) => {
+    const series = band.map((r) => { const v = y(r); return {t: r.t, date: r.date, next: r.next, v: finite(v) ? v : null}; });
+    const points = series.filter((d) => d.v !== null);
+    return clickToMonth(Plot.plot({
+      width, height: 200, marginLeft: 48,
+      x: {label: null, domain: span}, y: {label, grid: true, nice: true, ...(domain ? {domain} : {})},
+      marks: [
+        ...rules.map((v) => Plot.ruleY([v], {stroke: "#0b0b0b", strokeDasharray: "3,3"})),
+        ...(bars ? [Plot.rectY(points.filter((d) => d.v > 0), {x1: "date", x2: "next", y1: 0, y2: "v", fill: "#a2431a", fillOpacity: 0.75, inset: 0.3})]
+                 : [Plot.lineY(series, {x: "date", y: "v", stroke: "#0b0b0b", strokeWidth: 1.2}), Plot.dot(points, {x: "date", y: "v", r: 1.6, fill: "#0b0b0b"})]),
+        Plot.ruleX(here, {stroke: "#0b0b0b", strokeOpacity: 0.35}),
+        Plot.tip(points, Plot.pointerX({x: "date", y: "v", channels: {t: "t"}, title: (d) => `${monthLabel(meta.months[d.t])}\n${fmt(d.v)}`}))
+      ]
+    }));
+  };
+
+  // ---- part 1: the unit layer
+  let unitPart = "";
+  if (variable !== "none") {
+    const against = (column) => (u, t) => { const st = valueOf(u, "state", t), a = valueOf(u, column, t); return finite(a) && st !== 0 && st !== 7 ? 100 * Math.exp(a) : null; };
+    // the number a unit has on each layer: what places it among its siblings
+    const LAYER = {
+      status: {value: against("anomaly"), fmt: (v) => `${v.toFixed(0)}% of expected`, axis: "light as % of what its own past leads one to expect"},
+      expected: {value: against("anomaly"), fmt: (v) => `${v.toFixed(0)}% of expected`, axis: "light as % of what its own past leads one to expect"},
+      usual: {value: against("index"), fmt: (v) => `${v.toFixed(0)}% of usual`, axis: "light as % of its usual level over the record"},
+      radiance: {value: (u, t) => { const st = valueOf(u, "state", t), r = radianceOf(u, t); return finite(r) && st !== 0 && st !== 7 ? r : null; }, fmt: (v) => `${v.toFixed(1)} nW cm-2 sr-1`, axis: "mean radiance of lit cells, nW cm-2 sr-1"},
+      seen: {value: (u, t) => 100 * valueOf(u, "coverage", t), fmt: (v) => `${v.toFixed(0)}% seen`, axis: "% of usual light seen"},
+      unseen: {value: (u, t) => valueOf(u, "unseen", t), fmt: months, axis: "months in a row without a reading"},
+      run: {value: (u, t) => (big(u) ? valueOf(u, "run", t) : null), fmt: months, axis: "months of the current spell of Watch or Alarm"},
+      trend: {value: (u) => (big(u) ? u.trend : null), fmt: (v) => `${signed(v)}% a year`, axis: "trend of its light, % a year"},
+      newlit: {value: (u) => (big(u) && classed(u) ? (100 * u.thenNow[3]) / classed(u) : null), fmt: (v) => `${v.toFixed(1)}% emerged`, axis: "% of its cells that emerged from dark"}
+    }[variable];
+    const siblings = (unit.level === "province" ? units.province : unit.level === "district" ? units.district.filter((u) => u.province === unit.province)
+      : units.subdistrict.filter((u) => Math.floor(u.code / 100) === Math.floor(unit.code / 100))).filter((u) => bundleOf(u));
+    const holder = unit.level === "province" ? "Indonesia" : unit.level === "district" ? prov.name : dist.name;
+    const placed = siblings.map((u) => ({u, v: LAYER.value(u, month), state: valueOf(u, "state", month)})).filter((d) => finite(d.v));
+    const mine = placed.find((d) => d.u === unit), others = placed.filter((d) => d.u !== unit);
+    const lower = mine ? others.filter((d) => d.v < mine.v).length : 0, higher = mine ? others.filter((d) => d.v > mine.v).length : 0;
+    const statusNow = variable === "status" ? html`Its status is ${dyn(STATUS[now.state].label)}. ` : "";
+    const sentence = mine
+      ? html`<p>${statusNow}${unit.name} is at ${dyn(LAYER.fmt(mine.v))}${STATIC ? "" : html` in ${dyn(when)}`}.${others.length ? html` Of the other ${n0(others.length)} ${LEVEL_PLURAL[unit.level]} of ${holder} with a value, ${dyn(n0(lower))} ${lower === 1 ? "is" : "are"} lower and ${dyn(n0(higher))} higher${others.length - lower - higher ? html`; ${dyn(n0(others.length - lower - higher))} ${others.length - lower - higher === 1 ? "is" : "are"} the same` : ""}.` : ""}</p>`
+      : html`<p>${statusNow}${unit.name} has no value on this layer${STATIC ? "" : html` in ${dyn(when)}`}${variable === "run" || variable === "trend" || variable === "newlit" ? ` (it may have under ${MIN_CELLS} lit cells, or too few observed months)` : ""}. ${n0(others.length)} of the other ${LEVEL_PLURAL[unit.level]} of ${holder} have one.</p>`;
+    // every sibling as a dot along the layer's scale, this unit marked; a click opens the sibling
+    const colourOfDot = (d) => (variable === "status" ? (d.state === 7 ? "#0b0b0b" : STATUS[d.state].colour) : "#898781");
+    const strip = placed.length > 1 ? (width) => {
+      const plot = Plot.plot({
+        width, height: 84, marginLeft: 14, marginRight: 14, marginTop: 18, marginBottom: 34, x: {label: LAYER.axis, nice: true}, y: {axis: null, domain: [-1, 1]},
+        marks: [
+          Plot.ruleY([0], {stroke: "#e1e0d9"}),
+          Plot.dot(others, {x: "v", y: 0, r: 4, fill: colourOfDot, fillOpacity: 0.6, stroke: "#ffffff", strokeWidth: 0.5}),
+          ...(mine ? [Plot.dot([mine], {x: "v", y: 0, r: 7, fill: variable === "status" ? colourOfDot(mine) : "#a2431a", stroke: "#0b0b0b", strokeWidth: 1.5}),
+                      Plot.text([mine], {x: "v", y: 0, dy: -15, text: () => unit.name, fontSize: 11, fontWeight: 600, fill: "#0b0b0b", stroke: "#ffffff", strokeWidth: 3})] : []),
+          Plot.tip(placed, Plot.pointerX({x: "v", y: 0, channels: {code: (d) => d.u.code}, title: (d) => `${d.u.name}\n${LAYER.fmt(d.v)}${variable === "status" ? `\n${STATUS[d.state].label}` : ""}`}))
+        ]
+      });
+      plot.addEventListener("click", () => { if (plot.value && plot.value.u && plot.value.u !== unit) select(plot.value.u.level, plot.value.u.code); });
+      plot.style.cursor = "pointer";
+      return plot;
+    } : null;
+    // its own record on the layer
+    const record = (() => {
+      if (variable === "status") {
+        const counted = [3, 4, 5, 6, 7, 1, 2, 0].map((k) => ({label: STATUS[k].label, colour: k === 0 ? "#c9ced6" : k === 7 ? "#0b0b0b" : STATUS[k].colour, n: band.filter((r) => r.state === k).length}));
+        return chart("Its months in the window above, counted by status", `${n0(band.length)} months, ${monthLabel(meta.months[T0])} to ${monthLabel(meta.months[T1])}. Drag the window above to count other months. The strip under "Status, month by month" shows them in order.`, classBar(counted, "months"));
+      }
+      if (variable === "expected") return chart("Its light against expected, month by month", "The dashed line is 100%: as expected. This is the number the statuses are judged from, without the judgement. A gap is a month with no reading or no expectation.",
+        monthly((r) => (read(r) && finite(r.anomaly) ? 100 * Math.exp(r.anomaly) : null), {label: "% of expected light", fmt: (v) => `${v.toFixed(0)}% of expected`, rules: [100]}));
+      if (variable === "usual") {
+        const same = rows.filter((r) => meta.months[r.t].slice(5, 7) === meta.months[month].slice(5, 7) && read(r) && finite(r.observed)).map((r) => ({t: r.t, year: meta.months[r.t].slice(0, 4), v: r.observed}));
+        return chart(`Every ${calendar}: its light against usual`, `One bar per year in which ${calendar} was observed, as a percentage of the unit's usual light over the record; the rust bar is the month on the map. The climb is growth, which is why this layer cannot say what is unusual.`,
+          same.length ? (width) => clickToMonth(Plot.plot({
+            width, height: 200, marginLeft: 48, x: {label: null, type: "band", tickFormat: (y) => `'${y.slice(2)}`}, y: {label: "% of usual light", grid: true, nice: true},
+            marks: [Plot.barY(same, {x: "year", y: "v", fill: (d) => (d.t === month ? "#a2431a" : "#898781")}), Plot.ruleY([100], {stroke: "#0b0b0b", strokeDasharray: "3,3"}),
+                    Plot.tip(same, Plot.pointerX({x: "year", y: "v", channels: {t: "t"}, title: (d) => `${monthLabel(meta.months[d.t])}\n${d.v.toFixed(0)}% of usual light`}))]
+          })) : null);
+      }
+      if (variable === "radiance") return chart("Radiance of its lit cells, month by month", "An estimate: the unit's usual mean times that month's ratio on the cells that were seen, which assumes the unseen cells moved the same way.",
+        monthly((r) => (read(r) ? radianceOf(unit, r.t) : null), {label: "nW cm-2 sr-1", fmt: (v) => `${v.toFixed(1)} nW cm-2 sr-1`}));
+      if (variable === "seen") return chart("How much of it was seen, month by month", `The share of the unit's usual light that sat in cells with a usable value. Under the dashed line (${(100 * meta.thresholds.min_coverage).toFixed(0)}%) the month is "not observed", never "dark".`,
+        monthly((r) => 100 * r.coverage, {label: "% of usual light seen", fmt: (v) => `${v.toFixed(0)}% seen`, rules: [100 * meta.thresholds.min_coverage], domain: [0, 100]}));
+      if (variable === "unseen") return chart("Months in a row without a reading", "For each month the unit was not observed, how many months in a row it had then gone without a usable reading. No bar: it was observed that month.",
+        monthly((r) => valueOf(unit, "unseen", r.t), {label: "months without a reading", fmt: months, bars: true}));
+      if (variable === "run") return big(unit)
+        ? chart("Months reading low, spell by spell", `For each month in Watch or Alarm, how many months of that spell had read that way. Regional dimming is not counted${unit.level === "province" ? ", and a province never shows Watch or Alarm, so it has no spells" : ""}. No bar: not in a spell that month.`,
+            monthly((r) => valueOf(unit, "run", r.t), {label: "months of the spell", fmt: months, bars: true}))
+        : chart("Months reading low", `Not counted for this unit: it has ${n0(unit.cells)} lit cells, under the ${MIN_CELLS} a spell needs.`, null);
+      if (variable === "trend") {
+        const years = d3.rollups(rows.filter((r) => read(r) && finite(r.observed)), (v) => (v.length >= TR.min_months_per_year ? d3.median(v, (d) => d.observed) : null), (r) => r.date.getUTCFullYear())
+          .filter(([, v]) => v !== null).map(([year, v]) => ({year, date: new Date(Date.UTC(year, 6, 1)), v})).sort((a, b) => a.year - b.year);
+        return chart("Its light, year by year", `Each point is the median of a year's observed months, as a percentage of the unit's usual light, for years with at least ${TR.min_months_per_year} such months. The points are worked out on this page to show the shape; the rate itself comes from the pipeline. It does not move with the month or the window.`,
+          years.length ? (width) => Plot.plot({
+            width, height: 200, marginLeft: 48, x: {label: null}, y: {label: "% of usual light", grid: true, nice: true},
+            marks: [Plot.lineY(years, {x: "date", y: "v", stroke: "#898781", strokeWidth: 1}), Plot.dot(years, {x: "date", y: "v", r: 3.5, fill: "#0b0b0b"}),
+                    Plot.tip(years, Plot.pointerX({x: "date", y: "v", title: (d) => `${d.year}\n${d.v.toFixed(0)}% of usual light`}))]
+          }) : null);
+      }
+      const classes = [1, 2, 3, 4].map((k) => ({label: CELL_LAYERS.thennow.labels[k], colour: CELL_LAYERS.thennow.colours[k], n: unit.thenNow[k]}));
+      return chart("Its cells, then and now", `The unit's cells by their light in ${TN.then[0]} to ${TN.then[1]} against ${TN.now[0]} to ${TN.now[1]}${d3.sum(classes, (d) => d.n) ? "" : ": none can be classed"}. It does not move with the month.`,
+        d3.sum(classes, (d) => d.n) ? classBar(classes, "cells") : null);
+    })();
+    unitPart = part(`Among the ${LEVEL_PLURAL[unit.level]} of ${holder}: ${labelOf(UNIT_OPTIONS, variable)}`, html`<div class="narrative">${sentence}</div>
+      <div class="grid grid-cols-2" style="gap:1.1rem; grid-auto-rows:auto; margin-top:0.2rem;">
+        <div>${strip ? html`<h4>Where it stands${STATIC ? "" : `, ${when}`}</h4>${resize(strip)}<p class="fine" style="margin:0.2rem 0 0;">One dot per ${LEVEL_NAME[unit.level]} of ${holder} with a value${variable === "status" ? ", coloured by status" : ""}; the large one is ${unit.name}. Click a dot to open that ${LEVEL_NAME[unit.level]}.</p>` : ""}</div>
+        <div>${record}</div>
+      </div>`);
+  }
+
+  // ---- part 2: the unit's own lit cells on the cell layer
+  let cellPart = "";
+  if (cellMode !== "off") {
+    const N = cellIndex.length, own = [];
+    const member = cellUnit[unit.level];
+    for (let i = 0; i < N; i++) if (member[i] === unit.pos + 1) own.push(i);
+    const up = unit.level === "subdistrict" ? dist : unit.level === "district" ? prov : null; // the unit that holds it; null = the country
+    const upName = up ? up.name : "Indonesia";
+    const heading = `Its own lit cells: ${labelOf(CELL_OPTIONS, cellMode)}`;
+    const layer = cellMode === "usual" ? {...USUAL_CLASSES, labels: USUAL_CLASSES.labels.map((l) => `Usual radiance ${l}`), classAt: usualClass}
+      : cellMode === "thennow" ? {...CELL_LAYERS.thennow, classAt: (i) => cellThenNow[i]}
+      : MONTH_LAYERS.includes(cellMode) && cellMonth ? {...CELL_LAYERS[cellMode], classAt: (i) => classOfCell(i, cellMode)} : null;
+    if (cellMode === "faint") {
+      cellPart = part(heading, html`<div class="narrative"><p>The faint sources are counted by province only, and are in no figure of a unit: see "What this map says" above for ${prov ? prov.name : "the country"}. ${unit.name} has ${dyn(n0(own.length))} lit cells.</p></div>`);
+    } else if (!layer) {
+      cellPart = part(heading, html`<div class="narrative"><p>No cell values are available for ${when}.</p></div>`);
+    } else if (!own.length) {
+      cellPart = part(heading, html`<div class="narrative"><p>${unit.name} has no lit cell of its own.</p></div>`);
+    } else {
+      const K = layer.colours.length, shade = (colour) => (colour === "#000000" ? "#0b0b0b" : colour);
+      const count = (cells, classAt) => { const c = new Array(K).fill(0); for (const i of cells) c[classAt(i)]++; return c; };
+      const mineCounts = count(own, layer.classAt);
+      const upCounts = new Array(K).fill(0);
+      const upMember = up ? cellUnit[up.level] : null;
+      for (let i = 0; i < N; i++) if (!upMember || upMember[i] === up.pos + 1) upCounts[layer.classAt(i)]++;
+      const [key, what] = CELL_SHARE[cellMode];
+      const shareOf = (c) => { const [n, of] = key(c); return of > 0 ? (100 * n) / of : null; };
+      const pct = (v) => `${v.toFixed(v < 10 ? 1 : 0)}%`;
+      const a = shareOf(mineCounts), b = shareOf(upCounts);
+      const moves = MONTH_LAYERS.includes(cellMode);
+      const sentence = html`<p>${unit.name} has ${dyn(n0(own.length))} lit cells. ${a === null ? `None of them can be counted on this layer${moves ? ` in ${when}` : ""}.` : html`${moves ? html`In ${dyn(when)}, ` : ""}${dyn(pct(a))} ${what}${b === null ? "." : html`, against ${dyn(pct(b))} in ${upName}.`}`}${key(mineCounts)[1] > 0 && key(mineCounts)[1] < 20 ? ` That share rests on ${n0(key(mineCounts)[1])} cells: read it with care.` : ""}</p>`;
+      const bar = classBar(layer.colours.map((colour, k) => ({label: layer.labels[k], colour: shade(colour), n: mineCounts[k]})), "cells");
+      // through the year on the map: one bar per month, the unit's cells by class
+      let yearChart = "";
+      if (moves && cellYear) {
+        const entry = CM.files[monthYear];
+        const through = [];
+        for (let m = 0; m < entry.months; m++) {
+          const c = new Array(K).fill(0), at = m * N;
+          for (const i of own) c[(cellYear[at + i] >> CM[cellMode].shift) & CM[cellMode].mask]++;
+          const t = entry.first_window + m;
+          c.forEach((n, k) => { if (n) through.push({t, name: monthLabel(meta.months[t]).slice(0, 3), k, n, share: (100 * n) / own.length}); });
+        }
+        const order = [...new Set(through.map((d) => d.name))];
+        yearChart = chart(`Through ${monthYear}, month by month`, `The unit's lit cells by class in each month of ${monthYear} that has data, as shares of its ${n0(own.length)} cells; colours as in the bar beside it. The triangle marks the month on the map. Click a month to move the map there.`,
+          (width) => clickToMonth(Plot.plot({
+            width, height: 200, marginLeft: 40, marginTop: 18, x: {label: null, type: "band", domain: order}, y: {label: "% of its cells", domain: [0, 100]},
+            marks: [Plot.barY(through, {x: "name", y: "share", z: "k", fill: (d) => shade(layer.colours[d.k]), order: (d) => d.k, stroke: "#ffffff", strokeWidth: 0.4}),
+                    Plot.text(through.filter((d) => d.t === month).slice(0, 1), {x: "name", frameAnchor: "top", dy: -14, text: () => "▼", fontSize: 10, fill: "#a2431a"}),
+                    Plot.tip(through, Plot.pointerX(Plot.stackY({x: "name", y: "share", z: "k", order: (d) => d.k, channels: {t: "t"}, title: (d) => `${monthLabel(meta.months[d.t])}\n${layer.labels[d.k]}\n${n0(d.n)} cells (${d.share.toFixed(0)}%)`})))]
+          })));
+      }
+      cellPart = part(heading, html`<div class="narrative">${sentence}</div>
+        <div class="grid grid-cols-2" style="gap:1.1rem; grid-auto-rows:auto; margin-top:0.2rem;">
+          <div><h4>Its lit cells, counted by ${layer.title ?? "their usual radiance"}</h4>${resize(bar)}<p class="fine" style="margin:0.2rem 0 0;">Cells are counted in the unit they lie in by the exact boundaries, as every figure of a unit is. These are single cells: no status is judged from them.</p></div>
+          <div>${yearChart}</div>
+        </div>`);
+    }
+  }
+  return html`<div class="card insight">
+    <h3>${unit.name} under the layers shown</h3>
+    ${unitPart}${cellPart}
+  </div>`;
+})() : html`<span></span>`);
 ```
 
 ```js
@@ -1057,6 +1368,11 @@ display(unit && rows ? (() => {
         title: (d) => `${monthLabel(meta.months[d.t])}\n${seenText(d.coverage, d.state)} of its usual light seen${Number.isFinite(d.nights) ? `\nmean ${d.nights.toFixed(1)} observations per cell` : ""}`}))
     ]
   }));
+  const stripCard = html`<div class="card">
+      <h3>Status, month by month</h3>
+      <p class="fine">Blank: not observed. Light grey: seen but not judged. Slate: normal. Amber, red and violet: watch, alarm and regional dimming, as on the map. Black: seen, no light.</p>
+      ${resize(stripPlot)}
+    </div>`;
   return html`<div class="card">
     <h3>Light, observed and expected</h3>
     <p class="fine">The light of the unit's lit cells each month, as a percentage of its usual level over the record, on the cells that were seen that month. The grey line is what up to six of its own previous years lead one to expect for that month. Below a dashed line a reading counts as low. A gap is a month that was not observed well enough; a point at zero is a month that was seen with no detectable light. Click the chart to move the map to a month.</p>
@@ -1066,11 +1382,7 @@ display(unit && rows ? (() => {
     ${resize(lightPlot)}
   </div>
   <div class="grid grid-cols-2">
-    <div class="card">
-      <h3>Status, month by month</h3>
-      <p class="fine">Blank: not observed. Light grey: seen but not judged. Slate: normal. Amber, red and violet: watch, alarm and regional dimming, as on the map. Black: seen, no light.</p>
-      ${resize(stripPlot)}
-    </div>
+    ${stripCard}
     <div class="card">
       <h3>How much of it was seen</h3>
       <p class="fine">The share of the unit's usual light that sat in cells with a usable value that month. Below the dashed line the month is "not observed", never "dark".</p>
@@ -1079,6 +1391,9 @@ display(unit && rows ? (() => {
   </div>`;
 })() : html`<span></span>`);
 ```
+
+</div>
+<div class="below-col below-yearly">
 
 ```js
 // ---- year by year: the people of the selected unit (or the country) by the light recorded where they live (ntl.litshare).
@@ -1161,7 +1476,7 @@ display((() => {
 ```
 
 </div>
-<div class="below-col">
+<div class="below-col below-units">
 
 ```js
 // ---- the units inside the selection (or of the country), this month. Always displays something.
@@ -1194,7 +1509,7 @@ display((() => {
       format: {"Light vs expected": (v) => (v === null ? "" : `${(100 * v).toFixed(0)}%`), "Months low": (v) => (v === null ? "" : v),
                "Trend over the record, % a year": (v) => (v === null ? "" : `${v > 0 ? "+" : ""}${v.toFixed(1)}`)},
       align: {"Light vs expected": "right", "Light seen": "right", "Lit cells": "right", "Months low": "right", "Trend over the record, % a year": "right"},
-      rows: 14, select: false
+      rows: 22, select: false
     })}
   </div>`;
 })());

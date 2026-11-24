@@ -69,6 +69,7 @@ import {files} from "./data/events/mudik2019/files.js";
 import {files as national} from "./data/files.js";
 import {loadTyped} from "./components/load.js";
 import {drawMap} from "./components/map.js";
+import {nightExplorer} from "./components/explorer.js";
 import {NO_VALUE} from "./components/palette.js";
 import * as d3 from "npm:d3";
 ```
@@ -327,6 +328,35 @@ const roadChart = (width) => Plot.plot({
   <div class="card"><div class="tile-value">${good.length} of ${D}</div><div class="tile-label">Nights with enough of the cities seen to be counted. The other nights were lost to cloud or poor retrievals.</div></div>
   <div class="card"><div class="tile-value">1 year</div><div class="tile-label">Of Mudik looked at, 2019. One year cannot separate a holiday from a coincidence.</div></div>
 </div>
+</section>
+
+<section class="part">
+<p class="kicker">Every night, place by place</p>
+
+## Step through the nights, district by district
+
+<p>The sections above tell one story. This map is for looking yourself. Move the slider to a night, click a district to open it and move the map to it, then click one of its sub-districts. The text under the map follows what is open: its light that night against its reference, how much of it was seen, where it stands among its neighbours, and its own nights.</p>
+
+```js
+const mudikUnits = await files["units.json"].json();
+const mudikCells = await loadTyped("mudik-cells", files["cells.u32.gz"], Uint32Array);
+const mudikNights = await loadTyped("mudik-nights", files["nights.u8.gz"], Uint8Array);
+const MN = mudikCells.length, GRID_COLS = 86400, GRID_DEG = 1 / 240;
+const CLASS_COLOURS = [null, NO_VALUE, NO_VALUE, brbg[0], brbg[1], brbg[3], brbg[5], NO_VALUE];
+const classLegend = html`<div class="legend">${[[3, "under 50% of its reference"], [4, "50 to 80%"], [5, "80 to 125%: about the same"], [6, "125% or more"]].map(([k, label]) =>
+  html`<span class="legend-item"><span class="swatch" style=${`background:${CLASS_COLOURS[k]};`}></span>Cell at ${label}</span>`)}
+  <span class="legend-item"><span class="swatch" style=${`background:${NO_VALUE};`}></span>Cell not seen that night (cloud or a poor-quality retrieval), which is not the same as dark</span></div>`;
+display(nightExplorer({
+  meta, units: mudikUnits, colours: CLASS_COLOURS.map((c) => (c ? rgb(c) : null)), provinces: provinces.features, districts: districtGeo.features,
+  lon: Float32Array.from(mudikCells, (i) => -180 + ((i % GRID_COLS) + 0.5) * GRID_DEG), lat: Float32Array.from(mudikCells, (i) => 90 - (Math.floor(i / GRID_COLS) + 0.5) * GRID_DEG),
+  focus: {key: "mudik-explorer", bounds: [[105.5, -7.9], [110.0, -5.8]]}, start: K, scope: "western and central Java", legend: classLegend,
+  subOutlines: (p) => { const f = national[`outlines/subdistrict/${p}.geojson`]; return f ? f.json() : Promise.resolve(null); },
+  levelAt: (k) => { const level = new Uint8Array(MN); for (let i = 0; i < MN; i++) level[i] = mudikNights[k * MN + i] & 7; return level; },
+  noteAt: (k) => `The night that began on the evening of ${day(k)}${k === K || k === K + 1 ? ", an Eid night" : ""}. Cells are shown against their own reference, with the viewing angle not matched: the first section shows how much that alone moves a city's light. `
+    + `${pct(meta.seen_share_by_night[k])} of the lit cells in the tile were seen; of the cities people leave, ${F.raw.seen[k].toLocaleString("en")} of ${F.raw.cells.toLocaleString("en")}.`
+}));
+```
+
 </section>
 
 <p class="fine" style="max-width:none;">Source: NASA Black Marble daily, VNP46A2, Collection 2, the moonlight-corrected radiance, high-quality retrievals only, tile h28v09. The cities people leave: the five municipalities of Jakarta, Kota Bekasi, Kota Depok, Kota Tangerang and Kota Tangerang Selatan (${F.raw.cells.toLocaleString("en")} lit cells). Home districts: sixteen districts of eastern West Java and western Central Java in the same tile; a choice made for this page, not a survey of where travellers go. A cell's reference is its median over the nights of ${day(0)} to ${day(night(meta.reference.last))}. Eid date: Government of Indonesia, announcement of 3 June 2019 (setkab.go.id). Roads: OpenStreetMap contributors (Open Database Licence), ways tagged motorway (toll roads) and trunk (national main roads), as mapped on ${roads.fetched.slice(0, 10)}; stretches opened after June 2019 are included. View angles: the sensor zenith layer of VNP46A1, 21 May to 5 June 2019; other nights take the angle of the night 16 before or after. A file dated D is the night that begins on the evening of local date D.</p>

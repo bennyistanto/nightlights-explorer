@@ -55,7 +55,7 @@ section.part > p:not(.kicker) {max-width: none; margin: 0 0 1rem; line-height: 1
 </style>
 
 <header class="page-head">
-  <p class="brand"><a href="./">Nightlights Explorer</a> · Case study</p>
+  <p class="brand"><a href="./" title="Back to the main dashboard">&larr; Nightlights Explorer</a> · Case study</p>
   <h1><svg class="logo" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10.5" fill="#10151c"/><path d="M12 1.5a10.500 10.500 0 0 1 0 21 13.500 13.500 0 0 0 0-21Z" fill="#2a3644"/><circle cx="8.300" cy="9.400" r="3" fill="#ffd76a" opacity=".22"/><circle cx="8.300" cy="9.400" r="1.500" fill="#ffd76a"/><circle cx="12.700" cy="13.700" r="1.100" fill="#ffd76a"/><circle cx="7.300" cy="14.900" r=".800" fill="#f2b24a"/><circle cx="11.300" cy="6.700" r=".600" fill="#f2b24a"/><circle cx="10.200" cy="17.600" r=".600" fill="#f2b24a"/></svg>Nyepi 2026: an island at under a tenth of its light</h1>
   <p class="lede">Nyepi is the Balinese day of silence, when by custom lights are kept off for a night. It is the one night of the year when a dimming is known in advance, which makes it a test of what a satellite can measure.</p>
 </header>
@@ -232,3 +232,5 @@ const districtChart = (width) => Plot.plot({
 </section>
 
 <p class="fine" style="max-width:none;">Source: NASA Black Marble daily, VNP46A2, Collection 2, the moonlight-corrected radiance, readings flagged high quality or poor quality, over the ${N.toLocaleString("en")} lit cells of Banyuwangi, Bali and Lombok (${meta.cells.with_reference.toLocaleString("en")} with a reference). A file dated D is the night that begins on the evening of local date D. Nyepi 2026 (19 March) and Eid al-Fitr 2026 (21 to 22 March): the joint ministerial decree on national holidays for 2026, published by the State Secretariat (setneg.go.id). The 2024 date is in the 2024 decree (setkab.go.id); the 2025 date was not traced to its decree. View angles: the sensor zenith layer of VNP46A1 (the file for 18 March 2026 is missing from the archive; that night takes its angle from 2018, 171 cycles of 16 nights earlier, which was checked to agree within half a degree on the other nights). The product's stated detection-limit targets are 3.0 nW (threshold) to 0.25 nW (goal), from the product user guide. This page measures dimming and says nothing about electricity.</p>
+
+<p class="fine" style="max-width:none; margin-top:1.2rem;"><a href="./">\&larr; Back to the main dashboard</a> · <a href="https://github.com/bennyistanto/nightlights-explorer" target="_blank" rel="noopener">Code and method on GitHub</a></p>

@@ -56,7 +56,7 @@ section.part > p:not(.kicker) {max-width: none; margin: 0 0 1rem; line-height: 1
 </style>
 
 <header class="page-head">
-  <p class="brand"><a href="./">Nightlights Explorer</a> · Case study</p>
+  <p class="brand"><a href="./" title="Back to the main dashboard">&larr; Nightlights Explorer</a> · Case study</p>
   <h1><svg class="logo" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10.5" fill="#10151c"/><path d="M12 1.5a10.500 10.500 0 0 1 0 21 13.500 13.500 0 0 0 0-21Z" fill="#2a3644"/><circle cx="8.300" cy="9.400" r="3" fill="#ffd76a" opacity=".22"/><circle cx="8.300" cy="9.400" r="1.500" fill="#ffd76a"/><circle cx="12.700" cy="13.700" r="1.100" fill="#ffd76a"/><circle cx="7.300" cy="14.900" r=".800" fill="#f2b24a"/><circle cx="11.300" cy="6.700" r=".600" fill="#f2b24a"/><circle cx="10.200" cy="17.600" r=".600" fill="#f2b24a"/></svg>Lombok 2018: two dark nights, one of them unexplained</h1>
   <p class="lede">Three large earthquakes, among many smaller ones, struck Lombok between 29 July and 19 August 2018. A satellite passed over every night at about 01:30. This page asks what it saw that nobody on the island could have seen, and what it could not see at all.</p>
 </header>
@@ -190,7 +190,7 @@ const skyChart = (width) => Plot.plot({
 
 ## Near the epicentre there is almost nothing to watch
 
-<p>The obvious question is whether places nearer the epicentre dimmed more. Night lights cannot answer it here. Of Lombok's ${F.raw.cells.toLocaleString("en")} lit cells, only <span class="dyn">${B[0].raw.cells + B[1].raw.cells}</span> lie within 30 km of the epicentre of the main earthquake. Three nights after it the band 15 to 30 km out read <span class="dyn">${show(B[1].light_adjusted[night("2018-08-08")])}</span> against Bali, and the same ${B[1].raw.cells} cells, followed through the nights before the main earthquake, ranged from <span class="dyn">${show(d3.min(B[1].light_adjusted.slice(0, night(meta.reference.last) + 1).filter((v) => v !== null)))}</span> to <span class="dyn">${show(d3.max(B[1].light_adjusted.slice(0, night(meta.reference.last) + 1).filter((v) => v !== null)))}</span>. A handful of cells swings that much on its own. After the main earthquake the bands beyond 30 km, which hold nearly all the light, show no drop larger than the scatter. On 19 August every band is down by about half: that is the dark night of part 2, not something that depends on distance. Night lights watch the towns of the south and west, not the north of the island.</p>
+<p>The obvious question is whether places nearer the epicentre dimmed more. Night lights cannot answer it here. Of Lombok's ${F.raw.cells.toLocaleString("en")} lit cells, only <span class="dyn">${B[0].raw.cells + B[1].raw.cells}</span> lie within 30 km of the epicentre of the main earthquake. Three nights after it the band 15 to 30 km out read <span class="dyn">${show(B[1].light_adjusted[night("2018-08-08")])}</span> against Bali, and the same ${B[1].raw.cells} cells, followed through the nights before the main earthquake, ranged from <span class="dyn">${show(d3.min(B[1].light_adjusted.slice(0, night(meta.reference.last) + 1).filter((v) => v !== null)))}</span> to <span class="dyn">${show(d3.max(B[1].light_adjusted.slice(0, night(meta.reference.last) + 1).filter((v) => v !== null)))}</span>. A handful of cells swings that much on its own. After the main earthquake the bands beyond 30 km, which hold nearly all the light, show no drop larger than the scatter. On 19 August every band is down by about half: that is the dark night of the section above, not something that depends on distance. Night lights watch the towns of the south and west, not the north of the island.</p>
 
 ```js
 const bandLabel = (b) => `${b.km[0]} to ${b.km[1]} km`;
@@ -280,3 +280,5 @@ display(html`<div class="card">
 </section>
 
 <p class="fine" style="max-width:none;">Source: NASA Black Marble daily, VNP46A2, Collection 2, the moonlight-corrected radiance, high-quality retrievals only, over the ${N.toLocaleString("en")} lit cells of Bali, Lombok and west Sumbawa (${meta.cells.with_reference.toLocaleString("en")} with a reference). A cell's reference is its median over the nights of ${day(0)} to ${day(night(meta.reference.last))}, with at least ${meta.reference.min_nights} of them seen. Earthquake times, magnitudes and the epicentre: USGS catalogue. A file dated D is the night that begins on the evening of local date D.</p>
+
+<p class="fine" style="max-width:none; margin-top:1.2rem;"><a href="./">\&larr; Back to the main dashboard</a> · <a href="https://github.com/bennyistanto/nightlights-explorer" target="_blank" rel="noopener">Code and method on GitHub</a></p>
